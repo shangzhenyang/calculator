@@ -1,0 +1,13 @@
+.header {
+	align-items: center;
+	border-bottom: 1px solid var(--fg-alpha-2);
+	display: flex;
+	padding: 25px;
+}
+
+.header h1 {
+	flex: 1;
+	font-size: 24px;
+	font-weight: normal;
+	margin: 0;
+}

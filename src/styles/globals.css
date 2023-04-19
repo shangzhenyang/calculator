@@ -1,0 +1,29 @@
+:root {
+	--fg-alpha-2: rgba(0, 0, 0, .2);
+}
+
+a {
+	color: inherit;
+}
+
+body {
+	cursor: default;
+	font-family: Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+	margin: 0;
+	overflow: hidden;
+	-webkit-tap-highlight-color: transparent;
+	text-size-adjust: 100%;
+	user-select: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--fg-alpha-2: rgba(255, 255, 255, .2);
+		color-scheme: dark;
+	}
+
+	body {
+		background-color: rgb(30, 30, 30);
+		color: whitesmoke;
+	}
+}
