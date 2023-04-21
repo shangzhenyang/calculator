@@ -59,7 +59,7 @@ function Regular({ math }: PageProps) {
 	};
 
 	return (
-		<main>
+		<main className={styles["regular"]}>
 			<MainInputBar
 				className={styles["formula-input"]}
 				placeholder="enterFormula"

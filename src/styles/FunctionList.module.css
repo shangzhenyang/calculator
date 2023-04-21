@@ -28,3 +28,12 @@
 	border-radius: var(--radius);
 	padding: 10px 15px;
 }
+
+.function-list li:hover {
+	background-color: var(--fg-alpha-2);
+}
+
+.function-list li:active {
+	background-color: var(--theme-color);
+	color: white;
+}

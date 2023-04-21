@@ -11,3 +11,8 @@
 	margin: 0 auto;
 	width: 500px;
 }
+
+.regular {
+	display: flex;
+	flex-direction: column;
+}

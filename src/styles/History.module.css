@@ -1,0 +1,41 @@
+.history {
+	margin: 15px;
+}
+
+.history li {
+	background-color: var(--fg-alpha-1);
+	display: flex;
+	overflow: hidden;
+}
+
+.history li:first-of-type {
+	border-top-left-radius: var(--radius);
+	border-top-right-radius: var(--radius);
+}
+
+.history li:last-of-type {
+	border-bottom-left-radius: var(--radius);
+	border-bottom-right-radius: var(--radius);
+}
+
+.history li:nth-child(even) {
+	background-color: var(--fg-alpha-05);
+}
+
+.history li>* {
+	font-size: inherit;
+	padding: 10px 15px;
+}
+
+.history ul {
+	margin: 15px 0;
+}
+
+.list-item-main {
+	cursor: text;
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	user-select: text;
+}

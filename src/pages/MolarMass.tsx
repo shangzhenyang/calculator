@@ -2,6 +2,7 @@ import { useState } from "react";
 import i18n from "i18next";
 import { elements, getCompound, isErrorResult } from "@shangzhen/periodic-table";
 
+import History from "@/components/History";
 import InputBar from "@/components/InputBar";
 import MainInputBar from "@/components/MainInputBar";
 
@@ -10,14 +11,45 @@ import type { AllResult } from "@shangzhen/periodic-table";
 import type PageProps from "@/types/PageProps";
 
 function MolarMass({ math }: PageProps) {
-	const [mole, setMole] = useState<string>("1");
 	const [mass, setMass] = useState<string>("");
+	const [mole, setMole] = useState<string>("1");
 	const [particle, setParticle] = useState<string>("");
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [selectedElement, setSelectedElement] = useState<AllResult>();
 
 	const hasSelectedElement = !!selectedElement &&
 		!isErrorResult(selectedElement);
+
+	const hasMassError = !mass || isNaN(Number(mass));
+	const hasMoleError = !mole || isNaN(Number(mole));
+	const hasParticleError = !particle || isNaN(Number(particle));
+
+	const addToHistory = () => {
+		if (!hasSelectedElement) {
+			return;
+		}
+		let moleNum = Number(mole);
+		if (isNaN(moleNum)) {
+			moleNum = 1;
+		}
+		if (mole.includes(".")) {
+			moleNum = math.round(moleNum);
+		}
+		if (moleNum < 1) {
+			moleNum = 1;
+		}
+		const newMoleStr = moleNum.toString();
+		setMole(newMoleStr);
+		const massResultStr = calculate(selectedElement, newMoleStr);
+		const resultParts = [];
+		if (moleNum > 1) {
+			resultParts.push(moleNum);
+		}
+		resultParts.push(selectedElement.symbol);
+		resultParts.push("-");
+		resultParts.push(massResultStr);
+		return resultParts.join("");
+	};
 
 	const calculate = (newElement: AllResult, newMole: string) => {
 		if (!newMole || isNaN(Number(newMole)) || isErrorResult(newElement)) {
@@ -33,7 +65,9 @@ function MolarMass({ math }: PageProps) {
 			newMoleNum,
 			math.bignumber(newElement.mass)
 		);
-		setMass(math.format(massResult));
+		const massResultStr = math.format(massResult);
+		setMass(massResultStr);
+		return massResultStr;
 	};
 
 	const calculateBasedOnMass = (newMass: string) => {
@@ -134,26 +168,36 @@ function MolarMass({ math }: PageProps) {
 			<datalist id="element-list">{elementOptions}</datalist>
 			{hasSelectedElement && <div>
 				<InputBar
-					hasError={!mole || isNaN(Number(mole))}
+					hasError={hasMoleError}
 					id="mole"
 					label="mole"
 					value={mole}
 					setValue={handleMoleChange}
 				/>
 				<InputBar
-					hasError={!particle || isNaN(Number(particle))}
+					hasError={hasParticleError}
 					id="particle"
 					label="particle"
 					value={particle}
 					setValue={handleParticleChange}
 				/>
 				<InputBar
+					hasError={hasMassError}
 					id="mass"
 					label="mass"
 					value={mass}
 					setValue={handleMassChange}
 				/>
 			</div>}
+			<History
+				addToHistory={addToHistory}
+				canAdd={
+					hasSelectedElement &&
+					!hasMassError &&
+					!hasMoleError &&
+					!hasParticleError
+				}
+			/>
 		</main>
 	);
 }

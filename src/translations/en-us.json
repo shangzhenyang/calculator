@@ -1,10 +1,12 @@
 {
+	"addToHistory": "Add to History",
 	"backspace": "Backspace",
 	"base": "Base",
 	"byte": "Byte",
 	"calculator": "Calculator",
 	"currency": "Currency",
 	"date": "Date",
+	"delete": "Delete",
 	"enterElementOrCompound": "Enter an Element or a Compound",
 	"enterFormula": "Enter a Formula",
 	"linearFormula": "Linear Formula",

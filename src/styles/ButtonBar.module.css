@@ -1,0 +1,15 @@
+.button-bar {
+	display: flex;
+	gap: 15px;
+}
+
+.button-bar button {
+	border: var(--border);
+	border-radius: var(--radius);
+	display: flex;
+	flex: 1;
+	font-size: inherit;
+	gap: 10px;
+	padding: 15px 20px;
+	width: 100%;
+}

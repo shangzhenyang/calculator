@@ -1,10 +1,12 @@
 {
+	"addToHistory": "添加到历史记录",
 	"backspace": "退格",
 	"base": "进制",
 	"byte": "字节",
 	"calculator": "计算器",
 	"currency": "货币",
 	"date": "日期",
+	"delete": "删除",
 	"enterElementOrCompound": "输入元素或化合物",
 	"enterFormula": "输入算式",
 	"linearFormula": "一次函数解析式",
