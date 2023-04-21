@@ -19,11 +19,11 @@ function MolarMass({ math }: PageProps) {
 	const hasSelectedElement = selectedElement &&
 		!isErrorResult(selectedElement);
 
-	const calculate = (element: AllResult) => {
-		if (isErrorResult(element)) {
+	const calculate = (newElement: AllResult, newMole: string) => {
+		if (isErrorResult(newElement)) {
 			return;
 		}
-		const moleNum = math.bignumber(mole);
+		const moleNum = math.bignumber(newMole);
 		if (math.isNaN(moleNum) || moleNum.isZero()) {
 			return;
 		}
@@ -34,7 +34,7 @@ function MolarMass({ math }: PageProps) {
 		setParticle(math.format(particleResult));
 		const massResult = math.multiply(
 			moleNum,
-			element.mass
+			math.bignumber(newElement.mass)
 		);
 		setMass(math.format(massResult));
 	};
@@ -44,7 +44,7 @@ function MolarMass({ math }: PageProps) {
 		const result = getCompound(evt.target.value);
 		setSelectedElement(result);
 		setMole("1");
-		calculate(result);
+		calculate(result, "1");
 	};
 
 	const elementOptions = elements.map((element) => {
