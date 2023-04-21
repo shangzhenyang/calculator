@@ -1,3 +1,19 @@
 {
-	"calculator": "Calculator"
+	"backspace": "Backspace",
+	"base": "Base",
+	"byte": "Byte",
+	"calculator": "Calculator",
+	"currency": "Currency",
+	"date": "Date",
+	"enterFormula": "Enter a Formula",
+	"linearFormula": "Linear Formula",
+	"molarMass": "Molar Mass",
+	"quadraticEquation": "Quadratic Equation",
+	"quadraticFormula": "Quadratic Formula",
+	"quadraticFunction": "Quadratic Function",
+	"regular": "Regular",
+	"shangzhenYang": "Shangzhen Yang",
+	"statistics": "Statistics",
+	"threeVariableLinearEquations": "3-Var Linear Equations",
+	"twoVariableLinearEquations": "2-Var Linear Equations"
 }

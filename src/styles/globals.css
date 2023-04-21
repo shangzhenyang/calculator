@@ -1,5 +1,14 @@
 :root {
+	--border: 1px solid var(--fg-alpha-2);
+	--fg-alpha-05: rgba(0, 0, 0, .05);
+	--fg-alpha-15: rgba(0, 0, 0, .15);
 	--fg-alpha-2: rgba(0, 0, 0, .2);
+	--radius: 8px;
+	--theme-color: rgb(0, 102, 204);
+}
+
+* {
+	box-sizing: border-box;
 }
 
 a {
@@ -8,16 +17,24 @@ a {
 
 body {
 	cursor: default;
-	font-family: Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+	font-family: sans-serif;
+	height: 100%;
 	margin: 0;
-	overflow: hidden;
+	/* overflow: hidden; */
 	-webkit-tap-highlight-color: transparent;
 	text-size-adjust: 100%;
 	user-select: none;
 }
 
+html,
+#root {
+	height: 100%;
+}
+
 @media (prefers-color-scheme: dark) {
 	:root {
+		--fg-alpha-05: rgba(255, 255, 255, .05);
+		--fg-alpha-15: rgba(255, 255, 255, .15);
 		--fg-alpha-2: rgba(255, 255, 255, .2);
 		color-scheme: dark;
 	}

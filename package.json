@@ -14,6 +14,7 @@
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@fortawesome/react-fontawesome": "^0.2.0",
 		"@shangzhen/periodic-table": "^2.0.2",
+		"classnames": "^2.3.2",
 		"i18next": "^22.4.14",
 		"mathjs": "^11.8.0",
 		"react": "^18.2.0",

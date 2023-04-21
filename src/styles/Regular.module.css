@@ -1,0 +1,50 @@
+.formula-input {
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	display: block;
+	font-family: monospace;
+	font-size: 24px;
+	padding: 20px 25px;
+	text-align: right;
+	width: 100%;
+}
+
+.input-bar {
+	border-bottom: var(--border);
+	display: flex;
+}
+
+.input-bar button {
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	border-left: var(--border);
+	padding: 20px 25px;
+	transition: all .25s;
+}
+
+.keyboard-area {
+	align-items: center;
+	display: flex;
+	flex: 1;
+	gap: 1px;
+	margin: 0 auto;
+	width: 500px;
+}
+
+.regular {
+	display: flex;
+	flex-direction: column;
+}
+
+.regular button:hover,
+.regular li:hover {
+	background-color: var(--fg-alpha-2);
+}
+
+.regular button:active,
+.regular li:active {
+	background-color: var(--theme-color);
+	color: white;
+}

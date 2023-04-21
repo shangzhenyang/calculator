@@ -1,0 +1,35 @@
+.nav-item {
+	border-radius: var(--radius);
+	color: inherit;
+	cursor: pointer;
+	display: block;
+	line-height: 22px;
+	padding: 8px 15px;
+	text-decoration: none;
+	transition: all .25s;
+	word-break: break-word;
+}
+
+.nav-item:hover {
+	background-color: var(--b-alpha-5);
+}
+
+.nav-item:active {
+	background-color: var(--b-alpha-10);
+	color: var(--theme-color);
+}
+
+.nav-item.active {
+	background-color: var(--theme-color);
+	color: white;
+}
+
+.sidebar {
+	border-right: var(--border);
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	gap: 5px;
+	grid-area: sidebar;
+	padding: 15px;
+}

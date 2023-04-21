@@ -1,7 +1,8 @@
 .header {
 	align-items: center;
-	border-bottom: 1px solid var(--fg-alpha-2);
+	border-bottom: var(--border);
 	display: flex;
+	grid-area: header;
 	padding: 25px;
 }
 

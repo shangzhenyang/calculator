@@ -1,3 +1,19 @@
 {
-	"calculator": "計算機"
+	"backspace": "退格",
+	"base": "進位",
+	"byte": "位元組",
+	"calculator": "計算機",
+	"currency": "貨幣",
+	"date": "日期",
+	"enterFormula": "輸入算式",
+	"linearFormula": "一次函數解析式",
+	"molarMass": "莫耳質量",
+	"quadraticEquation": "一元二次方程",
+	"quadraticFormula": "二次函數解析式",
+	"quadraticFunction": "二次函數",
+	"regular": "常規",
+	"shangzhenYang": "楊尚臻",
+	"statistics": "統計",
+	"threeVariableLinearEquations": "三元一次方程組",
+	"twoVariableLinearEquations": "二元一次方程組"
 }
