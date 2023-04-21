@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { create, all } from "mathjs";
 
 import Base from "@/pages/Base";
 import Byte from "@/pages/Byte";
@@ -19,18 +20,26 @@ import TwoVarLinearEquations from "@/pages/TwoVarLinearEquations";
 import styles from "@/styles/App.module.css";
 
 function App() {
+	const math = create(all, {
+		number: "BigNumber",
+		precision: 16
+	});
+
 	return (
 		<div className={styles["App"]}>
 			<Header />
 			<Sidebar />
 			<Routes>
-				<Route path="/" element={<Regular />} />
+				<Route path="/" element={<Regular math={math} />} />
 				<Route path="/base" element={<Base />} />
 				<Route path="/byte" element={<Byte />} />
 				<Route path="/currency" element={<Currency />} />
 				<Route path="/date" element={<Date />} />
 				<Route path="/linear-formula" element={<LinearFormula />} />
-				<Route path="/molar-mass" element={<MolarMass />} />
+				<Route
+					path="/molar-mass"
+					element={<MolarMass math={math} />}
+				/>
 				<Route
 					path="/quadratic-equation"
 					element={<QuadraticEquation />}
