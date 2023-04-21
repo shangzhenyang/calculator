@@ -24,14 +24,7 @@
 	background-color: var(--theme-color);
 }
 
-.function-list ul {
-	margin: 0;
-	overflow: hidden;
-	padding-inline-start: 0;
-}
-
 .function-list li {
 	border-radius: var(--radius);
 	padding: 10px 15px;
-	transition: all .25s;
 }

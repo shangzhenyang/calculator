@@ -1,17 +1,19 @@
+import classnames from "classnames";
 import { t } from "i18next";
 
 import styles from "@/styles/InputBar.module.css";
 
-import type { ChangeEvent, Dispatch, SetStateAction } from "react";
+import type { ChangeEvent } from "react";
 
 interface Props {
+	hasError?: boolean;
 	id: string;
 	label: string;
 	value: string;
-	setValue: Dispatch<SetStateAction<string>>;
+	setValue: (newValue: string) => void;
 }
 
-function InputBar({ id, label, value, setValue }: Props) {
+function InputBar({ hasError, id, label, value, setValue }: Props) {
 	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
 		setValue(evt.target.value);
 	};
@@ -20,6 +22,9 @@ function InputBar({ id, label, value, setValue }: Props) {
 		<div className={styles["input-bar"]}>
 			<label htmlFor={id}>{t(label)}</label>
 			<input
+				className={classnames({
+					[styles["error"]]: hasError
+				})}
 				id={id}
 				value={value}
 				onChange={handleChange}

@@ -1,5 +1,6 @@
 :root {
 	--border: 1px solid var(--fg-alpha-2);
+	--error-color: rgba(255, 0, 0, .1);
 	--fg-alpha-05: rgba(0, 0, 0, .05);
 	--fg-alpha-15: rgba(0, 0, 0, .15);
 	--fg-alpha-2: rgba(0, 0, 0, .2);
@@ -9,6 +10,14 @@
 
 * {
 	box-sizing: border-box;
+}
+
+*:focus:not(:focus-visible) {
+	outline: none;
+}
+
+*:focus-visible {
+	outline: auto;
 }
 
 a {
@@ -26,9 +35,47 @@ body {
 	user-select: none;
 }
 
+button,
+input {
+	appearance: none;
+	background-color: transparent;
+	border: none;
+}
+
 html,
 #root {
 	height: 100%;
+}
+
+input:focus-visible {
+	outline: none;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	grid-area: main;
+}
+
+main button,
+main li {
+	transition: all .25s;
+}
+
+main button:hover,
+main li:hover {
+	background-color: var(--fg-alpha-2);
+}
+
+main button:active,
+main li:active {
+	background-color: var(--theme-color);
+	color: white;
+}
+
+ul {
+	margin: 0;
+	padding-inline-start: 0;
 }
 
 @media (prefers-color-scheme: dark) {

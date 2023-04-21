@@ -1,3 +1,7 @@
+.error {
+	background-color: var(--error-color);
+}
+
 .main-input-bar {
 	border-bottom: var(--border);
 	display: flex;
@@ -7,13 +11,6 @@
 	padding: 20px 25px;
 }
 
-.main-input-bar>button {
-	appearance: none;
-	background-color: transparent;
-	border: none;
-	transition: all .25s;
-}
-
 .main-input-bar>div {
 	align-items: center;
 	display: flex;
@@ -21,9 +18,6 @@
 }
 
 .main-input-bar>input {
-	appearance: none;
-	background-color: transparent;
-	border: none;
 	border-right: var(--border);
 	display: block;
 	font-size: 24px;

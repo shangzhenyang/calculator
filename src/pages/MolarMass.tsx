@@ -16,27 +16,86 @@ function MolarMass({ math }: PageProps) {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [selectedElement, setSelectedElement] = useState<AllResult>();
 
-	const hasSelectedElement = selectedElement &&
+	const hasSelectedElement = !!selectedElement &&
 		!isErrorResult(selectedElement);
 
 	const calculate = (newElement: AllResult, newMole: string) => {
-		if (isErrorResult(newElement)) {
+		if (!newMole || isNaN(Number(newMole)) || isErrorResult(newElement)) {
 			return;
 		}
-		const moleNum = math.bignumber(newMole);
-		if (math.isNaN(moleNum) || moleNum.isZero()) {
-			return;
-		}
+		const newMoleNum = math.bignumber(newMole);
 		const particleResult = math.multiply(
-			math.multiply(moleNum, 6.022),
-			1e+23
+			newMoleNum,
+			math.multiply(math.bignumber(6.022), 1e+23)
 		);
 		setParticle(math.format(particleResult));
 		const massResult = math.multiply(
-			moleNum,
+			newMoleNum,
 			math.bignumber(newElement.mass)
 		);
 		setMass(math.format(massResult));
+	};
+
+	const calculateBasedOnMass = (newMass: string) => {
+		if (
+			!newMass ||
+			isNaN(Number(newMass)) ||
+			!selectedElement ||
+			isErrorResult(selectedElement)
+		) {
+			return;
+		}
+		const newMassNum = math.bignumber(newMass);
+		const moleResult = math.divide(
+			newMassNum,
+			math.bignumber(selectedElement.mass)
+		);
+		setMole(math.format(moleResult));
+		const particleResult = math.multiply(
+			moleResult,
+			math.multiply(math.bignumber(6.022), 1e+23)
+		);
+		setParticle(math.format(particleResult));
+	};
+
+	const calculateBasedOnParticle = (newParticle: string) => {
+		if (
+			!newParticle ||
+			isNaN(Number(newParticle)) ||
+			!selectedElement ||
+			isErrorResult(selectedElement)
+		) {
+			return;
+		}
+		const newParticleNum = math.bignumber(newParticle);
+		const moleResult = math.divide(
+			newParticleNum,
+			math.multiply(math.bignumber(6.022), 1e+23)
+		);
+		setMole(math.format(moleResult));
+		const massResult = math.multiply(
+			moleResult,
+			math.bignumber(selectedElement.mass)
+		);
+		setMass(math.format(massResult));
+	};
+
+	const handleMassChange = (newValue: string) => {
+		setMass(newValue);
+		calculateBasedOnMass(newValue);
+	};
+
+	const handleMoleChange = (newValue: string) => {
+		if (!hasSelectedElement) {
+			return;
+		}
+		setMole(newValue);
+		calculate(selectedElement, newValue);
+	};
+
+	const handleParticleChange = (newValue: string) => {
+		setParticle(newValue);
+		calculateBasedOnParticle(newValue);
 	};
 
 	const handleSearchTermChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +123,7 @@ function MolarMass({ math }: PageProps) {
 	return (
 		<main>
 			<MainInputBar
+				hasError={!!searchTerm && !hasSelectedElement}
 				list="element-list"
 				placeholder="enterElementOrCompound"
 				value={searchTerm}
@@ -72,26 +132,28 @@ function MolarMass({ math }: PageProps) {
 				{hasSelectedElement && <div>{selectedElement.symbol}</div>}
 			</MainInputBar>
 			<datalist id="element-list">{elementOptions}</datalist>
-			{hasSelectedElement && <>
+			{hasSelectedElement && <div>
 				<InputBar
+					hasError={!mole || isNaN(Number(mole))}
 					id="mole"
 					label="mole"
 					value={mole}
-					setValue={setMole}
+					setValue={handleMoleChange}
 				/>
 				<InputBar
+					hasError={!particle || isNaN(Number(particle))}
 					id="particle"
 					label="particle"
 					value={particle}
-					setValue={setParticle}
+					setValue={handleParticleChange}
 				/>
 				<InputBar
 					id="mass"
 					label="mass"
 					value={mass}
-					setValue={setMass}
+					setValue={handleMassChange}
 				/>
-			</>}
+			</div>}
 		</main>
 	);
 }

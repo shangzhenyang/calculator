@@ -1,0 +1,22 @@
+.error {
+	background-color: var(--error-color);
+}
+
+.input-bar {
+	align-items: center;
+	display: flex;
+	margin: 10px;
+}
+
+.input-bar input {
+	border: var(--border);
+	border-radius: var(--radius);
+	flex: 1;
+	font-size: inherit;
+	padding: 10px 15px;
+}
+
+.input-bar label {
+	padding: 0 15px;
+	width: 30%;
+}

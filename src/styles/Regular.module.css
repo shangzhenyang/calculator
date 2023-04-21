@@ -11,19 +11,3 @@
 	margin: 0 auto;
 	width: 500px;
 }
-
-.regular {
-	display: flex;
-	flex-direction: column;
-}
-
-.regular button:hover,
-.regular li:hover {
-	background-color: var(--fg-alpha-2);
-}
-
-.regular button:active,
-.regular li:active {
-	background-color: var(--theme-color);
-	color: white;
-}

@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import { t } from "i18next";
 
 import styles from "@/styles/MainInputBar.module.css";
@@ -11,6 +12,7 @@ import type {
 interface Props {
 	children: ReactNode;
 	className?: string;
+	hasError?: boolean;
 	list?: string;
 	placeholder: string;
 	value: string;
@@ -21,6 +23,7 @@ interface Props {
 function MainInputBar({
 	children,
 	className,
+	hasError,
 	list,
 	placeholder,
 	value,
@@ -30,7 +33,9 @@ function MainInputBar({
 	return (
 		<div className={styles["main-input-bar"]}>
 			<input
-				className={className}
+				className={classnames(className, {
+					[styles["error"]]: hasError
+				})}
 				list={list}
 				placeholder={t(placeholder).toString()}
 				value={value}
