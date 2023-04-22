@@ -9,6 +9,7 @@ interface Props {
 function FunctionList({ setFormula }: Props) {
 	const functions = [
 		"abs()",
+		"bin()",
 		"cbrt()",
 		"ceil()",
 		"cos()",
@@ -18,8 +19,10 @@ function FunctionList({ setFormula }: Props) {
 		"e",
 		"exp()",
 		"floor()",
+		"hex()",
 		"log10()",
 		"log2()",
+		"oct()",
 		"π",
 		"pow()",
 		"random()",

@@ -31,10 +31,15 @@ function Byte() {
 		});
 	};
 
-	const handleChange = (
-		newValue: string,
-		setterIndex: number
-	) => {
+	const clear = () => {
+		setByte("");
+		setKilobyte("");
+		setMegabyte("");
+		setGigabyte("");
+		setTerabyte("");
+	};
+
+	const handleChange = (newValue: string, setterIndex: number) => {
 		if (!newValue) {
 			clear();
 			return;
@@ -72,14 +77,6 @@ function Byte() {
 		setTerabyte(newValue);
 	};
 
-	const clear = () => {
-		setByte("");
-		setKilobyte("");
-		setMegabyte("");
-		setGigabyte("");
-		setTerabyte("");
-	};
-
 	const inputBarItems = [{
 		label: "byte",
 		value: byte,
@@ -100,14 +97,14 @@ function Byte() {
 		label: "terabyte",
 		value: terabyte,
 		setValue: handleTerabyteChange
-	}];
+	}] as const;
 
 	const inputBarElements = inputBarItems.map((item) => {
 		return (
 			<InputBar
 				hasError={isNaN(Number(item.value))}
-				key={item.label}
 				id={item.label + "-input"}
+				key={item.label}
 				label={item.label}
 				placeholder={"enterNumber"}
 				value={item.value}

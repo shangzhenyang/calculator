@@ -22,7 +22,7 @@ import styles from "@/styles/App.module.css";
 function App() {
 	const math = create(all, {
 		number: "BigNumber",
-		precision: 16
+		precision: 64
 	});
 
 	return (
@@ -31,7 +31,7 @@ function App() {
 			<Sidebar />
 			<Routes>
 				<Route path="/" element={<Regular math={math} />} />
-				<Route path="/base" element={<Base />} />
+				<Route path="/base" element={<Base math={math} />} />
 				<Route path="/byte" element={<Byte />} />
 				<Route path="/currency" element={<Currency />} />
 				<Route path="/date" element={<Date />} />
