@@ -9,11 +9,19 @@ interface Props {
 	hasError?: boolean;
 	id: string;
 	label: string;
+	placeholder?: string;
 	value: string;
 	setValue: (newValue: string) => void;
 }
 
-function InputBar({ hasError, id, label, value, setValue }: Props) {
+function InputBar({
+	hasError,
+	id,
+	label,
+	placeholder,
+	value,
+	setValue
+}: Props) {
 	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
 		setValue(evt.target.value);
 	};
@@ -22,10 +30,12 @@ function InputBar({ hasError, id, label, value, setValue }: Props) {
 		<div className={styles["input-bar"]}>
 			<label htmlFor={id}>{t(label)}</label>
 			<input
+				autoComplete="off"
 				className={classnames({
 					[styles["error"]]: hasError
 				})}
 				id={id}
+				placeholder={placeholder && t(placeholder).toString()}
 				value={value}
 				onChange={handleChange}
 			/>

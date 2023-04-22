@@ -33,6 +33,8 @@ function MainInputBar({
 	return (
 		<div className={styles["main-input-bar"]}>
 			<input
+				autoComplete="off"
+				autoFocus={true}
 				className={classnames(className, {
 					[styles["error"]]: hasError
 				})}

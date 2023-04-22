@@ -9,8 +9,12 @@
 	"delete": "删除",
 	"enterElementOrCompound": "输入元素或化合物",
 	"enterFormula": "输入算式",
+	"enterNumber": "输入数字",
+	"gigabyte": "吉字节",
+	"kilobyte": "千字节",
 	"linearFormula": "一次函数解析式",
 	"mass": "质量",
+	"megabyte": "兆字节",
 	"molarMass": "摩尔质量",
 	"mole": "摩尔",
 	"particle": "粒子",
@@ -20,6 +24,7 @@
 	"regular": "常规",
 	"shangzhenYang": "杨尚臻",
 	"statistics": "统计",
+	"terabyte": "太字节",
 	"threeVariableLinearEquations": "三元一次方程组",
 	"twoVariableLinearEquations": "二元一次方程组"
 }

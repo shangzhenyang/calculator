@@ -9,8 +9,12 @@
 	"delete": "Delete",
 	"enterElementOrCompound": "Enter an Element or a Compound",
 	"enterFormula": "Enter a Formula",
+	"enterNumber": "Enter a Number",
+	"gigabyte": "Gigabyte",
+	"kilobyte": "Kilobyte",
 	"linearFormula": "Linear Formula",
 	"mass": "Mass",
+	"megabyte": "Megabyte",
 	"molarMass": "Molar Mass",
 	"mole": "Mole",
 	"particle": "Particle",
@@ -20,6 +24,7 @@
 	"regular": "Regular",
 	"shangzhenYang": "Shangzhen Yang",
 	"statistics": "Statistics",
+	"terabyte": "Terabyte",
 	"threeVariableLinearEquations": "3-Var Linear Equations",
 	"twoVariableLinearEquations": "2-Var Linear Equations"
 }
