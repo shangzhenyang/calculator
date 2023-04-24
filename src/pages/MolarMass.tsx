@@ -160,7 +160,7 @@ function MolarMass({ math }: PageProps) {
 				list="element-list"
 				placeholder="enterElementOrCompound"
 				value={searchTerm}
-				setValue={handleSearchTermChange}
+				onChange={handleSearchTermChange}
 			>
 				{hasSelectedElement && <div>{selectedElement.symbol}</div>}
 			</MainInputBar>
@@ -171,21 +171,21 @@ function MolarMass({ math }: PageProps) {
 					id="mole"
 					label="mole"
 					value={mole}
-					setValue={handleMoleChange}
+					onChange={handleMoleChange}
 				/>
 				<InputBar
 					hasError={hasParticleError}
 					id="particle"
 					label="particle"
 					value={particle}
-					setValue={handleParticleChange}
+					onChange={handleParticleChange}
 				/>
 				<InputBar
 					hasError={hasMassError}
 					id="mass"
 					label="mass"
 					value={mass}
-					setValue={handleMassChange}
+					onChange={handleMassChange}
 				/>
 			</div>}
 			<History

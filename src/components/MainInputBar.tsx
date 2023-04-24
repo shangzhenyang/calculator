@@ -18,8 +18,8 @@ interface Props {
 	placeholder: string;
 	value: string;
 	onChange: (newValue: string) => void;
-	onSubmit: () => void;
 	onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+	onSubmit?: () => void;
 }
 
 function MainInputBar({
@@ -30,8 +30,8 @@ function MainInputBar({
 	placeholder,
 	value,
 	onChange,
-	onSubmit,
-	onKeyDown
+	onKeyDown,
+	onSubmit
 }: Props) {
 	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
 		onChange(evt.target.value);
@@ -39,7 +39,7 @@ function MainInputBar({
 
 	const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
 		evt.preventDefault();
-		onSubmit();
+		onSubmit?.();
 	};
 
 	return (
