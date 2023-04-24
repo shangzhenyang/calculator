@@ -14,6 +14,7 @@ import type PageProps from "@/types/PageProps";
 
 function Regular({ math }: PageProps) {
 	const [formula, setFormula] = useState<string>("");
+	const [formulaHasError, setFormulaHasError] = useState<boolean>(false);
 	const [useAnswer, setUseAnswer] = useState<boolean>(false);
 
 	const backspace = () => {
@@ -37,7 +38,20 @@ function Regular({ math }: PageProps) {
 		if (!formulaProcessed) {
 			return;
 		}
-		setFormula(formulaProcessed + " = " + math.evaluate(formulaProcessed));
+		try {
+			const result = math.evaluate(formulaProcessed);
+			if (result.isNaN()) {
+				throw new Error("NaN");
+			}
+			setFormula(formulaProcessed + " = " + result);
+		} catch {
+			setFormulaHasError(true);
+		}
+	};
+
+	const handleFormulaChange = (newValue: string) => {
+		setFormula(newValue);
+		setFormulaHasError(false);
 	};
 
 	const handleFormulaKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
@@ -56,9 +70,10 @@ function Regular({ math }: PageProps) {
 		<main className={styles["regular"]}>
 			<MainInputBar
 				className={styles["formula-input"]}
+				hasError={formulaHasError}
 				placeholder="enterFormula"
 				value={formula}
-				onChange={setFormula}
+				onChange={handleFormulaChange}
 				onSubmit={handleFormulaSubmit}
 				onKeyDown={handleFormulaKeyDown}
 			>

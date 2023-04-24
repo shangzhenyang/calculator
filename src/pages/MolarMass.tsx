@@ -170,6 +170,7 @@ function MolarMass({ math }: PageProps) {
 					hasError={hasMoleError}
 					id="mole"
 					label="mole"
+					type="number"
 					value={mole}
 					onChange={handleMoleChange}
 				/>
@@ -177,6 +178,7 @@ function MolarMass({ math }: PageProps) {
 					hasError={hasParticleError}
 					id="particle"
 					label="particle"
+					type="number"
 					value={particle}
 					onChange={handleParticleChange}
 				/>
@@ -184,6 +186,7 @@ function MolarMass({ math }: PageProps) {
 					hasError={hasMassError}
 					id="mass"
 					label="mass"
+					type="number"
 					value={mass}
 					onChange={handleMassChange}
 				/>

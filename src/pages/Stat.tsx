@@ -14,7 +14,39 @@ import type PageProps from "@/types/PageProps";
 
 function Stat({ math }: PageProps) {
 	const [newNumber, setNewNumber] = useState<string>("");
+	const [newNumberHasError, setNewNumberHasError] = useState<boolean>(false);
 	const [numbers, setNumbers] = useState<string>("");
+
+	const addNumber = () => {
+		if (!newNumber) {
+			return;
+		}
+		try {
+			const evaluated = math.evaluate(newNumber);
+			if (evaluated.isNaN()) {
+				throw new Error("NaN");
+			}
+			setNumbers([...numberArray, evaluated].sort((a, b) => {
+				return a - b;
+			}).join(", "));
+			setNewNumber("");
+		} catch {
+			setNewNumberHasError(true);
+		}
+	};
+
+	const clear = () => {
+		setNumbers("");
+	};
+
+	const handleNewNumberChange = (newValue: string) => {
+		setNewNumber(newValue);
+		setNewNumberHasError(false);
+	};
+
+	const handleNumbersChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+		setNumbers(evt.target.value);
+	};
 
 	const numberArray = numbers
 		.replace(/(,|，|、|\n|\s)+/g, ",")
@@ -26,6 +58,9 @@ function Stat({ math }: PageProps) {
 		.map((item) => {
 			return Number(item);
 		});
+	numberArray.sort((a, b) => {
+		return a - b;
+	});
 
 	const count = numberArray.length;
 	const frequency = new Map<number, number>();
@@ -35,62 +70,60 @@ function Stat({ math }: PageProps) {
 		sum = sum.add(math.bignumber(number));
 	}
 	const average = math.divide(sum, count);
-	const maxFrequency = Math.max.apply(null, Array.from(frequency.values()));
+	const maxFrequency = Math.max(...Array.from(frequency.values()));
 	const modes = Array.from(frequency.keys()).filter((key) => {
 		return frequency.get(key) === maxFrequency;
 	});
 	const mode = modes.join(", ");
-	const max = Math.max.apply(null, numberArray);
-	const min = Math.min.apply(null, numberArray);
-	const range = math.subtract(math.bignumber(max), math.bignumber(min));
+	const maximum = Math.max(...numberArray);
+	const minimum = Math.min(...numberArray);
+	const range = math.subtract(
+		math.bignumber(maximum),
+		math.bignumber(minimum)
+	);
+	const median = count ? Number(math.median(numberArray)) : undefined;
+	const lowerQuantile = (count >= 4) ? (
+		count % 4 === 0 ?
+			math.divide(math.add(
+				math.bignumber(numberArray[(count / 4) - 1]),
+				math.bignumber(numberArray[count / 4])
+			), 2) :
+			numberArray[Math.floor(count / 4)]
+	) : undefined;
+	const upperQuantile = (count >= 4) ? (
+		count % 4 === 0 ?
+			math.divide(math.add(
+				math.bignumber(numberArray[(count * 3 / 4) - 1]),
+				math.bignumber(numberArray[count * 3 / 4])
+			), 2) :
+			numberArray[Math.floor(count * 3 / 4)]
+	) : undefined;
 
-	const addNumber = () => {
-		if (!newNumber) {
-			return;
+	const results = count ? {
+		range,
+		count,
+		average,
+		sum,
+		mode,
+		minimum,
+		lowerQuantile,
+		median,
+		upperQuantile,
+		maximum
+	} as const : {} as const;
+
+	const inputBars = Object.keys(results).map((key) => {
+		const value = results[key as keyof typeof results];
+		if (!value) {
+			return null;
 		}
-		try {
-			const evaluated = math.evaluate(newNumber);
-			setNumbers([...numberArray, evaluated].sort((a, b) => {
-				return a - b;
-			}).join(", "));
-			setNewNumber("");
-		} catch {
-			return;
-		}
-	};
-
-	const clear = () => {
-		setNumbers("");
-	};
-
-	const handleChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-		setNumbers(evt.target.value);
-	};
-
-	const results = count ? [{
-		label: "range",
-		value: range
-	}, {
-		label: "count",
-		value: count
-	}, {
-		label: "average",
-		value: average
-	}, {
-		label: "sum",
-		value: sum
-	}, {
-		label: "mode",
-		value: mode
-	}] : [];
-
-	const inputBars = results.map((result) => {
 		return (
 			<InputBar
-				id={result.label}
-				key={result.label}
-				label={result.label}
-				value={result.value.toString()}
+				id={key}
+				key={key}
+				label={key}
+				type="text"
+				value={value.toString()}
 			/>
 		);
 	});
@@ -98,9 +131,10 @@ function Stat({ math }: PageProps) {
 	return (
 		<main>
 			<MainInputBar
+				hasError={newNumberHasError}
 				placeholder="enterNewNumber"
 				value={newNumber}
-				onChange={setNewNumber}
+				onChange={handleNewNumberChange}
 				onSubmit={addNumber}
 			>
 				<button>
@@ -113,7 +147,7 @@ function Stat({ math }: PageProps) {
 				<textarea
 					id="added-numbers"
 					value={numbers}
-					onChange={handleChange}
+					onChange={handleNumbersChange}
 				></textarea>
 				<BlockButton
 					icon={faBroom}

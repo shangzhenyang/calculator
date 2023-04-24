@@ -10,6 +10,7 @@ interface Props {
 	id: string;
 	label: string;
 	placeholder?: string;
+	type: "text" | "number";
 	value: string;
 	onChange?: (newValue: string) => void;
 }
@@ -19,6 +20,7 @@ function InputBar({
 	id,
 	label,
 	placeholder,
+	type,
 	value,
 	onChange
 }: Props) {
@@ -37,6 +39,7 @@ function InputBar({
 				id={id}
 				placeholder={placeholder && t(placeholder).toString()}
 				readOnly={!onChange}
+				type={type}
 				value={value}
 				onChange={handleChange}
 			/>

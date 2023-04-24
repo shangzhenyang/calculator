@@ -128,6 +128,7 @@ function Base({ math }: PageProps) {
 				key={item.label}
 				label={item.label}
 				placeholder="enterNumber"
+				type="number"
 				value={item.value}
 				onChange={item.onChange}
 			/>

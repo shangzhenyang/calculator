@@ -13,7 +13,7 @@ import type {
 interface Props {
 	children: ReactNode;
 	className?: string;
-	hasError?: boolean;
+	hasError: boolean;
 	list?: string;
 	placeholder: string;
 	value: string;
@@ -55,6 +55,7 @@ function MainInputBar({
 				})}
 				list={list}
 				placeholder={t(placeholder).toString()}
+				type="text"
 				value={value}
 				onChange={handleChange}
 				onKeyDown={onKeyDown}
