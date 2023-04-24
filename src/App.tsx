@@ -52,7 +52,7 @@ function App() {
 					path="/quadratic-function"
 					element={<QuadraticFunction />}
 				/>
-				<Route path="/stat" element={<Stat />} />
+				<Route path="/stat" element={<Stat math={math} />} />
 				<Route
 					path="/2var-linear-equations"
 					element={<TwoVarLinearEquations />}

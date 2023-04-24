@@ -11,7 +11,7 @@ interface Props {
 	label: string;
 	placeholder?: string;
 	value: string;
-	setValue?: (newValue: string) => void;
+	onChange?: (newValue: string) => void;
 }
 
 function InputBar({
@@ -20,10 +20,10 @@ function InputBar({
 	label,
 	placeholder,
 	value,
-	setValue
+	onChange
 }: Props) {
 	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-		setValue?.(evt.target.value);
+		onChange?.(evt.target.value);
 	};
 
 	return (
@@ -36,7 +36,7 @@ function InputBar({
 				})}
 				id={id}
 				placeholder={placeholder && t(placeholder).toString()}
-				readOnly={!setValue}
+				readOnly={!onChange}
 				value={value}
 				onChange={handleChange}
 			/>

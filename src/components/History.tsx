@@ -36,7 +36,10 @@ function History({ addToHistory, canAdd }: Props) {
 		return (
 			<li key={index}>
 				<div className={styles["list-item-main"]}>{value}</div>
-				<button onClick={handleDeleteClick}>{t("delete")}</button>
+				<button
+					type="button"
+					onClick={handleDeleteClick}
+				>{t("delete")}</button>
 			</li>
 		);
 	});

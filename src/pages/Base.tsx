@@ -102,22 +102,22 @@ function Base({ math }: PageProps) {
 		hasError: hasError(binary, binaryPrefix) || binary.length > 64,
 		label: "binary",
 		value: binary,
-		setValue: handleBinaryChange
+		onChange: handleBinaryChange
 	}, {
 		hasError: hasError(octal, octalPrefix),
 		label: "octal",
 		value: octal,
-		setValue: handleOctalChange
+		onChange: handleOctalChange
 	}, {
 		hasError: hasError(decimal),
 		label: "decimal",
 		value: decimal,
-		setValue: handleDecimalChange
+		onChange: handleDecimalChange
 	}, {
 		hasError: hasError(hexadecimal, hexadecimalPrefix),
 		label: "hexadecimal",
 		value: hexadecimal,
-		setValue: handleHexadecimalChange
+		onChange: handleHexadecimalChange
 	}] as const;
 
 	const inputBarElements = inputBarItems.map((item) => {
@@ -129,7 +129,7 @@ function Base({ math }: PageProps) {
 				label={item.label}
 				placeholder="enterNumber"
 				value={item.value}
-				setValue={item.setValue}
+				onChange={item.onChange}
 			/>
 		);
 	});

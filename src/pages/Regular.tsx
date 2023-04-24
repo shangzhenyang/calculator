@@ -41,16 +41,14 @@ function Regular({ math }: PageProps) {
 	};
 
 	const handleFormulaKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
-		switch (evt.key) {
-			case "Enter":
-				calculate();
-				break;
-			case "Escape":
-				setFormula("");
-				break;
-			default:
-				break;
+		if (evt.key === "Escape") {
+			setFormula("");
 		}
+		setUseAnswer(false);
+	};
+
+	const handleFormulaSubmit = () => {
+		calculate();
 		setUseAnswer(false);
 	};
 
@@ -60,11 +58,13 @@ function Regular({ math }: PageProps) {
 				className={styles["formula-input"]}
 				placeholder="enterFormula"
 				value={formula}
-				setValue={setFormula}
+				onChange={setFormula}
+				onSubmit={handleFormulaSubmit}
 				onKeyDown={handleFormulaKeyDown}
 			>
 				<button
 					title={t("backspace").toString()}
+					type="button"
 					onClick={backspace}
 				>
 					<FontAwesomeIcon icon={faDeleteLeft} size="xl" />

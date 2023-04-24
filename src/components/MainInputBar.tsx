@@ -5,6 +5,7 @@ import styles from "@/styles/MainInputBar.module.css";
 
 import type {
 	ChangeEvent,
+	FormEvent,
 	KeyboardEventHandler,
 	ReactNode
 } from "react";
@@ -16,7 +17,8 @@ interface Props {
 	list?: string;
 	placeholder: string;
 	value: string;
-	setValue: (newValue: string) => void;
+	onChange: (newValue: string) => void;
+	onSubmit: () => void;
 	onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
@@ -27,15 +29,24 @@ function MainInputBar({
 	list,
 	placeholder,
 	value,
-	setValue,
+	onChange,
+	onSubmit,
 	onKeyDown
 }: Props) {
 	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-		setValue(evt.target.value);
+		onChange(evt.target.value);
+	};
+
+	const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+		evt.preventDefault();
+		onSubmit();
 	};
 
 	return (
-		<div className={styles["main-input-bar"]}>
+		<form
+			className={styles["main-input-bar"]}
+			onSubmit={handleSubmit}
+		>
 			<input
 				autoComplete="off"
 				autoFocus={true}
@@ -49,7 +60,7 @@ function MainInputBar({
 				onKeyDown={onKeyDown}
 			/>
 			{children}
-		</div>
+		</form>
 	);
 }
 

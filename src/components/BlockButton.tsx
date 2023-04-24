@@ -15,6 +15,7 @@ function BlockButton({ icon, label, onClick }: Props) {
 	return (
 		<button
 			className={styles["block-button"]}
+			type="button"
 			onClick={onClick}
 		>
 			<FontAwesomeIcon icon={icon} size="xl" />

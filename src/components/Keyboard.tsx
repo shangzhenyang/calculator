@@ -42,6 +42,7 @@ function Keyboard({ calculate, setFormula, setUseAnswer }: Props) {
 			<button
 				className={styles["key"]}
 				key={key}
+				type="button"
 				onClick={handleClick}
 			>{key}</button>
 		);

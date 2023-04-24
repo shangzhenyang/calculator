@@ -80,23 +80,23 @@ function Byte() {
 	const inputBarItems = [{
 		label: "byte",
 		value: byte,
-		setValue: handleByteChange
+		onChange: handleByteChange
 	}, {
 		label: "kilobyte",
 		value: kilobyte,
-		setValue: handleKilobyteChange
+		onChange: handleKilobyteChange
 	}, {
 		label: "megabyte",
 		value: megabyte,
-		setValue: handleMegabyteChange
+		onChange: handleMegabyteChange
 	}, {
 		label: "gigabyte",
 		value: gigabyte,
-		setValue: handleGigabyteChange
+		onChange: handleGigabyteChange
 	}, {
 		label: "terabyte",
 		value: terabyte,
-		setValue: handleTerabyteChange
+		onChange: handleTerabyteChange
 	}] as const;
 
 	const inputBarElements = inputBarItems.map((item) => {
@@ -108,7 +108,7 @@ function Byte() {
 				label={item.label}
 				placeholder={"enterNumber"}
 				value={item.value}
-				setValue={item.setValue}
+				onChange={item.onChange}
 			/>
 		);
 	});
