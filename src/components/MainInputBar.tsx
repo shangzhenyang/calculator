@@ -4,7 +4,7 @@ import { t } from "i18next";
 import styles from "@/styles/MainInputBar.module.css";
 
 import type {
-	ChangeEventHandler,
+	ChangeEvent,
 	KeyboardEventHandler,
 	ReactNode
 } from "react";
@@ -16,7 +16,7 @@ interface Props {
 	list?: string;
 	placeholder: string;
 	value: string;
-	onChange: ChangeEventHandler<HTMLInputElement>;
+	setValue: (newValue: string) => void;
 	onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
@@ -27,9 +27,13 @@ function MainInputBar({
 	list,
 	placeholder,
 	value,
-	onChange,
+	setValue,
 	onKeyDown
 }: Props) {
+	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+		setValue(evt.target.value);
+	};
+
 	return (
 		<div className={styles["main-input-bar"]}>
 			<input
@@ -41,7 +45,7 @@ function MainInputBar({
 				list={list}
 				placeholder={t(placeholder).toString()}
 				value={value}
-				onChange={onChange}
+				onChange={handleChange}
 				onKeyDown={onKeyDown}
 			/>
 			{children}

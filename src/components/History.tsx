@@ -2,7 +2,7 @@ import { useState } from "react";
 import { t } from "i18next";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
-import ButtonBar from "@/components/ButtonBar";
+import BlockButton from "@/components/BlockButton";
 
 import styles from "@/styles/History.module.css";
 
@@ -43,12 +43,10 @@ function History({ addToHistory, canAdd }: Props) {
 
 	return (
 		<div className={styles["history"]}>
-			{canAdd && <ButtonBar
-				buttons={[{
-					icon: faCirclePlus,
-					label: "addToHistory",
-					onClick: handleAddToHistoryClick
-				}]}
+			{canAdd && <BlockButton
+				icon={faCirclePlus}
+				label="addToHistory"
+				onClick={handleAddToHistoryClick}
 			/>}
 			<ul>{historyListItems}</ul>
 		</div>

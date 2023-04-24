@@ -9,7 +9,7 @@ import MainInputBar from "@/components/MainInputBar";
 
 import styles from "@/styles/Regular.module.css";
 
-import type { ChangeEvent, KeyboardEvent } from "react";
+import type { KeyboardEvent } from "react";
 import type PageProps from "@/types/PageProps";
 
 function Regular({ math }: PageProps) {
@@ -40,10 +40,6 @@ function Regular({ math }: PageProps) {
 		setFormula(formulaProcessed + " = " + math.evaluate(formulaProcessed));
 	};
 
-	const handleFormulaChange = (evt: ChangeEvent<HTMLInputElement>) => {
-		setFormula(evt.target.value);
-	};
-
 	const handleFormulaKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
 		switch (evt.key) {
 			case "Enter":
@@ -64,7 +60,7 @@ function Regular({ math }: PageProps) {
 				className={styles["formula-input"]}
 				placeholder="enterFormula"
 				value={formula}
-				onChange={handleFormulaChange}
+				setValue={setFormula}
 				onKeyDown={handleFormulaKeyDown}
 			>
 				<button

@@ -1,0 +1,24 @@
+.stat-editor {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin: 15px;
+}
+
+.stat-editor label {
+	padding: 0 5px;
+}
+
+.stat-editor textarea {
+	appearance: none;
+	background-color: transparent;
+	border: var(--border);
+	border-radius: var(--radius);
+	display: block;
+	font-family: inherit;
+	font-size: inherit;
+	height: 300px;
+	padding: 10px 15px;
+	resize: none;
+	width: 100%;
+}

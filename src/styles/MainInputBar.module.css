@@ -11,6 +11,14 @@
 	padding: 20px 25px;
 }
 
+.main-input-bar>button {
+	align-items: center;
+	display: flex;
+	font-size: inherit;
+	gap: 10px;
+	white-space: nowrap;
+}
+
 .main-input-bar>div {
 	align-items: center;
 	display: flex;

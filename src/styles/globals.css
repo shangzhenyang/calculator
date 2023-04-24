@@ -13,7 +13,9 @@
 	box-sizing: border-box;
 }
 
-*:focus:not(:focus-visible) {
+*:focus:not(:focus-visible),
+input:focus-visible,
+textarea:focus-visible {
 	outline: none;
 }
 
@@ -46,10 +48,6 @@ input {
 html,
 #root {
 	height: 100%;
-}
-
-input:focus-visible {
-	outline: none;
 }
 
 main {

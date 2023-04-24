@@ -6,7 +6,6 @@ import History from "@/components/History";
 import InputBar from "@/components/InputBar";
 import MainInputBar from "@/components/MainInputBar";
 
-import type { ChangeEvent } from "react";
 import type { AllResult } from "@shangzhen/periodic-table";
 import type PageProps from "@/types/PageProps";
 
@@ -132,9 +131,9 @@ function MolarMass({ math }: PageProps) {
 		calculateBasedOnParticle(newValue);
 	};
 
-	const handleSearchTermChange = (evt: ChangeEvent<HTMLInputElement>) => {
-		setSearchTerm(evt.target.value);
-		const result = getCompound(evt.target.value);
+	const handleSearchTermChange = (newValue: string) => {
+		setSearchTerm(newValue);
+		const result = getCompound(newValue);
 		setSelectedElement(result);
 		setMole("1");
 		calculate(result, "1");
@@ -161,7 +160,7 @@ function MolarMass({ math }: PageProps) {
 				list="element-list"
 				placeholder="enterElementOrCompound"
 				value={searchTerm}
-				onChange={handleSearchTermChange}
+				setValue={handleSearchTermChange}
 			>
 				{hasSelectedElement && <div>{selectedElement.symbol}</div>}
 			</MainInputBar>

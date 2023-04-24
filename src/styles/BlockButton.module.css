@@ -1,9 +1,5 @@
-.button-bar {
-	display: flex;
-	gap: 15px;
-}
-
-.button-bar button {
+.block-button {
+	align-items: center;
 	border: var(--border);
 	border-radius: var(--radius);
 	display: flex;

@@ -16,6 +16,11 @@
 	padding: 10px 15px;
 }
 
+.input-bar input:read-only {
+	background-color: var(--fg-alpha-05);
+	cursor: not-allowed;
+}
+
 .input-bar label {
 	padding: 0 15px;
 	width: 30%;
