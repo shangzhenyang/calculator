@@ -61,7 +61,6 @@ function Stat({ math }: PageProps) {
 	numberArray.sort((a, b) => {
 		return a - b;
 	});
-
 	const count = numberArray.length;
 	const frequency = new Map<number, number>();
 	let sum = math.bignumber(0);
@@ -98,6 +97,24 @@ function Stat({ math }: PageProps) {
 			), 2) :
 			numberArray[Math.floor(count * 3 / 4)]
 	) : undefined;
+	let tmpVariance = math.bignumber(0);
+	for (const number of numberArray) {
+		tmpVariance = tmpVariance.add(math.square(Number(math.subtract(
+			math.bignumber(number),
+			average
+		))));
+	}
+	const sampleVariance = math.divide(tmpVariance, count - 1);
+	const populationVariance = math.divide(tmpVariance, count);
+	const standardDeviation = math.sqrt(Number(populationVariance));
+	const interquartileRange =
+		(upperQuantile !== undefined && lowerQuantile !== undefined) ?
+			math.subtract(
+				upperQuantile,
+				lowerQuantile
+			) : undefined;
+	const quartileDeviation = (interquartileRange !== undefined) ?
+		math.divide(interquartileRange, 2) : undefined;
 
 	const results = count ? {
 		range,
@@ -105,6 +122,11 @@ function Stat({ math }: PageProps) {
 		average,
 		sum,
 		mode,
+		sampleVariance,
+		populationVariance,
+		standardDeviation,
+		quartileDeviation,
+		interquartileRange,
 		minimum,
 		lowerQuantile,
 		median,
