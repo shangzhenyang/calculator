@@ -40,7 +40,7 @@ function Regular({ math }: PageProps) {
 		}
 		try {
 			const result = math.evaluate(formulaProcessed);
-			if (result.isNaN()) {
+			if (typeof result === "function") {
 				throw new Error("NaN");
 			}
 			setFormula(formulaProcessed + " = " + result);
