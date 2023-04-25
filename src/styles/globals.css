@@ -44,6 +44,12 @@ input {
 	border: none;
 }
 
+hr {
+	border: none;
+	border-top: var(--border);
+	margin: 0;
+}
+
 html,
 #root {
 	height: 100%;
@@ -65,6 +71,13 @@ main button:hover {
 main button:active {
 	background-color: var(--theme-color);
 	color: white;
+}
+
+p {
+	border: var(--border);
+	border-radius: var(--radius);
+	margin: 15px;
+	padding: 15px;
 }
 
 ul {

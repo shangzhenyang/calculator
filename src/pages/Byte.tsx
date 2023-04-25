@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { t } from "i18next";
 
 import InputBar from "@/components/InputBar";
 
@@ -105,12 +106,11 @@ function Byte() {
 				hasError={isNaN(Number(item.value))}
 				id={item.label + "-input"}
 				key={item.label}
-				label={item.label}
 				placeholder={"enterNumber"}
 				type="number"
 				value={item.value}
 				onChange={item.onChange}
-			/>
+			>{t(item.label)}</InputBar>
 		);
 	});
 

@@ -3,12 +3,12 @@ import { t } from "i18next";
 
 import styles from "@/styles/InputBar.module.css";
 
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, ReactNode } from "react";
 
 interface Props {
+	children: ReactNode;
 	hasError?: boolean;
 	id: string;
-	label: string;
 	placeholder?: string;
 	type: "text" | "number";
 	value: string;
@@ -16,9 +16,9 @@ interface Props {
 }
 
 function InputBar({
+	children,
 	hasError,
 	id,
-	label,
 	placeholder,
 	type,
 	value,
@@ -30,7 +30,7 @@ function InputBar({
 
 	return (
 		<div className={styles["input-bar"]}>
-			<label htmlFor={id}>{t(label)}</label>
+			<label htmlFor={id}>{children}</label>
 			<input
 				autoComplete="off"
 				className={classnames({

@@ -134,7 +134,7 @@ function Stat({ math }: PageProps) {
 		maximum
 	} as const : {} as const;
 
-	const inputBars = Object.keys(results).map((key) => {
+	const resultBars = Object.keys(results).map((key) => {
 		const value = results[key as keyof typeof results];
 		if (!value) {
 			return null;
@@ -143,10 +143,9 @@ function Stat({ math }: PageProps) {
 			<InputBar
 				id={key}
 				key={key}
-				label={key}
 				type="text"
 				value={value.toString()}
-			/>
+			>{t(key)}</InputBar>
 		);
 	});
 
@@ -177,7 +176,7 @@ function Stat({ math }: PageProps) {
 					onClick={clear}
 				/>
 			</div>
-			{inputBars}
+			{resultBars}
 		</main>
 	);
 }

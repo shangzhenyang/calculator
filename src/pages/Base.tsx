@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { t } from "i18next";
 
 import InputBar from "@/components/InputBar";
 
@@ -126,12 +127,11 @@ function Base({ math }: PageProps) {
 				hasError={item.hasError}
 				id={item.label + "-input"}
 				key={item.label}
-				label={item.label}
 				placeholder="enterNumber"
 				type="number"
 				value={item.value}
 				onChange={item.onChange}
-			/>
+			>{t(item.label)}</InputBar>
 		);
 	});
 

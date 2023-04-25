@@ -1,5 +1,5 @@
 import { useState } from "react";
-import i18n from "i18next";
+import i18n, { t } from "i18next";
 import { elements, getCompound, isErrorResult } from "@shangzhen/periodic-table";
 
 import History from "@/components/History";
@@ -153,6 +153,36 @@ function MolarMass({ math }: PageProps) {
 		);
 	});
 
+	const inputs = [{
+		hasError: hasMoleError,
+		label: "mole",
+		value: mole,
+		onChange: handleMoleChange
+	}, {
+		hasError: hasParticleError,
+		label: "particle",
+		value: particle,
+		onChange: handleParticleChange
+	}, {
+		hasError: hasMassError,
+		label: "mass",
+		value: mass,
+		onChange: handleMassChange
+	}] as const;
+
+	const inputBars = inputs.map((input) => {
+		return (
+			<InputBar
+				hasError={input.hasError}
+				id={input.label}
+				key={input.label}
+				type="number"
+				value={input.value}
+				onChange={input.onChange}
+			>{t(input.label)}</InputBar>
+		);
+	});
+
 	return (
 		<main>
 			<MainInputBar
@@ -165,32 +195,7 @@ function MolarMass({ math }: PageProps) {
 				{hasSelectedElement && <div>{selectedElement.symbol}</div>}
 			</MainInputBar>
 			<datalist id="element-list">{elementOptions}</datalist>
-			{hasSelectedElement && <div>
-				<InputBar
-					hasError={hasMoleError}
-					id="mole"
-					label="mole"
-					type="number"
-					value={mole}
-					onChange={handleMoleChange}
-				/>
-				<InputBar
-					hasError={hasParticleError}
-					id="particle"
-					label="particle"
-					type="number"
-					value={particle}
-					onChange={handleParticleChange}
-				/>
-				<InputBar
-					hasError={hasMassError}
-					id="mass"
-					label="mass"
-					type="number"
-					value={mass}
-					onChange={handleMassChange}
-				/>
-			</div>}
+			{hasSelectedElement && <div>{inputBars}</div>}
 			<History
 				addToHistory={addToHistory}
 				canAdd={

@@ -42,7 +42,7 @@ function App() {
 				/>
 				<Route
 					path="/quadratic-equation"
-					element={<QuadraticEquation />}
+					element={<QuadraticEquation math={math} />}
 				/>
 				<Route
 					path="/quadratic-formula"
