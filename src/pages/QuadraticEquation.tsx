@@ -11,12 +11,12 @@ function QuadraticEquation({ math }: PageProps) {
 	const [c, setC] = useState<string>("");
 
 	const scope = {
-		a: Number(a),
-		b: Number(b),
-		c: Number(c),
+		a: a ? math.bignumber(a) : NaN,
+		b: b ? math.bignumber(b) : NaN,
+		c: c ? math.bignumber(c) : NaN,
 		delta: 0
 	};
-	scope.delta = Number(math.evaluate("pow(b, 2) - 4 * a * c", scope));
+	scope.delta = math.evaluate("pow(b, 2) - 4 * a * c", scope);
 	const hasSolutions = scope.delta >= 0;
 	const delta = scope.delta + (() => {
 		if (scope.delta > 0) {
@@ -27,9 +27,9 @@ function QuadraticEquation({ math }: PageProps) {
 			return " = 0";
 		}
 	})();
-	const x1 = hasSolutions ?
+	const x1: string = hasSolutions ?
 		math.evaluate("(-b + sqrt(delta)) / (2 * a)", scope) : "NaN";
-	const x2 = hasSolutions ?
+	const x2: string = hasSolutions ?
 		math.evaluate("(-b - sqrt(delta)) / (2 * a)", scope) : "NaN";
 
 	const inputs = {
@@ -85,8 +85,10 @@ function QuadraticEquation({ math }: PageProps) {
 				{a || "a"}x<sup>2</sup> + {b || "b"}x + {c || "c"} = 0 (a ≠ 0)
 			</p>
 			{inputBars}
-			<hr />
-			{resultBars}
+			{a && b && c && <>
+				<hr />
+				{resultBars}
+			</>}
 		</main>
 	);
 }
