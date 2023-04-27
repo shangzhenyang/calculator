@@ -1,7 +1,10 @@
 import { Fragment, useState } from "react";
 
-import InputBar from "@/components/InputBar";
+import InputBars from "@/components/InputBars";
+import ResultBars from "@/components/ResultBars";
 
+import type InputInfo from "@/types/InputInfo";
+import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
 function ThreeVarLinearEquations({ math }: PageProps) {
@@ -44,7 +47,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 	const y = math.evaluate("((a1 * d2 * c3) + (d1 * c2 * a3) + (c1 * a2 * d3) - (c1 * d2 * a3) - (a1 * c2 * d3) - (d1 * a2 * c3)) / delta", scope);
 	const z = math.evaluate("((a1 * b2 * d3) + (b1 * d2 * a3) + (d1 * a2 * b3) - (d1 * b2 * a3) - (a1 * d2 * b3) - (b1 * a2 * d3)) / delta", scope);
 
-	const inputs = [
+	const inputs: InputInfoWritable[][] = [
 		[
 			{
 				id: "a1",
@@ -147,28 +150,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 				setValue: setD3
 			}
 		]
-	] as const;
-
-	const inputBars = inputs.map((row, index) => {
-		const rows = row.map(({ id, label, value, setValue }) => {
-			return (
-				<InputBar
-					id={id}
-					key={id}
-					type="number"
-					value={value}
-					onChange={setValue}
-				>{label}</InputBar>
-			);
-		});
-
-		return (
-			<Fragment key={index}>
-				{rows}
-				{index !== inputs.length - 1 && <hr />}
-			</Fragment>
-		);
-	});
+	];
 
 	const inputPreview = inputs.map((row, index) => {
 		return (
@@ -185,7 +167,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 		return value !== "";
 	});
 
-	const results = [
+	const results: InputInfo[] = [
 		{
 			id: "x",
 			label: (
@@ -209,24 +191,13 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 		}
 	];
 
-	const resultBars = results.map(({ id, label, value }) => {
-		return (
-			<InputBar
-				id={id}
-				key={id}
-				type="text"
-				value={(value * 1).toString()} // to eliminate negative zero
-			>{label}</InputBar>
-		);
-	});
-
 	return (
 		<main>
 			<p>{inputPreview}</p>
-			{inputBars}
+			<InputBars inputs={inputs} />
 			{allInputsFilled && <>
 				<hr />
-				{resultBars}
+				<ResultBars results={results} />
 			</>}
 		</main>
 	);

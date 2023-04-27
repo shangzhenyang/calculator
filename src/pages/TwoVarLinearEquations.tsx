@@ -1,7 +1,10 @@
 import { Fragment, useState } from "react";
 
-import InputBar from "@/components/InputBar";
+import InputBars from "@/components/InputBars";
+import ResultBars from "@/components/ResultBars";
 
+import type InputInfo from "@/types/InputInfo";
+import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
 function TwoVarLinearEquations({ math }: PageProps) {
@@ -28,7 +31,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 	const y = math.evaluate("((a1 * c2) - (a2 * c1)) / ((b1 * a2) - (a1 * b2))",
 		scope);
 
-	const inputs = [
+	const inputs: InputInfoWritable[][] = [
 		[
 			{
 				id: "a1",
@@ -81,29 +84,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 				setValue: setC2
 			}
 		]
-	] as const;
-
-
-	const inputBars = inputs.map((row, index) => {
-		const rows = row.map(({ id, label, value, setValue }) => {
-			return (
-				<InputBar
-					id={id}
-					key={id}
-					type="number"
-					value={value}
-					onChange={setValue}
-				>{label}</InputBar>
-			);
-		});
-
-		return (
-			<Fragment key={index}>
-				{rows}
-				{index !== inputs.length - 1 && <hr />}
-			</Fragment>
-		);
-	});
+	];
 
 	const inputPreview = inputs.map((row, index) => {
 		return (
@@ -119,7 +100,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 		return value !== "";
 	});
 
-	const results = [
+	const results: InputInfo[] = [
 		{
 			id: "x",
 			label: (
@@ -136,24 +117,13 @@ function TwoVarLinearEquations({ math }: PageProps) {
 		}
 	];
 
-	const resultBars = results.map(({ id, label, value }) => {
-		return (
-			<InputBar
-				id={id}
-				key={id}
-				type="text"
-				value={(value * 1).toString()} // to eliminate negative zero
-			>{label}</InputBar>
-		);
-	});
-
 	return (
 		<main>
 			<p>{inputPreview}</p>
-			{inputBars}
+			<InputBars inputs={inputs} />
 			{allInputsFilled && <>
 				<hr />
-				{resultBars}
+				<ResultBars results={results} />
 			</>}
 		</main>
 	);
