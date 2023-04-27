@@ -99,27 +99,32 @@ function Base({ math }: PageProps) {
 		return isNaN(Number(value));
 	};
 
-	const inputBarItems = [{
-		hasError: hasError(binary, binaryPrefix) || binary.length > 64,
-		label: "binary",
-		value: binary,
-		onChange: handleBinaryChange
-	}, {
-		hasError: hasError(octal, octalPrefix),
-		label: "octal",
-		value: octal,
-		onChange: handleOctalChange
-	}, {
-		hasError: hasError(decimal),
-		label: "decimal",
-		value: decimal,
-		onChange: handleDecimalChange
-	}, {
-		hasError: hasError(hexadecimal, hexadecimalPrefix),
-		label: "hexadecimal",
-		value: hexadecimal,
-		onChange: handleHexadecimalChange
-	}] as const;
+	const inputBarItems = [
+		{
+			hasError: hasError(binary, binaryPrefix) || binary.length > 64,
+			label: "binary",
+			value: binary,
+			onChange: handleBinaryChange
+		},
+		{
+			hasError: hasError(octal, octalPrefix),
+			label: "octal",
+			value: octal,
+			onChange: handleOctalChange
+		},
+		{
+			hasError: hasError(decimal),
+			label: "decimal",
+			value: decimal,
+			onChange: handleDecimalChange
+		},
+		{
+			hasError: hasError(hexadecimal, hexadecimalPrefix),
+			label: "hexadecimal",
+			value: hexadecimal,
+			onChange: handleHexadecimalChange
+		}
+	] as const;
 
 	const inputBarElements = inputBarItems.map((item) => {
 		return (

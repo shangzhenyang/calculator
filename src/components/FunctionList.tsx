@@ -33,7 +33,10 @@ function FunctionList({ setFormula }: Props) {
 		"sqrt()",
 		"tan()",
 		"tanh()",
-		"(π/180)"
+		"(π/180)",
+		"0b",
+		"0o",
+		"0x"
 	];
 
 	const listItems = functions.map((item) => {

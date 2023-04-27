@@ -55,7 +55,7 @@ function App() {
 				<Route path="/stat" element={<Stat math={math} />} />
 				<Route
 					path="/2var-linear-equations"
-					element={<TwoVarLinearEquations />}
+					element={<TwoVarLinearEquations math={math} />}
 				/>
 				<Route
 					path="/3var-linear-equations"

@@ -7,46 +7,60 @@ import Footer from "@/components/Footer";
 import styles from "@/styles/Sidebar.module.css";
 
 function Sidebar() {
-	const navItems = [{
-		path: "/",
-		text: "regular"
-	}, {
-		path: "/base",
-		text: "base"
-	}, {
-		path: "/byte",
-		text: "byte"
-	}, {
-		path: "/currency",
-		text: "currency"
-	}, {
-		path: "/date",
-		text: "date"
-	}, {
-		path: "/molar-mass",
-		text: "molarMass"
-	}, {
-		path: "/stat",
-		text: "statistics"
-	}, {
-		path: "/quadratic-equation",
-		text: "quadraticEquation"
-	}, {
-		path: "/2var-linear-equations",
-		text: "twoVariableLinearEquations"
-	}, {
-		path: "/3var-linear-equations",
-		text: "threeVariableLinearEquations"
-	}, {
-		path: "/quadratic-function",
-		text: "quadraticFunction"
-	}, {
-		path: "/linear-formula",
-		text: "linearFormula"
-	}, {
-		path: "/quadratic-formula",
-		text: "quadraticFormula"
-	}];
+	const navItems = [
+		{
+			path: "/",
+			text: "regular"
+		},
+		{
+			path: "/base",
+			text: "base"
+		},
+		{
+			path: "/byte",
+			text: "byte"
+		},
+		{
+			path: "/currency",
+			text: "currency"
+		},
+		{
+			path: "/date",
+			text: "date"
+		},
+		{
+			path: "/molar-mass",
+			text: "molarMass"
+		},
+		{
+			path: "/stat",
+			text: "statistics"
+		},
+		{
+			path: "/quadratic-equation",
+			text: "quadraticEquation"
+		},
+		{
+			path: "/2var-linear-equations",
+			text: "twoVariableLinearEquations"
+		},
+		{
+			path: "/3var-linear-equations",
+			text: "threeVariableLinearEquations"
+		},
+		{
+			path: "/quadratic-function",
+			text: "quadraticFunction"
+		},
+		{
+			path: "/linear-formula",
+			text: "linearFormula"
+		},
+		{
+			path: "/quadratic-formula",
+			text: "quadraticFormula"
+		}
+	];
 
 	const navLinks = navItems.map((item) => {
 		return (

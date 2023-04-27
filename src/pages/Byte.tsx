@@ -78,27 +78,33 @@ function Byte() {
 		setTerabyte(newValue);
 	};
 
-	const inputBarItems = [{
-		label: "byte",
-		value: byte,
-		onChange: handleByteChange
-	}, {
-		label: "kilobyte",
-		value: kilobyte,
-		onChange: handleKilobyteChange
-	}, {
-		label: "megabyte",
-		value: megabyte,
-		onChange: handleMegabyteChange
-	}, {
-		label: "gigabyte",
-		value: gigabyte,
-		onChange: handleGigabyteChange
-	}, {
-		label: "terabyte",
-		value: terabyte,
-		onChange: handleTerabyteChange
-	}] as const;
+	const inputBarItems = [
+		{
+			label: "byte",
+			value: byte,
+			onChange: handleByteChange
+		},
+		{
+			label: "kilobyte",
+			value: kilobyte,
+			onChange: handleKilobyteChange
+		},
+		{
+			label: "megabyte",
+			value: megabyte,
+			onChange: handleMegabyteChange
+		},
+		{
+			label: "gigabyte",
+			value: gigabyte,
+			onChange: handleGigabyteChange
+		},
+		{
+			label: "terabyte",
+			value: terabyte,
+			onChange: handleTerabyteChange
+		}
+	] as const;
 
 	const inputBarElements = inputBarItems.map((item) => {
 		return (

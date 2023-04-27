@@ -153,22 +153,26 @@ function MolarMass({ math }: PageProps) {
 		);
 	});
 
-	const inputs = [{
-		hasError: hasMoleError,
-		label: "mole",
-		value: mole,
-		onChange: handleMoleChange
-	}, {
-		hasError: hasParticleError,
-		label: "particle",
-		value: particle,
-		onChange: handleParticleChange
-	}, {
-		hasError: hasMassError,
-		label: "mass",
-		value: mass,
-		onChange: handleMassChange
-	}] as const;
+	const inputs = [
+		{
+			hasError: hasMoleError,
+			label: "mole",
+			value: mole,
+			onChange: handleMoleChange
+		},
+		{
+			hasError: hasParticleError,
+			label: "particle",
+			value: particle,
+			onChange: handleParticleChange
+		},
+		{
+			hasError: hasMassError,
+			label: "mass",
+			value: mass,
+			onChange: handleMassChange
+		}
+	] as const;
 
 	const inputBars = inputs.map((input) => {
 		return (
