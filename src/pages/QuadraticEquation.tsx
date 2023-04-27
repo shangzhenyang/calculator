@@ -15,7 +15,7 @@ function QuadraticEquation({ math }: PageProps) {
 		c: c && !isNaN(Number(c)) ? math.bignumber(c) : NaN,
 		delta: 0
 	};
-	scope.delta = math.evaluate("pow(b, 2) - 4 * a * c", scope);
+	scope.delta = math.evaluate("pow(b, 2) - (4 * a * c)", scope);
 	const hasSolutions = scope.delta >= 0;
 	const delta = scope.delta + (() => {
 		if (scope.delta > 0) {

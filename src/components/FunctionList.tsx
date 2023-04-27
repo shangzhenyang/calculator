@@ -8,6 +8,9 @@ interface Props {
 
 function FunctionList({ setFormula }: Props) {
 	const functions = [
+		"0b",
+		"0o",
+		"0x",
 		"abs()",
 		"bin()",
 		"cbrt()",
@@ -33,10 +36,7 @@ function FunctionList({ setFormula }: Props) {
 		"sqrt()",
 		"tan()",
 		"tanh()",
-		"(π/180)",
-		"0b",
-		"0o",
-		"0x"
+		"(π/180)"
 	];
 
 	const listItems = functions.map((item) => {

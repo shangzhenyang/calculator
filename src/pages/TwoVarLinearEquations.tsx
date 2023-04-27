@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import InputBar from "@/components/InputBar";
 
@@ -8,6 +8,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 	const [a1, setA1] = useState<string>("");
 	const [b1, setB1] = useState<string>("");
 	const [c1, setC1] = useState<string>("");
+
 	const [a2, setA2] = useState<string>("");
 	const [b2, setB2] = useState<string>("");
 	const [c2, setC2] = useState<string>("");
@@ -16,13 +17,16 @@ function TwoVarLinearEquations({ math }: PageProps) {
 		a1: a1 && !isNaN(Number(a1)) ? math.bignumber(a1) : NaN,
 		b1: b1 && !isNaN(Number(b1)) ? math.bignumber(b1) : NaN,
 		c1: c1 && !isNaN(Number(c1)) ? math.bignumber(-c1) : NaN,
+
 		a2: a2 && !isNaN(Number(a2)) ? math.bignumber(a2) : NaN,
 		b2: b2 && !isNaN(Number(b2)) ? math.bignumber(b2) : NaN,
 		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(-c2) : NaN
 	};
 
-	const x = math.evaluate("(b1 * c2 - b2 * c1) / (a1 * b2 - b1 * a2)", scope);
-	const y = math.evaluate("(a1 * c2 - a2 * c1) / (b1 * a2 - a1 * b2)", scope);
+	const x = math.evaluate("((b1 * c2) - (b2 * c1)) / ((a1 * b2) - (b1 * a2))",
+		scope);
+	const y = math.evaluate("((a1 * c2) - (a2 * c1)) / ((b1 * a2) - (a1 * b2))",
+		scope);
 
 	const inputs = [
 		[
@@ -79,31 +83,39 @@ function TwoVarLinearEquations({ math }: PageProps) {
 		]
 	] as const;
 
-	const inputsFlat = inputs.flat();
 
-	const inputBars = inputsFlat.map(({ id, label, value, setValue }) => {
+	const inputBars = inputs.map((row, index) => {
+		const rows = row.map(({ id, label, value, setValue }) => {
+			return (
+				<InputBar
+					id={id}
+					key={id}
+					type="number"
+					value={value}
+					onChange={setValue}
+				>{label}</InputBar>
+			);
+		});
+
 		return (
-			<InputBar
-				id={id}
-				key={id}
-				type="number"
-				value={value}
-				onChange={setValue}
-			>{label}</InputBar>
+			<Fragment key={index}>
+				{rows}
+				{index !== inputs.length - 1 && <hr />}
+			</Fragment>
 		);
 	});
 
 	const inputPreview = inputs.map((row, index) => {
 		return (
-			<>
+			<Fragment key={index}>
 				{row[0].value || row[0].label}x + {row[1].value || row[1].label}
 				y = {row[2].value || row[2].label}
 				{index !== inputs.length - 1 && <br />}
-			</>
+			</Fragment>
 		);
 	});
 
-	const allInputsFilled = inputsFlat.every(({ value }) => {
+	const allInputsFilled = inputs.flat().every(({ value }) => {
 		return value !== "";
 	});
 
@@ -130,7 +142,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 				id={id}
 				key={id}
 				type="text"
-				value={value}
+				value={(value * 1).toString()} // to eliminate negative zero
 			>{label}</InputBar>
 		);
 	});

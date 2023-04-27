@@ -59,7 +59,7 @@ function App() {
 				/>
 				<Route
 					path="/3var-linear-equations"
-					element={<ThreeVarLinearEquations />}
+					element={<ThreeVarLinearEquations math={math} />}
 				/>
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>

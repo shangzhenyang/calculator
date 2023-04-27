@@ -3,6 +3,10 @@
 	text-align: right;
 }
 
+.formula-input::placeholder {
+	font-family: sans-serif;
+}
+
 .keyboard-area {
 	align-items: center;
 	display: flex;
