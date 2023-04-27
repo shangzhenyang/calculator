@@ -38,10 +38,12 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
 	appearance: none;
 	background-color: transparent;
 	border: none;
+	font-family: inherit;
 }
 
 hr {

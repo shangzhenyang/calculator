@@ -10,7 +10,7 @@ interface Props {
 	hasError?: boolean;
 	id: string;
 	placeholder?: string;
-	type: "text" | "number";
+	type: "text" | "number" | "date";
 	value: string;
 	onChange?: (newValue: string) => void;
 }

@@ -4,7 +4,7 @@ import { create, all } from "mathjs";
 import Base from "@/pages/Base";
 import Byte from "@/pages/Byte";
 import Currency from "@/pages/Currency";
-import Date from "@/pages/Date";
+import DateDifference from "@/pages/DateDifference";
 import Header from "@/components/Header";
 import LinearFormula from "@/pages/LinearFormula";
 import MolarMass from "@/pages/MolarMass";
@@ -34,7 +34,7 @@ function App() {
 				<Route path="/base" element={<Base math={math} />} />
 				<Route path="/byte" element={<Byte />} />
 				<Route path="/currency" element={<Currency />} />
-				<Route path="/date" element={<Date />} />
+				<Route path="/date-difference" element={<DateDifference />} />
 				<Route path="/linear-formula" element={<LinearFormula />} />
 				<Route
 					path="/molar-mass"

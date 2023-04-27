@@ -78,7 +78,7 @@ function Byte() {
 		setTerabyte(newValue);
 	};
 
-	const inputBarItems = [
+	const inputs = [
 		{
 			label: "byte",
 			value: byte,
@@ -106,7 +106,7 @@ function Byte() {
 		}
 	] as const;
 
-	const inputBarElements = inputBarItems.map((item) => {
+	const inputBars = inputs.map((item) => {
 		return (
 			<InputBar
 				hasError={isNaN(Number(item.value))}
@@ -121,7 +121,7 @@ function Byte() {
 	});
 
 	return (
-		<main>{inputBarElements}</main>
+		<main>{inputBars}</main>
 	);
 }
 

@@ -10,12 +10,9 @@
 }
 
 .stat-editor textarea {
-	appearance: none;
-	background-color: transparent;
 	border: var(--border);
 	border-radius: var(--radius);
 	display: block;
-	font-family: inherit;
 	font-size: inherit;
 	height: 300px;
 	padding: 10px 15px;

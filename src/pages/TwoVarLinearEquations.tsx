@@ -96,7 +96,8 @@ function TwoVarLinearEquations({ math }: PageProps) {
 	const inputPreview = inputs.map((row, index) => {
 		return (
 			<>
-				{row[0].value || row[0].label}x + {row[1].value || row[1].label}y = {row[2].value || row[2].label}
+				{row[0].value || row[0].label}x + {row[1].value || row[1].label}
+				y = {row[2].value || row[2].label}
 				{index !== inputs.length - 1 && <br />}
 			</>
 		);

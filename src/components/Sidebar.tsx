@@ -25,8 +25,8 @@ function Sidebar() {
 			text: "currency"
 		},
 		{
-			path: "/date",
-			text: "date"
+			path: "/date-difference",
+			text: "dateDifference"
 		},
 		{
 			path: "/molar-mass",

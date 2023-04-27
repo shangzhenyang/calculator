@@ -99,7 +99,7 @@ function Base({ math }: PageProps) {
 		return isNaN(Number(value));
 	};
 
-	const inputBarItems = [
+	const inputs = [
 		{
 			hasError: hasError(binary, binaryPrefix) || binary.length > 64,
 			label: "binary",
@@ -126,7 +126,7 @@ function Base({ math }: PageProps) {
 		}
 	] as const;
 
-	const inputBarElements = inputBarItems.map((item) => {
+	const inputBars = inputs.map((item) => {
 		return (
 			<InputBar
 				hasError={item.hasError}
@@ -141,7 +141,7 @@ function Base({ math }: PageProps) {
 	});
 
 	return (
-		<main>{inputBarElements}</main>
+		<main>{inputBars}</main>
 	);
 }
 
