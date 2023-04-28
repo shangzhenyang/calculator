@@ -1,7 +1,10 @@
 import { useState } from "react";
 
-import InputBar from "@/components/InputBar";
+import InputBars from "@/components/InputBars";
+import ResultBars from "@/components/ResultBars";
 
+import type InputInfo from "@/types/InputInfo";
+import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
 function QuadraticEquation({ math }: PageProps) {
@@ -31,8 +34,9 @@ function QuadraticEquation({ math }: PageProps) {
 	const x2: string = hasSolutions ?
 		math.evaluate("(-b - sqrt(delta)) / (2 * a)", scope) : "NaN";
 
-	const inputs = [
+	const inputs: InputInfoWritable[] = [
 		{
+			hasError: !!a && Number(a) === 0,
 			id: "a",
 			value: a,
 			setValue: setA
@@ -47,68 +51,45 @@ function QuadraticEquation({ math }: PageProps) {
 			value: c,
 			setValue: setC
 		}
-	] as const;
-
-	const inputBars = inputs.map(({ id, value, setValue }) => {
-		return (
-			<InputBar
-				id={id}
-				key={id}
-				type="number"
-				value={value}
-				onChange={setValue}
-			>{id} =</InputBar>
-		);
-	});
+	];
 
 	const allInputsFilled = inputs.every(({ value }) => {
 		return value !== "";
 	});
 
-	const results = [
+	const results: InputInfo[] = [
 		{
 			id: "delta",
 			label: (
-				<>Δ =</>
+				<>Δ</>
 			),
 			value: delta
 		},
 		{
 			id: "x1",
 			label: (
-				<>x<sub>1</sub> =</>
+				<>x<sub>1</sub></>
 			),
 			value: x1
 		},
 		{
 			id: "x2",
 			label: (
-				<>x<sub>2</sub> =</>
+				<>x<sub>2</sub></>
 			),
 			value: x2
 		}
-	] as const;
-
-	const resultBars = results.map(({ id, label, value }) => {
-		return (
-			<InputBar
-				id={id}
-				key={id}
-				type="text"
-				value={value}
-			>{label}</InputBar>
-		);
-	});
+	];
 
 	return (
 		<main>
 			<p>
 				{a || "a"}x<sup>2</sup> + {b || "b"}x + {c || "c"} = 0 (a ≠ 0)
 			</p>
-			{inputBars}
+			<InputBars inputs={[inputs]} />
 			{allInputsFilled && <>
 				<hr />
-				{resultBars}
+				<ResultBars enforceNumber={false} results={results} />
 			</>}
 		</main>
 	);

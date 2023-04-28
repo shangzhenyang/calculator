@@ -86,6 +86,10 @@ function TwoVarLinearEquations({ math }: PageProps) {
 		]
 	];
 
+	const allInputsFilled = inputs.flat().every(({ value }) => {
+		return value !== "";
+	});
+
 	const inputPreview = inputs.map((row, index) => {
 		return (
 			<Fragment key={index}>
@@ -96,23 +100,13 @@ function TwoVarLinearEquations({ math }: PageProps) {
 		);
 	});
 
-	const allInputsFilled = inputs.flat().every(({ value }) => {
-		return value !== "";
-	});
-
 	const results: InputInfo[] = [
 		{
 			id: "x",
-			label: (
-				<>x =</>
-			),
 			value: x
 		},
 		{
 			id: "y",
-			label: (
-				<>y =</>
-			),
 			value: y
 		}
 	];
@@ -123,7 +117,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 			<InputBars inputs={inputs} />
 			{allInputsFilled && <>
 				<hr />
-				<ResultBars results={results} />
+				<ResultBars enforceNumber={true} results={results} />
 			</>}
 		</main>
 	);

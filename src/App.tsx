@@ -35,7 +35,10 @@ function App() {
 				<Route path="/byte" element={<Byte />} />
 				<Route path="/currency" element={<Currency />} />
 				<Route path="/date-difference" element={<DateDifference />} />
-				<Route path="/linear-formula" element={<LinearFormula />} />
+				<Route
+					path="/linear-formula"
+					element={<LinearFormula math={math} />}
+				/>
 				<Route
 					path="/molar-mass"
 					element={<MolarMass math={math} />}
@@ -46,7 +49,7 @@ function App() {
 				/>
 				<Route
 					path="/quadratic-formula"
-					element={<QuadraticFormula />}
+					element={<QuadraticFormula math={math} />}
 				/>
 				<Route
 					path="/quadratic-function"
