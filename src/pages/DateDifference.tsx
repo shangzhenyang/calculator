@@ -10,6 +10,8 @@ function DateDifference() {
 	const [endDate, setEndDate] = useState<string>("");
 	const [dayDifference, setDayDifference] = useState<string>("");
 
+	const millisecondsInDay = 1000 * 60 * 60 * 24;
+
 	const calculate = (newStartDate: string, newEndDate: string) => {
 		if (!newStartDate || !newEndDate) {
 			return;
@@ -17,7 +19,7 @@ function DateDifference() {
 		const startTimestamp = new Date(newStartDate).getTime();
 		const endTimestamp = new Date(newEndDate).getTime();
 		const result = Math.abs(endTimestamp - startTimestamp) /
-			1000 / 60 / 60 / 24;
+			millisecondsInDay;
 		setDayDifference(result.toString());
 	};
 
@@ -33,7 +35,7 @@ function DateDifference() {
 		if (isNaN(newDayDifference)) {
 			return;
 		}
-		const result = startTimestamp + (newDayDifference * 24 * 60 * 60 * 1000);
+		const result = startTimestamp + (newDayDifference * millisecondsInDay);
 		const resultDate = new Date(result);
 		const resultStr = resultDate.toISOString().split("T")[0];
 		setter(resultStr);
