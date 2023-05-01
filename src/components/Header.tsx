@@ -14,7 +14,7 @@ function Header() {
 				rel="noreferrer"
 				title="GitHub"
 			>
-				<FontAwesomeIcon icon={faGithub} size="xl" />
+				<FontAwesomeIcon icon={faGithub} size="xl" fixedWidth />
 			</a>
 		</header>
 	);

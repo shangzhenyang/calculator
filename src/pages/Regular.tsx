@@ -95,35 +95,53 @@ function Regular({ math }: PageProps) {
 				onSubmit={handleFormulaSubmit}
 				onKeyDown={handleFormulaKeyDown}
 			>
-				<button
-					title={t("backspace").toString()}
-					type="button"
-					onClick={backspace}
-				>
-					<FontAwesomeIcon icon={faDeleteLeft} size="xl" />
-				</button>
 				{showHistory && <>
 					<button
 						title={t("equal").toString()}
 						type="submit"
 					>
-						<FontAwesomeIcon icon={faEquals} size="xl" />
+						<FontAwesomeIcon
+							icon={faEquals}
+							size="xl"
+							fixedWidth
+						/>
 					</button>
 					<button
 						title={t("keyboard").toString()}
 						type="button"
 						onClick={toggleHistory}
 					>
-						<FontAwesomeIcon icon={faKeyboard} size="xl" />
+						<FontAwesomeIcon
+							icon={faKeyboard}
+							size="xl"
+							fixedWidth
+						/>
 					</button>
 				</>}
-				{!showHistory && <button
-					title={t("history").toString()}
-					type="button"
-					onClick={toggleHistory}
-				>
-					<FontAwesomeIcon icon={faClockRotateLeft} size="xl" />
-				</button>}
+				{!showHistory && <>
+					<button
+						title={t("backspace").toString()}
+						type="button"
+						onClick={backspace}
+					>
+						<FontAwesomeIcon
+							icon={faDeleteLeft}
+							size="xl"
+							fixedWidth
+						/>
+					</button>
+					<button
+						title={t("history").toString()}
+						type="button"
+						onClick={toggleHistory}
+					>
+						<FontAwesomeIcon
+							icon={faClockRotateLeft}
+							size="xl"
+							fixedWidth
+						/>
+					</button>
+				</>}
 			</MainInputBar>
 			{showHistory && <div>
 				<History

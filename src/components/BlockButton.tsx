@@ -18,7 +18,7 @@ function BlockButton({ icon, label, onClick }: Props) {
 			type="button"
 			onClick={onClick}
 		>
-			<FontAwesomeIcon icon={icon} size="xl" />
+			<FontAwesomeIcon icon={icon} size="xl" fixedWidth />
 			{t(label)}
 		</button>
 	);

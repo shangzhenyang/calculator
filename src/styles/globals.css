@@ -43,6 +43,7 @@ textarea {
 	appearance: none;
 	background-color: transparent;
 	border: none;
+	color: inherit;
 	font-family: inherit;
 }
 
