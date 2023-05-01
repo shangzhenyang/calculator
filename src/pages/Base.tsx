@@ -133,7 +133,7 @@ function Base({ math }: PageProps) {
 				id={item.label + "-input"}
 				key={item.label}
 				placeholder="enterNumber"
-				type="number"
+				type="text"
 				value={item.value}
 				onChange={item.onChange}
 			>{t(item.label)}</InputBar>
