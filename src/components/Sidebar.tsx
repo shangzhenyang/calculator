@@ -73,7 +73,7 @@ function Sidebar() {
 				}}
 				key={item.path}
 				to={item.path}
-			>{t(item.text)}</NavLink >
+			>{t(item.text)}</NavLink>
 		);
 	});
 

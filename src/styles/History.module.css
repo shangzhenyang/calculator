@@ -31,6 +31,10 @@
 	margin: 15px 0;
 }
 
+.history ul:empty {
+	display: none;
+}
+
 .list-item-main {
 	cursor: text;
 	flex: 1;

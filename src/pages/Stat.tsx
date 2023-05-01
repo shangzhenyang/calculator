@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { t } from "i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBroom, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faBroom, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import BlockButton from "@/components/BlockButton";
 import InputBar from "@/components/InputBar";
@@ -158,9 +158,8 @@ function Stat({ math }: PageProps) {
 				onChange={handleNewNumberChange}
 				onSubmit={addNumber}
 			>
-				<button>
-					<FontAwesomeIcon icon={faCirclePlus} size="xl" />
-					{t("add").toString()}
+				<button type="submit" title={t("add").toString()}>
+					<FontAwesomeIcon icon={faCheck} size="xl" />
 				</button>
 			</MainInputBar>
 			<div className={styles["stat-editor"]}>

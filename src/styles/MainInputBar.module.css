@@ -13,6 +13,7 @@
 
 .main-input-bar>button {
 	align-items: center;
+	border-left: var(--border);
 	display: flex;
 	font-size: inherit;
 	gap: 10px;
@@ -21,13 +22,14 @@
 
 .main-input-bar>div {
 	align-items: center;
+	border-left: var(--border);
 	display: flex;
 	font-size: 20px;
 }
 
 .main-input-bar>input {
-	border-right: var(--border);
 	display: block;
+	font-family: monospace;
 	font-size: 24px;
 	width: 100%;
 }

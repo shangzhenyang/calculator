@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { t } from "i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+	faClockRotateLeft,
+	faDeleteLeft,
+	faEquals,
+	faKeyboard
+} from "@fortawesome/free-solid-svg-icons";
 
 import FunctionList from "@/components/FunctionList";
+import History from "@/components/History";
 import Keyboard from "@/components/Keyboard";
 import MainInputBar from "@/components/MainInputBar";
 
@@ -15,6 +21,8 @@ import type PageProps from "@/types/PageProps";
 function Regular({ math }: PageProps) {
 	const [formula, setFormula] = useState<string>("");
 	const [formulaHasError, setFormulaHasError] = useState<boolean>(false);
+	const [historyItems, setHistoryItems] = useState<string[]>([]);
+	const [showHistory, setShowHistory] = useState<boolean>(false);
 	const [useAnswer, setUseAnswer] = useState<boolean>(false);
 
 	const backspace = () => {
@@ -43,7 +51,11 @@ function Regular({ math }: PageProps) {
 			if (typeof result === "function") {
 				throw new Error("NaN");
 			}
-			setFormula(formulaProcessed + " = " + result);
+			const formulaWithResult = formulaProcessed + " = " + result;
+			setFormula(formulaWithResult);
+			setHistoryItems((prevHistoryItems) => {
+				return [formulaWithResult, ...prevHistoryItems];
+			});
 		} catch {
 			setFormulaHasError(true);
 		}
@@ -66,6 +78,12 @@ function Regular({ math }: PageProps) {
 		setUseAnswer(false);
 	};
 
+	const toggleHistory = () => {
+		setShowHistory((prevShowHistory) => {
+			return !prevShowHistory;
+		});
+	};
+
 	return (
 		<main className={styles["regular"]}>
 			<MainInputBar
@@ -84,15 +102,45 @@ function Regular({ math }: PageProps) {
 				>
 					<FontAwesomeIcon icon={faDeleteLeft} size="xl" />
 				</button>
+				{showHistory && <>
+					<button
+						title={t("equal").toString()}
+						type="submit"
+					>
+						<FontAwesomeIcon icon={faEquals} size="xl" />
+					</button>
+					<button
+						title={t("keyboard").toString()}
+						type="button"
+						onClick={toggleHistory}
+					>
+						<FontAwesomeIcon icon={faKeyboard} size="xl" />
+					</button>
+				</>}
+				{!showHistory && <button
+					title={t("history").toString()}
+					type="button"
+					onClick={toggleHistory}
+				>
+					<FontAwesomeIcon icon={faClockRotateLeft} size="xl" />
+				</button>}
 			</MainInputBar>
-			<div className={styles["keyboard-area"]}>
+			{showHistory && <div>
+				<History
+					historyItems={historyItems}
+					setHistoryItems={setHistoryItems}
+					setInputValue={setFormula}
+					showClearButton={true}
+				/>
+			</div>}
+			{!showHistory && <div className={styles["keyboard-area"]}>
 				<FunctionList setFormula={setFormula} />
 				<Keyboard
 					calculate={calculate}
 					setFormula={setFormula}
 					setUseAnswer={setUseAnswer}
 				/>
-			</div>
+			</div>}
 		</main>
 	);
 }

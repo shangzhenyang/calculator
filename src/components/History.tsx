@@ -1,27 +1,31 @@
-import { useState } from "react";
 import { t } from "i18next";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faBroom, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 import BlockButton from "@/components/BlockButton";
 
 import styles from "@/styles/History.module.css";
 
+import type { Dispatch, SetStateAction } from "react";
+
 interface Props {
-	addToHistory: () => string | undefined;
-	canAdd: boolean;
+	addToHistory?: () => void;
+	historyItems: string[];
+	setHistoryItems: Dispatch<SetStateAction<string[]>>;
+	setInputValue?: Dispatch<SetStateAction<string>>;
+	showAddButton?: boolean;
+	showClearButton?: boolean;
 }
 
-function History({ addToHistory, canAdd }: Props) {
-	const [historyItems, setHistoryItems] = useState<string[]>([]);
-
-	const handleAddToHistoryClick = () => {
-		const valueToAdd = addToHistory();
-		if (!valueToAdd) {
-			return;
-		}
-		setHistoryItems((prevHistoryItems) => {
-			return [...prevHistoryItems, valueToAdd];
-		});
+function History({
+	addToHistory,
+	historyItems,
+	setHistoryItems,
+	setInputValue,
+	showAddButton,
+	showClearButton
+}: Props) {
+	const handleClearHistoryClick = () => {
+		setHistoryItems([]);
 	};
 
 	const historyListItems = historyItems.map((value, index) => {
@@ -33,9 +37,17 @@ function History({ addToHistory, canAdd }: Props) {
 			});
 		};
 
+		const handleEnterClick = () => {
+			setInputValue?.(value);
+		};
+
 		return (
 			<li key={index}>
 				<div className={styles["list-item-main"]}>{value}</div>
+				{setInputValue && <button
+					type="button"
+					onClick={handleEnterClick}
+				>{t("enter")}</button>}
 				<button
 					type="button"
 					onClick={handleDeleteClick}
@@ -46,10 +58,15 @@ function History({ addToHistory, canAdd }: Props) {
 
 	return (
 		<div className={styles["history"]}>
-			{canAdd && <BlockButton
+			{showAddButton && addToHistory && <BlockButton
 				icon={faCirclePlus}
 				label="addToHistory"
-				onClick={handleAddToHistoryClick}
+				onClick={addToHistory}
+			/>}
+			{showClearButton && <BlockButton
+				icon={faBroom}
+				label="clearHistory"
+				onClick={handleClearHistoryClick}
 			/>}
 			<ul>{historyListItems}</ul>
 		</div>

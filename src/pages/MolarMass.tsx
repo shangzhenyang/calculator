@@ -10,6 +10,7 @@ import type { AllResult } from "@shangzhen/periodic-table";
 import type PageProps from "@/types/PageProps";
 
 function MolarMass({ math }: PageProps) {
+	const [historyItems, setHistoryItems] = useState<string[]>([]);
 	const [mass, setMass] = useState<string>("");
 	const [mole, setMole] = useState<string>("1");
 	const [particle, setParticle] = useState<string>("");
@@ -47,7 +48,10 @@ function MolarMass({ math }: PageProps) {
 		resultParts.push(selectedElement.symbol);
 		resultParts.push("-");
 		resultParts.push(massResultStr);
-		return resultParts.join("");
+		const valueToAdd = resultParts.join("");
+		setHistoryItems((prevHistoryItems) => {
+			return [valueToAdd, ...prevHistoryItems];
+		});
 	};
 
 	const calculate = (newElement: AllResult, newMole: string) => {
@@ -202,7 +206,9 @@ function MolarMass({ math }: PageProps) {
 			{hasSelectedElement && <div>{inputBars}</div>}
 			<History
 				addToHistory={addToHistory}
-				canAdd={
+				historyItems={historyItems}
+				setHistoryItems={setHistoryItems}
+				showAddButton={
 					hasSelectedElement &&
 					!hasMassError &&
 					!hasMoleError &&

@@ -46,7 +46,7 @@ i18n.init({
 });
 
 document.documentElement.lang = lang;
-document.title = t("calculator");
+document.title = t("calculatorByShangzhen");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<StrictMode>
