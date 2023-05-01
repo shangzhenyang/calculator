@@ -21,10 +21,6 @@ function Sidebar() {
 			text: "byte"
 		},
 		{
-			path: "/currency",
-			text: "currency"
-		},
-		{
 			path: "/date-difference",
 			text: "dateDifference"
 		},

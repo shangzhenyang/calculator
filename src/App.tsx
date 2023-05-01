@@ -3,7 +3,6 @@ import { create, all } from "mathjs";
 
 import Base from "@/pages/Base";
 import Byte from "@/pages/Byte";
-import Currency from "@/pages/Currency";
 import DateDifference from "@/pages/DateDifference";
 import Header from "@/components/Header";
 import LinearFormula from "@/pages/LinearFormula";
@@ -33,7 +32,6 @@ function App() {
 				<Route path="/" element={<Regular math={math} />} />
 				<Route path="/base" element={<Base math={math} />} />
 				<Route path="/byte" element={<Byte />} />
-				<Route path="/currency" element={<Currency />} />
 				<Route path="/date-difference" element={<DateDifference />} />
 				<Route
 					path="/linear-formula"
