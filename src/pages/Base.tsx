@@ -52,6 +52,7 @@ function Base({ math }: PageProps) {
 		setterIndex: number,
 		prefix?: string
 	) => {
+		newValue = newValue.replace(/\s|,/g, "");
 		if (!newValue || newValue.includes(".")) {
 			clear();
 			return;
@@ -87,6 +88,7 @@ function Base({ math }: PageProps) {
 	};
 
 	const hasError = (value: string, prefix?: string) => {
+		value = value.replace(/\s|,/g, "");
 		if (!value) {
 			return false;
 		}
