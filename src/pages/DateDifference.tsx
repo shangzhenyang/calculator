@@ -6,11 +6,12 @@ import InputBar from "@/components/InputBar";
 import type { Dispatch, SetStateAction } from "react";
 
 function DateDifference() {
-	const [startDate, setStartDate] = useState<string>("");
-	const [endDate, setEndDate] = useState<string>("");
-	const [dayDifference, setDayDifference] = useState<string>("");
-
 	const millisecondsInDay = 1000 * 60 * 60 * 24;
+	const todayDate = new Date().toISOString().split("T")[0];
+
+	const [startDate, setStartDate] = useState<string>(todayDate);
+	const [endDate, setEndDate] = useState<string>(todayDate);
+	const [dayDifference, setDayDifference] = useState<string>("");
 
 	const calculate = (newStartDate: string, newEndDate: string) => {
 		if (!newStartDate || !newEndDate) {

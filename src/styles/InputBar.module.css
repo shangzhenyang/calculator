@@ -14,6 +14,7 @@
 	flex: 1;
 	font-size: inherit;
 	padding: 10px 15px;
+	text-align: left;
 }
 
 .input-bar input:read-only {

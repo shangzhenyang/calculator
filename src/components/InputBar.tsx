@@ -40,7 +40,6 @@ function InputBar({
 				placeholder={placeholder && t(placeholder).toString()}
 				readOnly={!onChange}
 				type={type}
-				inputMode={type === "number" ? "numeric" : undefined}
 				value={value}
 				onChange={handleChange}
 			/>
