@@ -200,7 +200,9 @@ function MolarMass({ math }: PageProps) {
 				value={searchTerm}
 				onChange={handleSearchTermChange}
 			>
-				{hasSelectedElement && <div>{selectedElement.symbol}</div>}
+				<div>
+					{hasSelectedElement ? selectedElement.symbol : "N/A"}
+				</div>
 			</MainInputBar>
 			<datalist id="element-list">{elementOptions}</datalist>
 			{hasSelectedElement && <div>{inputBars}</div>}

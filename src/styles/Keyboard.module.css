@@ -11,7 +11,7 @@
 .keyboard button {
 	border-bottom: var(--border);
 	font-family: monospace;
-	font-size: 24px;
+	font-size: 1.5rem;
 	line-height: 30px;
 	padding: 25px;
 }
@@ -19,5 +19,9 @@
 @media screen and (max-width: 700px) {
 	.keyboard {
 		border-top: none;
+	}
+
+	.keyboard button {
+		padding: 15px;
 	}
 }

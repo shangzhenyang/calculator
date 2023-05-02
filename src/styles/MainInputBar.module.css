@@ -24,16 +24,26 @@
 	align-items: center;
 	border-left: var(--border);
 	display: flex;
-	font-size: 20px;
+	font-size: 1.25rem;
 }
 
 .main-input-bar>input {
 	display: block;
 	font-family: monospace;
-	font-size: 24px;
+	font-size: 1.5rem;
 	width: 100%;
 }
 
 .main-input-bar>input:only-child {
 	border-right: none;
+}
+
+@media screen and (max-width: 700px) {
+	.main-input-bar>* {
+		padding: 10px 15px;
+	}
+
+	.main-input-bar>input {
+		font-size: 1rem;
+	}
 }
