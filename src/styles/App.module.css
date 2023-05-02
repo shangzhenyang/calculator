@@ -7,3 +7,22 @@
 	grid-template-rows: auto 1fr;
 	height: 100%;
 }
+
+@media screen and (max-width: 700px) {
+	.App {
+		grid-template-areas:
+			"header"
+			"main";
+		grid-template-columns: 1fr;
+	}
+
+	.App.show-sidebar {
+		grid-template-areas:
+			"header"
+			"sidebar";
+	}
+
+	.App.show-sidebar main {
+		display: none;
+	}
+}

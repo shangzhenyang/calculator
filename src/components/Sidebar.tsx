@@ -6,7 +6,18 @@ import Footer from "@/components/Footer";
 
 import styles from "@/styles/Sidebar.module.css";
 
-function Sidebar() {
+import type { Dispatch, SetStateAction } from "react";
+
+interface Props {
+	showSidebar: boolean;
+	setShowSidebar: Dispatch<SetStateAction<boolean>>;
+}
+
+function Sidebar({ showSidebar, setShowSidebar }: Props) {
+	const closeSidebar = () => {
+		setShowSidebar(false);
+	};
+
 	const navItems = [
 		{
 			path: "/",
@@ -69,12 +80,15 @@ function Sidebar() {
 				}}
 				key={item.path}
 				to={item.path}
+				onClick={closeSidebar}
 			>{t(item.text)}</NavLink>
 		);
 	});
 
 	return (
-		<div className={styles["sidebar"]}>
+		<div className={classnames(styles["sidebar"], {
+			[styles["show"]]: showSidebar
+		})}>
 			<nav>{navLinks}</nav>
 			<Footer />
 		</div>

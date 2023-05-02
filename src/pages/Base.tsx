@@ -15,6 +15,7 @@ function Base({ math }: PageProps) {
 	const binaryPrefix = "0b";
 	const octalPrefix = "0o";
 	const hexadecimalPrefix = "0x";
+	const valueFilter = /\s|,/g;
 
 	const setters = [
 		[setBinary, "bin"],
@@ -52,7 +53,7 @@ function Base({ math }: PageProps) {
 		setterIndex: number,
 		prefix?: string
 	) => {
-		newValue = newValue.replace(/\s|,/g, "");
+		newValue = newValue.replace(valueFilter, "");
 		if (!newValue || newValue.includes(".")) {
 			clear();
 			return;
@@ -88,7 +89,7 @@ function Base({ math }: PageProps) {
 	};
 
 	const hasError = (value: string, prefix?: string) => {
-		value = value.replace(/\s|,/g, "");
+		value = value.replace(valueFilter, "");
 		if (!value) {
 			return false;
 		}

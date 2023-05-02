@@ -1,3 +1,5 @@
+import { useState } from "react";
+import classnames from "classnames";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { create, all } from "mathjs";
 
@@ -19,15 +21,22 @@ import TwoVarLinearEquations from "@/pages/TwoVarLinearEquations";
 import styles from "@/styles/App.module.css";
 
 function App() {
+	const [showSidebar, setShowSidebar] = useState(false);
+
 	const math = create(all, {
 		number: "BigNumber",
 		precision: 64
 	});
 
 	return (
-		<div className={styles["App"]}>
-			<Header />
-			<Sidebar />
+		<div className={classnames(styles["App"], {
+			[styles["show-sidebar"]]: showSidebar
+		})}>
+			<Header setShowSidebar={setShowSidebar} />
+			<Sidebar
+				showSidebar={showSidebar}
+				setShowSidebar={setShowSidebar}
+			/>
 			<Routes>
 				<Route path="/" element={<Regular math={math} />} />
 				<Route path="/base" element={<Base math={math} />} />

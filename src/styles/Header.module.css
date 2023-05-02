@@ -3,12 +3,29 @@
 	border-bottom: var(--border);
 	display: flex;
 	grid-area: header;
+	justify-content: space-between;
 	padding: 25px;
 }
 
 .header h1 {
-	flex: 1;
 	font-size: 24px;
 	font-weight: normal;
 	margin: 0;
+}
+
+.header-left {
+	align-items: center;
+	display: flex;
+	gap: 20px;
+}
+
+.sidebar-icon {
+	display: none;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+	.sidebar-icon {
+		display: block;
+	}
 }

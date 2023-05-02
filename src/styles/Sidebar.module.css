@@ -33,3 +33,13 @@
 	grid-area: sidebar;
 	padding: 15px;
 }
+
+@media screen and (max-width: 700px) {
+	.sidebar {
+		display: none;
+	}
+
+	.sidebar.show {
+		display: flex;
+	}
+}
