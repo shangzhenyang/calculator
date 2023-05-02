@@ -156,6 +156,7 @@ function Regular({ math }: PageProps) {
 				<Keyboard
 					calculate={calculate}
 					setFormula={setFormula}
+					setFormulaHasError={setFormulaHasError}
 					setUseAnswer={setUseAnswer}
 				/>
 			</div>}

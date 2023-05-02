@@ -26,6 +26,7 @@ function History({
 }: Props) {
 	const handleClearHistoryClick = () => {
 		setHistoryItems([]);
+		setInputValue?.("");
 	};
 
 	const historyListItems = historyItems.map((value, index) => {

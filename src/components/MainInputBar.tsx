@@ -49,7 +49,6 @@ function MainInputBar({
 		>
 			<input
 				autoComplete="off"
-				autoFocus={true}
 				className={classnames(className, {
 					[styles["error"]]: hasError
 				})}
