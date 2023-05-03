@@ -8,6 +8,8 @@
 }
 
 .main-input-bar>* {
+	font-family: monospace;
+	font-size: 1.5rem;
 	padding: 20px 25px;
 }
 
@@ -15,7 +17,6 @@
 	align-items: center;
 	border-left: var(--border);
 	display: flex;
-	font-size: inherit;
 	gap: 10px;
 	white-space: nowrap;
 }
@@ -24,13 +25,10 @@
 	align-items: center;
 	border-left: var(--border);
 	display: flex;
-	font-size: 1.25rem;
 }
 
 .main-input-bar>input {
 	display: block;
-	font-family: monospace;
-	font-size: 1.5rem;
 	width: 100%;
 }
 
@@ -40,10 +38,7 @@
 
 @media screen and (max-width: 700px) {
 	.main-input-bar>* {
-		padding: 10px 15px;
-	}
-
-	.main-input-bar>input {
-		font-size: 1rem;
+		font-size: 1.25rem;
+		padding: 15px 20px;
 	}
 }

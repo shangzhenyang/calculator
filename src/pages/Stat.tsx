@@ -159,7 +159,7 @@ function Stat({ math }: PageProps) {
 				onSubmit={addNumber}
 			>
 				<button type="submit" title={t("add").toString()}>
-					<FontAwesomeIcon icon={faCheck} size="xl" fixedWidth />
+					<FontAwesomeIcon icon={faCheck} fixedWidth />
 				</button>
 			</MainInputBar>
 			<div className={styles["stat-editor"]}>

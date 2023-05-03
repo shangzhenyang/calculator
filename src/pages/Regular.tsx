@@ -102,7 +102,6 @@ function Regular({ math }: PageProps) {
 					>
 						<FontAwesomeIcon
 							icon={faEquals}
-							size="xl"
 							fixedWidth
 						/>
 					</button>
@@ -113,7 +112,6 @@ function Regular({ math }: PageProps) {
 					>
 						<FontAwesomeIcon
 							icon={faKeyboard}
-							size="xl"
 							fixedWidth
 						/>
 					</button>
@@ -126,7 +124,6 @@ function Regular({ math }: PageProps) {
 					>
 						<FontAwesomeIcon
 							icon={faDeleteLeft}
-							size="xl"
 							fixedWidth
 						/>
 					</button>
@@ -137,7 +134,6 @@ function Regular({ math }: PageProps) {
 					>
 						<FontAwesomeIcon
 							icon={faClockRotateLeft}
-							size="xl"
 							fixedWidth
 						/>
 					</button>

@@ -44,7 +44,7 @@ textarea {
 	background-color: transparent;
 	border: none;
 	color: inherit;
-	font-family: inherit;
+	font: inherit;
 }
 
 hr {
