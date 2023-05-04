@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classnames from "classnames";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { create, all } from "mathjs";
+import ReactGA from "react-ga4";
 
 import Base from "@/pages/Base";
 import Byte from "@/pages/Byte";
@@ -27,6 +28,13 @@ function App() {
 		number: "BigNumber",
 		precision: 64
 	});
+
+	useEffect(() => {
+		setTimeout(() => {
+			ReactGA.initialize("G-LS9MTX889C");
+			ReactGA.send("pageview");
+		}, 1000);
+	}, []);
 
 	return (
 		<div className={classnames(styles["App"], {

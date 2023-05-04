@@ -44,10 +44,10 @@ function FunctionList({ setFormula }: Props) {
 			const toAppend = item
 				.replace(")", "")
 				.replace("π", "pi");
-
 			setFormula((prev) => {
 				return prev + toAppend;
 			});
+			window.scrollTo(0, 0);
 		};
 
 		return (
