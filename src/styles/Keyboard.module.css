@@ -9,7 +9,6 @@
 
 .keyboard button {
 	border-bottom: var(--border);
-	font-family: monospace;
 	font-size: 1.5rem;
 	line-height: 30px;
 	padding: 25px;

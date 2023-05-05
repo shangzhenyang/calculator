@@ -27,7 +27,6 @@ function FunctionList({ setFormula }: Props) {
 		"log2()",
 		"oct()",
 		"π",
-		"pow()",
 		"random()",
 		"round()",
 		"sec()",
