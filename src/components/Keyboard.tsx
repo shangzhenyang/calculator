@@ -7,20 +7,17 @@ import type { Dispatch, SetStateAction } from "react";
 interface Props {
 	calculate: () => void;
 	setFormula: Dispatch<SetStateAction<string>>;
-	setFormulaHasError: Dispatch<SetStateAction<boolean>>;
 	setUseAnswer: Dispatch<SetStateAction<boolean>>;
 }
 
 function Keyboard({
 	calculate,
 	setFormula,
-	setFormulaHasError,
 	setUseAnswer
 }: Props) {
 	const clickMap = {
 		"C": () => {
 			setFormula("");
-			setFormulaHasError(false);
 		},
 		"=": () => {
 			calculate();

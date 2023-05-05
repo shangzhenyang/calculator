@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { t } from "i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -63,7 +63,6 @@ function Regular({ math }: PageProps) {
 
 	const handleFormulaChange = (newValue: string) => {
 		setFormula(newValue);
-		setFormulaHasError(false);
 	};
 
 	const handleFormulaKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
@@ -83,6 +82,10 @@ function Regular({ math }: PageProps) {
 			return !prevShowHistory;
 		});
 	};
+
+	useEffect(() => {
+		setFormulaHasError(false);
+	}, [formula]);
 
 	return (
 		<main className={styles["regular"]}>
@@ -152,7 +155,6 @@ function Regular({ math }: PageProps) {
 				<Keyboard
 					calculate={calculate}
 					setFormula={setFormula}
-					setFormulaHasError={setFormulaHasError}
 					setUseAnswer={setUseAnswer}
 				/>
 			</div>}
