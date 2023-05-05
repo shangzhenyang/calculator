@@ -15,12 +15,13 @@ function LinearFormula({ math }: PageProps) {
 	const [x2, setX2] = useState<string>("");
 	const [y2, setY2] = useState<string>("");
 
-	const scope = {
-		x1: x1 && !isNaN(Number(x1)) ? math.bignumber(x1) : NaN,
-		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : NaN,
+	const bigNaN = math.bignumber(NaN);
+	const scope: Record<string, math.BigNumber> = {
+		x1: x1 && !isNaN(Number(x1)) ? math.bignumber(x1) : bigNaN,
+		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : bigNaN,
 
-		x2: x2 && !isNaN(Number(x2)) ? math.bignumber(x2) : NaN,
-		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : NaN
+		x2: x2 && !isNaN(Number(x2)) ? math.bignumber(x2) : bigNaN,
+		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : bigNaN
 	};
 
 	const k = math.evaluate("(y1 - y2) / (x1 - x2)", scope);
@@ -81,8 +82,8 @@ function LinearFormula({ math }: PageProps) {
 		);
 	});
 
-	const kRounded = math.round(k, 2);
-	const bRounded = math.round(b, 2);
+	const kRounded = math.round(k, 4);
+	const bRounded = math.round(b, 4);
 
 	const results: InputInfo[] = [
 		{

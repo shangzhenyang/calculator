@@ -23,23 +23,24 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 	const [c3, setC3] = useState<string>("");
 	const [d3, setD3] = useState<string>("");
 
-	const scope = {
-		a1: a1 && !isNaN(Number(a1)) ? math.bignumber(a1) : NaN,
-		b1: b1 && !isNaN(Number(b1)) ? math.bignumber(b1) : NaN,
-		c1: c1 && !isNaN(Number(c1)) ? math.bignumber(c1) : NaN,
-		d1: d1 && !isNaN(Number(d1)) ? math.bignumber(d1) : NaN,
+	const bigNaN = math.bignumber(NaN);
+	const scope: Record<string, math.BigNumber> = {
+		a1: a1 && !isNaN(Number(a1)) ? math.bignumber(a1) : bigNaN,
+		b1: b1 && !isNaN(Number(b1)) ? math.bignumber(b1) : bigNaN,
+		c1: c1 && !isNaN(Number(c1)) ? math.bignumber(c1) : bigNaN,
+		d1: d1 && !isNaN(Number(d1)) ? math.bignumber(d1) : bigNaN,
 
-		a2: a2 && !isNaN(Number(a2)) ? math.bignumber(a2) : NaN,
-		b2: b2 && !isNaN(Number(b2)) ? math.bignumber(b2) : NaN,
-		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(c2) : NaN,
-		d2: d2 && !isNaN(Number(d2)) ? math.bignumber(d2) : NaN,
+		a2: a2 && !isNaN(Number(a2)) ? math.bignumber(a2) : bigNaN,
+		b2: b2 && !isNaN(Number(b2)) ? math.bignumber(b2) : bigNaN,
+		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(c2) : bigNaN,
+		d2: d2 && !isNaN(Number(d2)) ? math.bignumber(d2) : bigNaN,
 
-		a3: a3 && !isNaN(Number(a3)) ? math.bignumber(a3) : NaN,
-		b3: b3 && !isNaN(Number(b3)) ? math.bignumber(b3) : NaN,
-		c3: c3 && !isNaN(Number(c3)) ? math.bignumber(c3) : NaN,
-		d3: d3 && !isNaN(Number(d3)) ? math.bignumber(d3) : NaN,
+		a3: a3 && !isNaN(Number(a3)) ? math.bignumber(a3) : bigNaN,
+		b3: b3 && !isNaN(Number(b3)) ? math.bignumber(b3) : bigNaN,
+		c3: c3 && !isNaN(Number(c3)) ? math.bignumber(c3) : bigNaN,
+		d3: d3 && !isNaN(Number(d3)) ? math.bignumber(d3) : bigNaN,
 
-		delta: 0
+		delta: bigNaN
 	};
 
 	scope.delta = math.evaluate("(a1 * b2 * c3) + (b1 * c2 * a3) + (c1 * a2 * b3) - (c1 * b2 * a3) - (a1 * c2 * b3) - (b1 * a2 * c3)", scope);

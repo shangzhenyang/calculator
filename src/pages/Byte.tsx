@@ -112,7 +112,6 @@ function Byte() {
 				hasError={isNaN(Number(item.value))}
 				id={item.label + "-input"}
 				key={item.label}
-				placeholder={"enterNumber"}
 				type="number"
 				value={item.value}
 				onChange={item.onChange}

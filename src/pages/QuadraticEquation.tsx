@@ -12,18 +12,22 @@ function QuadraticEquation({ math }: PageProps) {
 	const [b, setB] = useState<string>("");
 	const [c, setC] = useState<string>("");
 
-	const scope = {
-		a: a && !isNaN(Number(a)) ? math.bignumber(a) : NaN,
-		b: b && !isNaN(Number(b)) ? math.bignumber(b) : NaN,
-		c: c && !isNaN(Number(c)) ? math.bignumber(c) : NaN,
-		delta: 0
+	const bigNaN = math.bignumber(NaN);
+	const scope: Record<string, math.BigNumber> = {
+		a: a && !isNaN(Number(a)) ? math.bignumber(a) : bigNaN,
+		b: b && !isNaN(Number(b)) ? math.bignumber(b) : bigNaN,
+		c: c && !isNaN(Number(c)) ? math.bignumber(c) : bigNaN,
+
+		delta: bigNaN
 	};
+
 	scope.delta = math.evaluate("pow(b, 2) - (4 * a * c)", scope);
-	const hasSolutions = scope.delta >= 0;
-	const delta = scope.delta + (() => {
-		if (scope.delta > 0) {
+	const delta = Number(scope.delta);
+	const hasSolutions = delta >= 0;
+	const deltaStr = delta + (() => {
+		if (delta > 0) {
 			return " > 0";
-		} else if (scope.delta < 0) {
+		} else if (delta < 0) {
 			return " < 0";
 		} else {
 			return " = 0";
@@ -63,7 +67,7 @@ function QuadraticEquation({ math }: PageProps) {
 			label: (
 				<>Δ</>
 			),
-			value: delta
+			value: deltaStr
 		},
 		{
 			id: "x1",

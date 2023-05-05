@@ -135,7 +135,6 @@ function Base({ math }: PageProps) {
 				hasError={item.hasError}
 				id={item.label + "-input"}
 				key={item.label}
-				placeholder="enterNumber"
 				type="text"
 				value={item.value}
 				onChange={item.onChange}

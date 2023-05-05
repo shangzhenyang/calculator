@@ -79,8 +79,11 @@ main button:active {
 p {
 	border: var(--border);
 	border-radius: var(--radius);
+	line-height: 1.5em;
 	margin: 15px;
-	padding: 15px;
+	padding: 10px 15px;
+	user-select: text;
+	word-break: break-all;
 }
 
 ul {

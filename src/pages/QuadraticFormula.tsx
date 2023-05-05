@@ -17,25 +17,26 @@ function QuadraticFormula({ math }: PageProps) {
 	const [x3, setX3] = useState<string>("");
 	const [y3, setY3] = useState<string>("");
 
-	const scope = {
-		x1: x1 && !isNaN(Number(x1)) ? math.bignumber(x1) : NaN,
-		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : NaN,
+	const bigNaN = math.bignumber(NaN);
+	const scope: Record<string, math.BigNumber> = {
+		x1: x1 && !isNaN(Number(x1)) ? math.bignumber(x1) : bigNaN,
+		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : bigNaN,
 
-		x2: x2 && !isNaN(Number(x2)) ? math.bignumber(x2) : NaN,
-		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : NaN,
+		x2: x2 && !isNaN(Number(x2)) ? math.bignumber(x2) : bigNaN,
+		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : bigNaN,
 
-		x3: x3 && !isNaN(Number(x3)) ? math.bignumber(x3) : NaN,
-		y3: y3 && !isNaN(Number(y3)) ? math.bignumber(y3) : NaN,
+		x3: x3 && !isNaN(Number(x3)) ? math.bignumber(x3) : bigNaN,
+		y3: y3 && !isNaN(Number(y3)) ? math.bignumber(y3) : bigNaN,
 
-		delta: 0,
-		x1Squared: 0,
-		x2Squared: 0,
-		x3Squared: 0
+		delta: bigNaN,
+		x1Squared: bigNaN,
+		x2Squared: bigNaN,
+		x3Squared: bigNaN
 	};
 
-	scope.x1Squared = Number(math.pow(scope.x1, 2));
-	scope.x2Squared = Number(math.pow(scope.x2, 2));
-	scope.x3Squared = Number(math.pow(scope.x3, 2));
+	scope.x1Squared = math.bignumber(Number(math.pow(scope.x1, 2)));
+	scope.x2Squared = math.bignumber(Number(math.pow(scope.x2, 2)));
+	scope.x3Squared = math.bignumber(Number(math.pow(scope.x3, 2)));
 	scope.delta = math.evaluate("x1Squared * x2 + x1 * x3Squared + x2Squared * x3 - x2 * x3Squared - x1Squared * x3 - x1 * x2Squared", scope);
 	const a = math.evaluate("(y1 * x2 + x1 * y3 + y2 * x3 - x2 * y3 - y1 * x3 - x1 * y2) / delta", scope);
 	const b = math.evaluate("(x1Squared * y2 + y1 * x3Squared + x2Squared * y3 - y2 * x3Squared - x1Squared * y3 - y1 * x2Squared) / delta", scope);
@@ -112,9 +113,9 @@ function QuadraticFormula({ math }: PageProps) {
 		);
 	});
 
-	const aRounded = math.round(a, 2);
-	const bRounded = math.round(b, 2);
-	const cRounded = math.round(c, 2);
+	const aRounded = math.round(a, 4);
+	const bRounded = math.round(b, 4);
+	const cRounded = math.round(c, 4);
 
 	const results: InputInfo[] = [
 		{

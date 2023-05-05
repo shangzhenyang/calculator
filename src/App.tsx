@@ -68,7 +68,7 @@ function App() {
 				/>
 				<Route
 					path="/quadratic-function"
-					element={<QuadraticFunction />}
+					element={<QuadraticFunction math={math} />}
 				/>
 				<Route path="/stat" element={<Stat math={math} />} />
 				<Route

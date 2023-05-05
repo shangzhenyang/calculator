@@ -9,7 +9,6 @@ interface Props {
 	children: ReactNode;
 	hasError?: boolean;
 	id: string;
-	placeholder?: string;
 	type: "text" | "number" | "date";
 	value: string;
 	onChange?: (newValue: string) => void;
@@ -19,7 +18,6 @@ function InputBar({
 	children,
 	hasError,
 	id,
-	placeholder,
 	type,
 	value,
 	onChange
@@ -37,7 +35,8 @@ function InputBar({
 					[styles["error"]]: hasError
 				})}
 				id={id}
-				placeholder={placeholder && t(placeholder).toString()}
+				placeholder={(onChange && type !== "date") ?
+					t("enterNumber").toString() : undefined}
 				readOnly={!onChange}
 				type={type}
 				value={value}
