@@ -18,7 +18,7 @@ A versatile calculator app built with React that offers a wide range of calculat
 	- Perform various statistical calculations, including average, sum, mode, variance, standard deviation, interquartile range, quantile, minimum, median, and maximum.
 - Equations Solving:
 	- Solve linear and quadratic equations.
-- Quadratic Function:
+- Quadratic Function Analysis:
 	- Provide information about quadratic functions, such as vertex, axis of symmetry, and roots.
 
 
