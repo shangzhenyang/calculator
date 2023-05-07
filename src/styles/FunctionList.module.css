@@ -2,7 +2,6 @@
 	border-bottom: var(--border);
 	border-right: var(--border);
 	border-top: var(--border);
-	height: 406px;
 	overflow: auto;
 	padding: 10px;
 	scrollbar-width: thin;
