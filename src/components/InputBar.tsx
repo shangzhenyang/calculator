@@ -22,8 +22,8 @@ function InputBar({
 	value,
 	onChange
 }: Props) {
-	const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-		onChange?.(evt.target.value);
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		onChange?.(event.target.value);
 	};
 
 	return (

@@ -65,8 +65,8 @@ function Regular({ math }: PageProps) {
 		setFormula(newValue);
 	};
 
-	const handleFormulaKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
-		if (evt.key === "Escape") {
+	const handleFormulaKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Escape") {
 			setFormula("");
 		}
 		setUseAnswer(false);

@@ -44,8 +44,8 @@ function Stat({ math }: PageProps) {
 		setNewNumberHasError(false);
 	};
 
-	const handleNumbersChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-		setNumbers(evt.target.value);
+	const handleNumbersChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+		setNumbers(event.target.value);
 	};
 
 	const numberArray = numbers

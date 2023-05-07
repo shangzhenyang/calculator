@@ -21,4 +21,8 @@
 		flex-direction: column-reverse;
 		width: 100%;
 	}
+
+	.keyboard-area>* {
+		height: auto;
+	}
 }
