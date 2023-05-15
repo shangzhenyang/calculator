@@ -143,6 +143,10 @@ function MolarMass({ math }: PageProps) {
 		calculate(result, "1");
 	};
 
+	const updateHistoryItems = (callback: (value: string[]) => string[]) => {
+		setHistoryItems(callback);
+	};
+
 	const elementOptions = elements.map((element) => {
 		const name = {
 			"en-US": element.name,
@@ -207,15 +211,15 @@ function MolarMass({ math }: PageProps) {
 			<datalist id="element-list">{elementOptions}</datalist>
 			{hasSelectedElement && <div>{inputBars}</div>}
 			<History
-				addToHistory={addToHistory}
 				historyItems={historyItems}
-				setHistoryItems={setHistoryItems}
 				showAddButton={
 					hasSelectedElement &&
 					!hasMassError &&
 					!hasMoleError &&
 					!hasParticleError
 				}
+				addToHistory={addToHistory}
+				updateHistoryItems={updateHistoryItems}
 			/>
 		</main>
 	);

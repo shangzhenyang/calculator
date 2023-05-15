@@ -52,17 +52,17 @@ function QuadraticFunction({ math }: PageProps) {
 			hasError: !!a && Number(a) === 0,
 			id: "a",
 			value: a,
-			setValue: setA
+			updateValue: setA
 		},
 		{
 			id: "b",
 			value: b,
-			setValue: setB
+			updateValue: setB
 		},
 		{
 			id: "c",
 			value: c,
-			setValue: setC
+			updateValue: setC
 		}
 	];
 

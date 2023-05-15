@@ -10,7 +10,7 @@ interface Props {
 
 function InputBars({ inputs }: Props) {
 	const elements = inputs.map((row, index) => {
-		const rows = row.map(({ hasError, id, label, value, setValue }) => {
+		const rows = row.map(({ hasError, id, label, value, updateValue }) => {
 			return (
 				<InputBar
 					hasError={hasError}
@@ -18,7 +18,7 @@ function InputBars({ inputs }: Props) {
 					key={id}
 					type="number"
 					value={value.toString()}
-					onChange={setValue}
+					onChange={updateValue}
 				>{label || id}</InputBar>
 			);
 		});

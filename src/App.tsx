@@ -29,6 +29,10 @@ function App() {
 		precision: 64
 	});
 
+	const toggleSidebar = () => {
+		setShowSidebar(!showSidebar);
+	};
+
 	useEffect(() => {
 		setTimeout(() => {
 			ReactGA.initialize("G-LS9MTX889C");
@@ -40,10 +44,10 @@ function App() {
 		<div className={classnames(styles["App"], {
 			[styles["show-sidebar"]]: showSidebar
 		})}>
-			<Header setShowSidebar={setShowSidebar} />
+			<Header toggleSidebar={toggleSidebar} />
 			<Sidebar
 				showSidebar={showSidebar}
-				setShowSidebar={setShowSidebar}
+				toggleSidebar={toggleSidebar}
 			/>
 			<Routes>
 				<Route path="/" element={<Regular math={math} />} />

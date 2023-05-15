@@ -5,19 +5,11 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 import styles from "@/styles/Header.module.css";
 
-import type { Dispatch, SetStateAction } from "react";
-
 interface Props {
-	setShowSidebar: Dispatch<SetStateAction<boolean>>;
+	toggleSidebar: () => void;
 }
 
-function Header({ setShowSidebar }: Props) {
-	const toggleSidebar = () => {
-		setShowSidebar((prevShowSidebar) => {
-			return !prevShowSidebar;
-		});
-	};
-
+function Header({ toggleSidebar }: Props) {
 	return (
 		<header className={styles["header"]}>
 			<div className={styles["header-left"]}>

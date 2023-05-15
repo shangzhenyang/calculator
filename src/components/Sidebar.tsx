@@ -6,18 +6,12 @@ import Footer from "@/components/Footer";
 
 import styles from "@/styles/Sidebar.module.css";
 
-import type { Dispatch, SetStateAction } from "react";
-
 interface Props {
 	showSidebar: boolean;
-	setShowSidebar: Dispatch<SetStateAction<boolean>>;
+	toggleSidebar: () => void;
 }
 
-function Sidebar({ showSidebar, setShowSidebar }: Props) {
-	const closeSidebar = () => {
-		setShowSidebar(false);
-	};
-
+function Sidebar({ showSidebar, toggleSidebar }: Props) {
 	const navItems = [
 		{
 			path: "/",
@@ -80,7 +74,7 @@ function Sidebar({ showSidebar, setShowSidebar }: Props) {
 				}}
 				key={item.path}
 				to={item.path}
-				onClick={closeSidebar}
+				onClick={toggleSidebar}
 			>{t(item.text)}</NavLink>
 		);
 	});

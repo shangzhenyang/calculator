@@ -50,7 +50,7 @@ function QuadraticFormula({ math }: PageProps) {
 					<>x<sub>1</sub></>
 				),
 				value: x1,
-				setValue: setX1
+				updateValue: setX1
 			},
 			{
 				id: "y1",
@@ -58,7 +58,7 @@ function QuadraticFormula({ math }: PageProps) {
 					<>y<sub>1</sub></>
 				),
 				value: y1,
-				setValue: setY1
+				updateValue: setY1
 			}
 		],
 		[
@@ -68,7 +68,7 @@ function QuadraticFormula({ math }: PageProps) {
 					<>x<sub>2</sub></>
 				),
 				value: x2,
-				setValue: setX2
+				updateValue: setX2
 			},
 			{
 				id: "y2",
@@ -76,7 +76,7 @@ function QuadraticFormula({ math }: PageProps) {
 					<>y<sub>2</sub></>
 				),
 				value: y2,
-				setValue: setY2
+				updateValue: setY2
 			}
 		],
 		[
@@ -86,7 +86,7 @@ function QuadraticFormula({ math }: PageProps) {
 					<>x<sub>3</sub></>
 				),
 				value: x3,
-				setValue: setX3
+				updateValue: setX3
 			},
 			{
 				id: "y3",
@@ -94,7 +94,7 @@ function QuadraticFormula({ math }: PageProps) {
 					<>y<sub>3</sub></>
 				),
 				value: y3,
-				setValue: setY3
+				updateValue: setY3
 			}
 		]
 	];

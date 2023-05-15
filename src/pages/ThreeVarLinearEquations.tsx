@@ -56,7 +56,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>a<sub>1</sub></>
 				),
 				value: a1,
-				setValue: setA1
+				updateValue: setA1
 			},
 			{
 				id: "b1",
@@ -64,7 +64,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>b<sub>1</sub></>
 				),
 				value: b1,
-				setValue: setB1
+				updateValue: setB1
 			},
 			{
 				id: "c1",
@@ -72,7 +72,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>c<sub>1</sub></>
 				),
 				value: c1,
-				setValue: setC1
+				updateValue: setC1
 			},
 			{
 				id: "d1",
@@ -80,7 +80,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>d<sub>1</sub></>
 				),
 				value: d1,
-				setValue: setD1
+				updateValue: setD1
 			}
 		],
 		[
@@ -90,7 +90,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>a<sub>2</sub></>
 				),
 				value: a2,
-				setValue: setA2
+				updateValue: setA2
 			},
 			{
 				id: "b2",
@@ -98,7 +98,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>b<sub>2</sub></>
 				),
 				value: b2,
-				setValue: setB2
+				updateValue: setB2
 			},
 			{
 				id: "c2",
@@ -106,7 +106,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>c<sub>2</sub></>
 				),
 				value: c2,
-				setValue: setC2
+				updateValue: setC2
 			},
 			{
 				id: "d2",
@@ -114,7 +114,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>d<sub>2</sub></>
 				),
 				value: d2,
-				setValue: setD2
+				updateValue: setD2
 			}
 		],
 		[
@@ -124,7 +124,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>a<sub>3</sub></>
 				),
 				value: a3,
-				setValue: setA3
+				updateValue: setA3
 			},
 			{
 				id: "b3",
@@ -132,7 +132,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>b<sub>3</sub></>
 				),
 				value: b3,
-				setValue: setB3
+				updateValue: setB3
 			},
 			{
 				id: "c3",
@@ -140,7 +140,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>c<sub>3</sub></>
 				),
 				value: c3,
-				setValue: setC3
+				updateValue: setC3
 			},
 			{
 				id: "d3",
@@ -148,7 +148,7 @@ function ThreeVarLinearEquations({ math }: PageProps) {
 					<>d<sub>3</sub></>
 				),
 				value: d3,
-				setValue: setD3
+				updateValue: setD3
 			}
 		]
 	];

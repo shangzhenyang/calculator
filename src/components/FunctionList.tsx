@@ -1,12 +1,10 @@
 import styles from "@/styles/FunctionList.module.css";
 
-import type { Dispatch, SetStateAction } from "react";
-
 interface Props {
-	setFormula: Dispatch<SetStateAction<string>>;
+	updateFormula: (newValue: string, append?: boolean) => void;
 }
 
-function FunctionList({ setFormula }: Props) {
+function FunctionList({ updateFormula }: Props) {
 	const functions = [
 		"0b",
 		"0o",
@@ -43,9 +41,7 @@ function FunctionList({ setFormula }: Props) {
 			const toAppend = item
 				.replace(")", "")
 				.replace("π", "pi");
-			setFormula((prev) => {
-				return prev + toAppend;
-			});
+			updateFormula(toAppend, true);
 			window.scrollTo(0, 0);
 		};
 

@@ -2,22 +2,20 @@ import { t } from "i18next";
 
 import styles from "@/styles/Keyboard.module.css";
 
-import type { Dispatch, SetStateAction } from "react";
-
 interface Props {
 	calculate: () => void;
-	setFormula: Dispatch<SetStateAction<string>>;
-	setUseAnswer: Dispatch<SetStateAction<boolean>>;
+	updateFormula: (newValue: string, append?: boolean) => void;
+	updateUseAnswer: (newValue: boolean) => void;
 }
 
 function Keyboard({
 	calculate,
-	setFormula,
-	setUseAnswer
+	updateFormula,
+	updateUseAnswer
 }: Props) {
 	const clickMap = {
 		"C": () => {
-			setFormula("");
+			updateFormula("", false);
 		},
 		"=": () => {
 			calculate();
@@ -53,10 +51,8 @@ function Keyboard({
 				if (key in replaceMap) {
 					key = replaceMap[key as keyof typeof replaceMap];
 				}
-				setFormula((prev) => {
-					return prev + key;
-				});
-				setUseAnswer(true);
+				updateFormula(key, true);
+				updateUseAnswer(true);
 			}
 		};
 

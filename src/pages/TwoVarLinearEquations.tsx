@@ -40,7 +40,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 					<>a<sub>1</sub></>
 				),
 				value: a1,
-				setValue: setA1
+				updateValue: setA1
 			},
 			{
 				id: "b1",
@@ -48,7 +48,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 					<>b<sub>1</sub></>
 				),
 				value: b1,
-				setValue: setB1
+				updateValue: setB1
 			},
 			{
 				id: "c1",
@@ -56,7 +56,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 					<>c<sub>1</sub></>
 				),
 				value: c1,
-				setValue: setC1
+				updateValue: setC1
 			}
 		],
 		[
@@ -66,7 +66,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 					<>a<sub>2</sub></>
 				),
 				value: a2,
-				setValue: setA2
+				updateValue: setA2
 			},
 			{
 				id: "b2",
@@ -74,7 +74,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 					<>b<sub>2</sub></>
 				),
 				value: b2,
-				setValue: setB2
+				updateValue: setB2
 			},
 			{
 				id: "c2",
@@ -82,7 +82,7 @@ function TwoVarLinearEquations({ math }: PageProps) {
 					<>c<sub>2</sub></>
 				),
 				value: c2,
-				setValue: setC2
+				updateValue: setC2
 			}
 		]
 	];

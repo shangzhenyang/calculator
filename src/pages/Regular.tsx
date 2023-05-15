@@ -83,6 +83,22 @@ function Regular({ math }: PageProps) {
 		});
 	};
 
+	const updateFormula = (newValue: string, append = false) => {
+		if (append) {
+			setFormula(formula + newValue);
+		} else {
+			setFormula(newValue);
+		}
+	};
+
+	const updateHistoryItems = (callback: (value: string[]) => string[]) => {
+		setHistoryItems(callback);
+	};
+
+	const updateUseAnswer = (newValue: boolean) => {
+		setUseAnswer(newValue);
+	};
+
 	useEffect(() => {
 		setFormulaHasError(false);
 	}, [formula]);
@@ -145,17 +161,17 @@ function Regular({ math }: PageProps) {
 			{showHistory && <div>
 				<History
 					historyItems={historyItems}
-					setHistoryItems={setHistoryItems}
-					setInputValue={setFormula}
 					showClearButton={true}
+					updateHistoryItems={updateHistoryItems}
+					updateInputValue={updateFormula}
 				/>
 			</div>}
 			{!showHistory && <div className={styles["keyboard-area"]}>
-				<FunctionList setFormula={setFormula} />
+				<FunctionList updateFormula={updateFormula} />
 				<Keyboard
 					calculate={calculate}
-					setFormula={setFormula}
-					setUseAnswer={setUseAnswer}
+					updateFormula={updateFormula}
+					updateUseAnswer={updateUseAnswer}
 				/>
 			</div>}
 		</main>
