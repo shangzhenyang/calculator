@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import browserUpdate from "browser-update";
 import classnames from "classnames";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { create, all } from "mathjs";
@@ -34,6 +35,17 @@ function App() {
 	};
 
 	useEffect(() => {
+		browserUpdate({
+			required: { c: -1, e: -1, f: -1, o: -1, s: 0 },
+			insecure: true,
+			noclose: true,
+			no_permanent_hide: true,
+			notify_esr: true,
+			reminder: 0,
+			reminderClosed: 0,
+			unsupported: true,
+			url: "https://www.google.cn/chrome/"
+		});
 		setTimeout(() => {
 			ReactGA.initialize("G-LS9MTX889C");
 			ReactGA.send("pageview");
