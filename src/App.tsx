@@ -44,7 +44,7 @@ function App() {
 			reminder: 0,
 			reminderClosed: 0,
 			unsupported: true,
-			url: "https://www.google.cn/chrome/"
+			url: "https://browsehappy.com/"
 		});
 		setTimeout(() => {
 			ReactGA.initialize("G-LS9MTX889C");
