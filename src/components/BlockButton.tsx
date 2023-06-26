@@ -11,7 +11,7 @@ interface Props {
 	onClick: () => void;
 }
 
-function BlockButton({ icon, label, onClick }: Props) {
+function BlockButton({ icon, label, onClick }: Props): JSX.Element {
 	return (
 		<button
 			className={styles["block-button"]}

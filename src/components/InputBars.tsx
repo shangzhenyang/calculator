@@ -8,7 +8,7 @@ interface Props {
 	inputs: InputInfoWritable[][];
 }
 
-function InputBars({ inputs }: Props) {
+function InputBars({ inputs }: Props): JSX.Element {
 	const elements = inputs.map((row, index) => {
 		const rows = row.map(({ hasError, id, label, value, updateValue }) => {
 			return (
@@ -19,7 +19,9 @@ function InputBars({ inputs }: Props) {
 					type="number"
 					value={value.toString()}
 					onChange={updateValue}
-				>{label || id}</InputBar>
+				>
+					{label || id}
+				</InputBar>
 			);
 		});
 

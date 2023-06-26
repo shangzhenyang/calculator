@@ -5,7 +5,7 @@ import InputBar from "@/components/InputBar";
 
 import type { Dispatch, SetStateAction } from "react";
 
-function Byte() {
+function Byte(): JSX.Element {
 	const [byte, setByte] = useState("");
 	const [kilobyte, setKilobyte] = useState("");
 	const [megabyte, setMegabyte] = useState("");
@@ -20,7 +20,7 @@ function Byte() {
 		[setTerabyte, 1024 * 1024 * 1024 * 1024]
 	] as [Dispatch<SetStateAction<string>>, number][];
 
-	const calculate = (newByte: number, setterIndex: number) => {
+	const calculate = (newByte: number, setterIndex: number): void => {
 		if (isNaN(newByte)) {
 			return;
 		}
@@ -32,7 +32,7 @@ function Byte() {
 		});
 	};
 
-	const clear = () => {
+	const clear = (): void => {
 		setByte("");
 		setKilobyte("");
 		setMegabyte("");
@@ -40,7 +40,7 @@ function Byte() {
 		setTerabyte("");
 	};
 
-	const handleChange = (newValue: string, setterIndex: number) => {
+	const handleChange = (newValue: string, setterIndex: number): void => {
 		if (!newValue) {
 			clear();
 			return;
@@ -53,27 +53,27 @@ function Byte() {
 		calculate(number * multiplier, setterIndex);
 	};
 
-	const handleByteChange = (newValue: string) => {
+	const handleByteChange = (newValue: string): void => {
 		handleChange(newValue, 0);
 		setByte(newValue);
 	};
 
-	const handleKilobyteChange = (newValue: string) => {
+	const handleKilobyteChange = (newValue: string): void => {
 		handleChange(newValue, 1);
 		setKilobyte(newValue);
 	};
 
-	const handleMegabyteChange = (newValue: string) => {
+	const handleMegabyteChange = (newValue: string): void => {
 		handleChange(newValue, 2);
 		setMegabyte(newValue);
 	};
 
-	const handleGigabyteChange = (newValue: string) => {
+	const handleGigabyteChange = (newValue: string): void => {
 		handleChange(newValue, 3);
 		setGigabyte(newValue);
 	};
 
-	const handleTerabyteChange = (newValue: string) => {
+	const handleTerabyteChange = (newValue: string): void => {
 		handleChange(newValue, 4);
 		setTerabyte(newValue);
 	};
@@ -115,7 +115,9 @@ function Byte() {
 				type="number"
 				value={item.value}
 				onChange={item.onChange}
-			>{t(item.label)}</InputBar>
+			>
+				{t(item.label)}
+			</InputBar>
 		);
 	});
 

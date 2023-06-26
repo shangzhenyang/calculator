@@ -23,16 +23,16 @@
 	background-color: var(--theme-color);
 }
 
-.function-list li {
+.function-list li>div {
 	border-radius: var(--radius);
 	padding: 10px 15px;
 }
 
-.function-list li:hover {
+.function-list li>div:hover {
 	background-color: var(--fg-alpha-2);
 }
 
-.function-list li:active {
+.function-list li>div:active {
 	background-color: var(--theme-color);
 	color: white;
 }

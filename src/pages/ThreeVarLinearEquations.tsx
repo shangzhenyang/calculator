@@ -7,7 +7,7 @@ import type InputInfo from "@/types/InputInfo";
 import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
-function ThreeVarLinearEquations({ math }: PageProps) {
+function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 	const [a1, setA1] = useState<string>("");
 	const [b1, setB1] = useState<string>("");
 	const [c1, setC1] = useState<string>("");

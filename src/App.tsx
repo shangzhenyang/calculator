@@ -22,7 +22,7 @@ import TwoVarLinearEquations from "@/pages/TwoVarLinearEquations";
 
 import styles from "@/styles/App.module.css";
 
-function App() {
+function App(): JSX.Element {
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	const math = create(all, {
@@ -30,7 +30,7 @@ function App() {
 		precision: 64
 	});
 
-	const toggleSidebar = () => {
+	const toggleSidebar = (): void => {
 		setShowSidebar(!showSidebar);
 	};
 

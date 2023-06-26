@@ -12,12 +12,12 @@ import styles from "@/styles/Stat.module.css";
 import type { ChangeEvent } from "react";
 import type PageProps from "@/types/PageProps";
 
-function Stat({ math }: PageProps) {
+function Stat({ math }: PageProps): JSX.Element {
 	const [newNumber, setNewNumber] = useState<string>("");
 	const [newNumberHasError, setNewNumberHasError] = useState<boolean>(false);
 	const [numbers, setNumbers] = useState<string>("");
 
-	const addNumber = () => {
+	const addNumber = (): void => {
 		if (!newNumber) {
 			return;
 		}
@@ -35,16 +35,18 @@ function Stat({ math }: PageProps) {
 		}
 	};
 
-	const clear = () => {
+	const clear = (): void => {
 		setNumbers("");
 	};
 
-	const handleNewNumberChange = (newValue: string) => {
+	const handleNewNumberChange = (newValue: string): void => {
 		setNewNumber(newValue);
 		setNewNumberHasError(false);
 	};
 
-	const handleNumbersChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+	const handleNumbersChange = (
+		event: ChangeEvent<HTMLTextAreaElement>
+	): void => {
 		setNumbers(event.target.value);
 	};
 

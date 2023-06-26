@@ -7,7 +7,7 @@ interface Props {
 	results: InputInfo[];
 }
 
-function ResultBars({ enforceNumber, results }: Props) {
+function ResultBars({ enforceNumber, results }: Props): JSX.Element {
 	const elements = results.map(({ id, label, value }) => {
 		// multiply value by 1 to eliminate negative zero
 		const finalValue = enforceNumber ?
@@ -19,7 +19,9 @@ function ResultBars({ enforceNumber, results }: Props) {
 				key={id}
 				type="text"
 				value={finalValue}
-			>{label || id}</InputBar>
+			>
+				{label || id}
+			</InputBar>
 		);
 	});
 

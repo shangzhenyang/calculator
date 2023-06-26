@@ -5,7 +5,7 @@ import InputBar from "@/components/InputBar";
 
 import type { Dispatch, SetStateAction } from "react";
 
-function DateDifference() {
+function DateDifference(): JSX.Element {
 	const millisecondsInDay = 1000 * 60 * 60 * 24;
 	const todayDate = new Date().toISOString().split("T")[0];
 
@@ -13,7 +13,7 @@ function DateDifference() {
 	const [endDate, setEndDate] = useState<string>(todayDate);
 	const [dayDifference, setDayDifference] = useState<string>("");
 
-	const calculate = (newStartDate: string, newEndDate: string) => {
+	const calculate = (newStartDate: string, newEndDate: string): void => {
 		if (!newStartDate || !newEndDate) {
 			return;
 		}
@@ -28,7 +28,7 @@ function DateDifference() {
 		newDayDifference: number,
 		newDate: string,
 		setter: Dispatch<SetStateAction<string>>
-	) => {
+	): void => {
 		if (!newDate) {
 			return;
 		}
@@ -42,7 +42,7 @@ function DateDifference() {
 		setter(resultStr);
 	};
 
-	const handleStartDateChange = (newValue: string) => {
+	const handleStartDateChange = (newValue: string): void => {
 		setStartDate(newValue);
 		if (!endDate && dayDifference) {
 			calculateBasedOnDayDifference(
@@ -55,7 +55,7 @@ function DateDifference() {
 		}
 	};
 
-	const handleEndDateChange = (newValue: string) => {
+	const handleEndDateChange = (newValue: string): void => {
 		setEndDate(newValue);
 		if (!startDate && dayDifference) {
 			calculateBasedOnDayDifference(
@@ -68,7 +68,7 @@ function DateDifference() {
 		}
 	};
 
-	const handleDayDifferenceChange = (newValue: string) => {
+	const handleDayDifferenceChange = (newValue: string): void => {
 		setDayDifference(newValue);
 		calculateBasedOnDayDifference(Number(newValue), startDate, setEndDate);
 	};
@@ -106,7 +106,9 @@ function DateDifference() {
 				type={type}
 				value={value}
 				onChange={onChange}
-			>{t(id)}</InputBar>
+			>
+				{t(id)}
+			</InputBar>
 		);
 	});
 

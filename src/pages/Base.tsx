@@ -6,7 +6,7 @@ import InputBar from "@/components/InputBar";
 import type { Dispatch, SetStateAction } from "react";
 import type PageProps from "@/types/PageProps";
 
-function Base({ math }: PageProps) {
+function Base({ math }: PageProps): JSX.Element {
 	const [binary, setBinary] = useState("");
 	const [octal, setOctal] = useState("");
 	const [decimal, setDecimal] = useState("");
@@ -24,7 +24,7 @@ function Base({ math }: PageProps) {
 		[setHexadecimal, "hex"]
 	] as [Dispatch<SetStateAction<string>>, string][];
 
-	const calculate = (newDecimal: string, setterIndex: number) => {
+	const calculate = (newDecimal: string, setterIndex: number): void => {
 		if (isNaN(Number(newDecimal))) {
 			return;
 		}
@@ -41,7 +41,7 @@ function Base({ math }: PageProps) {
 		});
 	};
 
-	const clear = () => {
+	const clear = (): void => {
 		setBinary("");
 		setOctal("");
 		setDecimal("");
@@ -52,7 +52,7 @@ function Base({ math }: PageProps) {
 		newValue: string,
 		setterIndex: number,
 		prefix?: string
-	) => {
+	): void => {
 		newValue = newValue.replace(valueFilter, "");
 		if (!newValue || newValue.includes(".")) {
 			clear();
@@ -68,27 +68,27 @@ function Base({ math }: PageProps) {
 		calculate(math.evaluate(newValue).toString(), setterIndex);
 	};
 
-	const handleBinaryChange = (newValue: string) => {
+	const handleBinaryChange = (newValue: string): void => {
 		handleChange(newValue, 0, binaryPrefix);
 		setBinary(newValue);
 	};
 
-	const handleOctalChange = (newValue: string) => {
+	const handleOctalChange = (newValue: string): void => {
 		handleChange(newValue, 1, octalPrefix);
 		setOctal(newValue);
 	};
 
-	const handleDecimalChange = (newValue: string) => {
+	const handleDecimalChange = (newValue: string): void => {
 		handleChange(newValue, 2);
 		setDecimal(newValue);
 	};
 
-	const handleHexadecimalChange = (newValue: string) => {
+	const handleHexadecimalChange = (newValue: string): void => {
 		handleChange(newValue, 3, hexadecimalPrefix);
 		setHexadecimal(newValue);
 	};
 
-	const hasError = (value: string, prefix?: string) => {
+	const hasError = (value: string, prefix?: string): boolean => {
 		value = value.replace(valueFilter, "");
 		if (!value) {
 			return false;
@@ -138,7 +138,9 @@ function Base({ math }: PageProps) {
 				type="text"
 				value={item.value}
 				onChange={item.onChange}
-			>{t(item.label)}</InputBar>
+			>
+				{t(item.label)}
+			</InputBar>
 		);
 	});
 

@@ -7,7 +7,7 @@ import type InputInfo from "@/types/InputInfo";
 import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
-function QuadraticEquation({ math }: PageProps) {
+function QuadraticEquation({ math }: PageProps): JSX.Element {
 	const [a, setA] = useState<string>("");
 	const [b, setB] = useState<string>("");
 	const [c, setC] = useState<string>("");
@@ -24,7 +24,7 @@ function QuadraticEquation({ math }: PageProps) {
 	scope.delta = math.evaluate("pow(b, 2) - (4 * a * c)", scope);
 	const delta = Number(scope.delta);
 	const hasSolutions = delta >= 0;
-	const deltaStr = delta + (() => {
+	const deltaStr = delta + ((): string => {
 		if (delta > 0) {
 			return " > 0";
 		} else if (delta < 0) {

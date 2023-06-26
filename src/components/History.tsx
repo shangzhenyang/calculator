@@ -21,8 +21,8 @@ function History({
 	addToHistory,
 	updateHistoryItems,
 	updateInputValue
-}: Props) {
-	const handleClearHistoryClick = () => {
+}: Props): JSX.Element {
+	const handleClearHistoryClick = (): void => {
 		updateHistoryItems(() => {
 			return [];
 		});
@@ -30,7 +30,7 @@ function History({
 	};
 
 	const historyListItems = historyItems.map((value, index) => {
-		const handleDeleteClick = () => {
+		const handleDeleteClick = (): void => {
 			updateHistoryItems((prevHistoryItems) => {
 				const newHistoryItems = [...prevHistoryItems];
 				newHistoryItems.splice(index, 1);
@@ -38,7 +38,7 @@ function History({
 			});
 		};
 
-		const handleEnterClick = () => {
+		const handleEnterClick = (): void => {
 			updateInputValue?.(value);
 		};
 

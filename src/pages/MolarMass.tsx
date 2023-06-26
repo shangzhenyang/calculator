@@ -9,7 +9,7 @@ import MainInputBar from "@/components/MainInputBar";
 import type { AllResult } from "@shangzhen/periodic-table";
 import type PageProps from "@/types/PageProps";
 
-function MolarMass({ math }: PageProps) {
+function MolarMass({ math }: PageProps): JSX.Element {
 	const [historyItems, setHistoryItems] = useState<string[]>([]);
 	const [mass, setMass] = useState<string>("");
 	const [mole, setMole] = useState<string>("1");
@@ -24,7 +24,7 @@ function MolarMass({ math }: PageProps) {
 	const hasMoleError = !mole || isNaN(Number(mole));
 	const hasParticleError = !particle || isNaN(Number(particle));
 
-	const addToHistory = () => {
+	const addToHistory = (): void => {
 		if (!hasSelectedElement) {
 			return;
 		}
@@ -54,9 +54,9 @@ function MolarMass({ math }: PageProps) {
 		});
 	};
 
-	const calculate = (newElement: AllResult, newMole: string) => {
+	const calculate = (newElement: AllResult, newMole: string): string => {
 		if (!newMole || isNaN(Number(newMole)) || isErrorResult(newElement)) {
-			return;
+			return "";
 		}
 		const newMoleNum = math.bignumber(newMole);
 		const particleResult = math.multiply(
@@ -73,7 +73,7 @@ function MolarMass({ math }: PageProps) {
 		return massResultStr;
 	};
 
-	const calculateBasedOnMass = (newMass: string) => {
+	const calculateBasedOnMass = (newMass: string): void => {
 		if (
 			!newMass ||
 			isNaN(Number(newMass)) ||
@@ -95,7 +95,7 @@ function MolarMass({ math }: PageProps) {
 		setParticle(math.format(particleResult));
 	};
 
-	const calculateBasedOnParticle = (newParticle: string) => {
+	const calculateBasedOnParticle = (newParticle: string): void => {
 		if (
 			!newParticle ||
 			isNaN(Number(newParticle)) ||
@@ -117,12 +117,12 @@ function MolarMass({ math }: PageProps) {
 		setMass(math.format(massResult));
 	};
 
-	const handleMassChange = (newValue: string) => {
+	const handleMassChange = (newValue: string): void => {
 		setMass(newValue);
 		calculateBasedOnMass(newValue);
 	};
 
-	const handleMoleChange = (newValue: string) => {
+	const handleMoleChange = (newValue: string): void => {
 		if (!hasSelectedElement) {
 			return;
 		}
@@ -130,12 +130,12 @@ function MolarMass({ math }: PageProps) {
 		calculate(selectedElement, newValue);
 	};
 
-	const handleParticleChange = (newValue: string) => {
+	const handleParticleChange = (newValue: string): void => {
 		setParticle(newValue);
 		calculateBasedOnParticle(newValue);
 	};
 
-	const handleSearchTermChange = (newValue: string) => {
+	const handleSearchTermChange = (newValue: string): void => {
 		setSearchTerm(newValue);
 		const result = getCompound(newValue);
 		setSelectedElement(result);
@@ -143,7 +143,9 @@ function MolarMass({ math }: PageProps) {
 		calculate(result, "1");
 	};
 
-	const updateHistoryItems = (callback: (value: string[]) => string[]) => {
+	const updateHistoryItems = (
+		callback: (value: string[]) => string[]
+	): void => {
 		setHistoryItems(callback);
 	};
 
@@ -191,7 +193,9 @@ function MolarMass({ math }: PageProps) {
 				type="number"
 				value={input.value}
 				onChange={input.onChange}
-			>{t(input.label)}</InputBar>
+			>
+				{t(input.label)}
+			</InputBar>
 		);
 	});
 

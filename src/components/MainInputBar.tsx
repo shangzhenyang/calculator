@@ -32,12 +32,12 @@ function MainInputBar({
 	onChange,
 	onKeyDown,
 	onSubmit
-}: Props) {
-	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+}: Props): JSX.Element {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		onChange(event.target.value);
 	};
 
-	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
 		onSubmit?.();
 	};

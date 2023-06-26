@@ -1,10 +1,12 @@
+import { keyboardClick } from "@/utils";
+
 import styles from "@/styles/FunctionList.module.css";
 
 interface Props {
 	updateFormula: (newValue: string, append?: boolean) => void;
 }
 
-function FunctionList({ updateFormula }: Props) {
+function FunctionList({ updateFormula }: Props): JSX.Element {
 	const functions = [
 		"0b",
 		"0o",
@@ -37,7 +39,7 @@ function FunctionList({ updateFormula }: Props) {
 	];
 
 	const listItems = functions.map((item) => {
-		const handleClick = () => {
+		const handleClick = (): void => {
 			const toAppend = item
 				.replace(")", "")
 				.replace("π", "pi");
@@ -46,12 +48,16 @@ function FunctionList({ updateFormula }: Props) {
 		};
 
 		return (
-			<li
-				key={item}
-				role="button"
-				tabIndex={0}
-				onClick={handleClick}
-			>{item}</li>
+			<li key={item}>
+				<div
+					role="button"
+					tabIndex={0}
+					onClick={handleClick}
+					onKeyDown={keyboardClick(handleClick)}
+				>
+					{item}
+				</div>
+			</li>
 		);
 	});
 

@@ -9,7 +9,7 @@ interface Props {
 	toggleSidebar: () => void;
 }
 
-function Header({ toggleSidebar }: Props) {
+function Header({ toggleSidebar }: Props): JSX.Element {
 	return (
 		<header className={styles["header"]}>
 			<div className={styles["header-left"]}>

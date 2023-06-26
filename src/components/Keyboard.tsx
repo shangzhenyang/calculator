@@ -12,12 +12,12 @@ function Keyboard({
 	calculate,
 	updateFormula,
 	updateUseAnswer
-}: Props) {
+}: Props): JSX.Element {
 	const clickMap = {
-		"C": () => {
+		"C": (): void => {
 			updateFormula("", false);
 		},
-		"=": () => {
+		"=": (): void => {
 			calculate();
 		}
 	};
@@ -44,7 +44,7 @@ function Keyboard({
 	];
 
 	const keyElements = keys.map((key) => {
-		const handleClick = () => {
+		const handleClick = (): void => {
 			if (key in clickMap) {
 				clickMap[key as keyof typeof clickMap]();
 			} else {
@@ -65,7 +65,9 @@ function Keyboard({
 					t(labelMap[key as keyof typeof labelMap]).toString() :
 					undefined}
 				onClick={handleClick}
-			>{key}</button>
+			>
+				{key}
+			</button>
 		);
 	});
 

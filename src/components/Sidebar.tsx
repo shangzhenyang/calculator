@@ -11,7 +11,7 @@ interface Props {
 	toggleSidebar: () => void;
 }
 
-function Sidebar({ showSidebar, toggleSidebar }: Props) {
+function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
 	const navItems = [
 		{
 			path: "/",
@@ -67,7 +67,7 @@ function Sidebar({ showSidebar, toggleSidebar }: Props) {
 		return (
 			<NavLink
 				draggable={false}
-				className={({ isActive }) => {
+				className={({ isActive }): string => {
 					return classnames(styles["nav-item"], {
 						[styles["active"]]: isActive
 					});
@@ -75,7 +75,9 @@ function Sidebar({ showSidebar, toggleSidebar }: Props) {
 				key={item.path}
 				to={item.path}
 				onClick={toggleSidebar}
-			>{t(item.text)}</NavLink>
+			>
+				{t(item.text)}
+			</NavLink>
 		);
 	});
 

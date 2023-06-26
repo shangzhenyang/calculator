@@ -7,7 +7,7 @@ import type InputInfo from "@/types/InputInfo";
 import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
-function QuadraticFormula({ math }: PageProps) {
+function QuadraticFormula({ math }: PageProps): JSX.Element {
 	const [x1, setX1] = useState<string>("");
 	const [y1, setY1] = useState<string>("");
 

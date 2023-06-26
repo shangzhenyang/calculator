@@ -8,7 +8,7 @@ import type InputInfo from "@/types/InputInfo";
 import type InputInfoWritable from "@/types/InputInfoWritable";
 import type PageProps from "@/types/PageProps";
 
-function LinearFormula({ math }: PageProps) {
+function LinearFormula({ math }: PageProps): JSX.Element {
 	const [x1, setX1] = useState<string>("");
 	const [y1, setY1] = useState<string>("");
 

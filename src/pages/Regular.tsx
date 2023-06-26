@@ -18,14 +18,14 @@ import styles from "@/styles/Regular.module.css";
 import type { KeyboardEvent } from "react";
 import type PageProps from "@/types/PageProps";
 
-function Regular({ math }: PageProps) {
+function Regular({ math }: PageProps): JSX.Element {
 	const [formula, setFormula] = useState<string>("");
 	const [formulaHasError, setFormulaHasError] = useState<boolean>(false);
 	const [historyItems, setHistoryItems] = useState<string[]>([]);
 	const [showHistory, setShowHistory] = useState<boolean>(false);
 	const [useAnswer, setUseAnswer] = useState<boolean>(false);
 
-	const backspace = () => {
+	const backspace = (): void => {
 		setFormula((prevFormula) => {
 			return prevFormula
 				.trim()
@@ -34,7 +34,7 @@ function Regular({ math }: PageProps) {
 		});
 	};
 
-	const calculate = () => {
+	const calculate = (): void => {
 		const formulaParts = formula.split("=");
 		const index = useAnswer ? formulaParts.length - 1 : 0;
 		const formulaProcessed = formulaParts[index]
@@ -61,29 +61,31 @@ function Regular({ math }: PageProps) {
 		}
 	};
 
-	const handleFormulaChange = (newValue: string) => {
+	const handleFormulaChange = (newValue: string): void => {
 		setFormula(newValue);
 	};
 
-	const handleFormulaKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+	const handleFormulaKeyDown = (
+		event: KeyboardEvent<HTMLInputElement>
+	): void => {
 		if (event.key === "Escape") {
 			setFormula("");
 		}
 		setUseAnswer(false);
 	};
 
-	const handleFormulaSubmit = () => {
+	const handleFormulaSubmit = (): void => {
 		calculate();
 		setUseAnswer(false);
 	};
 
-	const toggleHistory = () => {
+	const toggleHistory = (): void => {
 		setShowHistory((prevShowHistory) => {
 			return !prevShowHistory;
 		});
 	};
 
-	const updateFormula = (newValue: string, append = false) => {
+	const updateFormula = (newValue: string, append = false): void => {
 		if (append) {
 			setFormula(formula + newValue);
 		} else {
@@ -91,11 +93,13 @@ function Regular({ math }: PageProps) {
 		}
 	};
 
-	const updateHistoryItems = (callback: (value: string[]) => string[]) => {
+	const updateHistoryItems = (
+		callback: (value: string[]) => string[]
+	): void => {
 		setHistoryItems(callback);
 	};
 
-	const updateUseAnswer = (newValue: boolean) => {
+	const updateUseAnswer = (newValue: boolean): void => {
 		setUseAnswer(newValue);
 	};
 

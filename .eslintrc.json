@@ -6,9 +6,10 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:@typescript-eslint/recommended"
+		"plugin:@typescript-eslint/recommended",
+		"plugin:jsx-a11y/recommended"
 	],
-	"overrides": [],
+	"overrides": [ ],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaVersion": "latest",
@@ -16,7 +17,8 @@
 	},
 	"plugins": [
 		"react",
-		"@typescript-eslint"
+		"@typescript-eslint",
+		"jsx-a11y"
 	],
 	"rules": {
 		"arrow-body-style": [
@@ -62,7 +64,8 @@
 		"semi": [
 			"error",
 			"always"
-		]
+		],
+		"@typescript-eslint/explicit-function-return-type": "error"
 	},
 	"settings": {
 		"react": {
