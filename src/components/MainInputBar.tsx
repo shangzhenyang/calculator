@@ -7,7 +7,7 @@ import type {
 	ChangeEvent,
 	FormEvent,
 	KeyboardEventHandler,
-	ReactNode
+	ReactNode,
 } from "react";
 
 interface Props {
@@ -31,7 +31,7 @@ function MainInputBar({
 	value,
 	onChange,
 	onKeyDown,
-	onSubmit
+	onSubmit,
 }: Props): JSX.Element {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		onChange(event.target.value);
@@ -50,7 +50,7 @@ function MainInputBar({
 			<input
 				autoComplete="off"
 				className={classnames(className, {
-					[styles["error"]]: hasError
+					[styles["error"]]: hasError,
 				})}
 				list={list}
 				placeholder={t(placeholder).toString()}

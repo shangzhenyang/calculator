@@ -4,7 +4,7 @@ import { t } from "i18next";
 import InputBar from "@/components/InputBar";
 
 import type { Dispatch, SetStateAction } from "react";
-import type PageProps from "@/types/PageProps";
+import type { PageProps } from "@/types";
 
 function Base({ math }: PageProps): JSX.Element {
 	const [binary, setBinary] = useState("");
@@ -21,7 +21,7 @@ function Base({ math }: PageProps): JSX.Element {
 		[setBinary, "bin"],
 		[setOctal, "oct"],
 		[setDecimal, ""],
-		[setHexadecimal, "hex"]
+		[setHexadecimal, "hex"],
 	] as [Dispatch<SetStateAction<string>>, string][];
 
 	const calculate = (newDecimal: string, setterIndex: number): void => {
@@ -51,7 +51,7 @@ function Base({ math }: PageProps): JSX.Element {
 	const handleChange = (
 		newValue: string,
 		setterIndex: number,
-		prefix?: string
+		prefix?: string,
 	): void => {
 		newValue = newValue.replace(valueFilter, "");
 		if (!newValue || newValue.includes(".")) {
@@ -107,26 +107,26 @@ function Base({ math }: PageProps): JSX.Element {
 			hasError: hasError(binary, binaryPrefix) || binary.length > 64,
 			label: "binary",
 			value: binary,
-			onChange: handleBinaryChange
+			onChange: handleBinaryChange,
 		},
 		{
 			hasError: hasError(octal, octalPrefix),
 			label: "octal",
 			value: octal,
-			onChange: handleOctalChange
+			onChange: handleOctalChange,
 		},
 		{
 			hasError: hasError(decimal),
 			label: "decimal",
 			value: decimal,
-			onChange: handleDecimalChange
+			onChange: handleDecimalChange,
 		},
 		{
 			hasError: hasError(hexadecimal, hexadecimalPrefix),
 			label: "hexadecimal",
 			value: hexadecimal,
-			onChange: handleHexadecimalChange
-		}
+			onChange: handleHexadecimalChange,
+		},
 	] as const;
 
 	const inputBars = inputs.map((item) => {
@@ -144,9 +144,7 @@ function Base({ math }: PageProps): JSX.Element {
 		);
 	});
 
-	return (
-		<main>{inputBars}</main>
-	);
+	return <main>{inputBars}</main>;
 }
 
 export default Base;

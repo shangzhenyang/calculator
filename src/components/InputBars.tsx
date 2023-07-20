@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import InputBar from "@/components/InputBar";
 
-import type InputInfoWritable from "@/types/InputInfoWritable";
+import type { InputInfoWritable } from "@/types";
 
 interface Props {
 	inputs: InputInfoWritable[][];
@@ -33,9 +33,7 @@ function InputBars({ inputs }: Props): JSX.Element {
 		);
 	});
 
-	return (
-		<>{elements}</>
-	);
+	return <>{elements}</>;
 }
 
 export default InputBars;

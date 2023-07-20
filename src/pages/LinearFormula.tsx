@@ -4,9 +4,7 @@ import { t } from "i18next";
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
 
-import type InputInfo from "@/types/InputInfo";
-import type InputInfoWritable from "@/types/InputInfoWritable";
-import type PageProps from "@/types/PageProps";
+import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
 
 function LinearFormula({ math }: PageProps): JSX.Element {
 	const [x1, setX1] = useState<string>("");
@@ -21,7 +19,7 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : bigNaN,
 
 		x2: x2 && !isNaN(Number(x2)) ? math.bignumber(x2) : bigNaN,
-		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : bigNaN
+		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : bigNaN,
 	};
 
 	const k = math.evaluate("(y1 - y2) / (x1 - x2)", scope);
@@ -33,39 +31,31 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x1",
-				label: (
-					<>x<sub>1</sub></>
-				),
+				label: <>x<sub>1</sub></>,
 				value: x1,
-				updateValue: setX1
+				updateValue: setX1,
 			},
 			{
 				id: "y1",
-				label: (
-					<>y<sub>1</sub></>
-				),
+				label: <>y<sub>1</sub></>,
 				value: y1,
-				updateValue: setY1
-			}
+				updateValue: setY1,
+			},
 		],
 		[
 			{
 				id: "x2",
-				label: (
-					<>x<sub>2</sub></>
-				),
+				label: <>x<sub>2</sub></>,
 				value: x2,
-				updateValue: setX2
+				updateValue: setX2,
 			},
 			{
 				id: "y2",
-				label: (
-					<>y<sub>2</sub></>
-				),
+				label: <>y<sub>2</sub></>,
 				value: y2,
-				updateValue: setY2
-			}
-		]
+				updateValue: setY2,
+			},
+		],
 	];
 
 	const allInputsFilled = inputs.flat().every(({ value }) => {
@@ -88,33 +78,33 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 	const results: InputInfo[] = [
 		{
 			id: "k",
-			value: k
+			value: k,
 		},
 		{
 			id: "b",
-			value: b
+			value: b,
 		},
 		{
 			id: "y",
-			value: `${kRounded} * x + (${bRounded})`
+			value: `${kRounded} * x + (${bRounded})`,
 		},
 		{
 			id: "distance",
-			label: (
-				<>{t("distanceBetweenTwoPoints")}</>
-			),
-			value: distance
-		}
+			label: <>{t("distanceBetweenTwoPoints")}</>,
+			value: distance,
+		},
 	];
 
 	return (
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled && <>
-				<hr />
-				<ResultBars enforceNumber={false} results={results} />
-			</>}
+			{allInputsFilled &&
+				<>
+					<hr />
+					<ResultBars enforceNumber={false} results={results} />
+				</>
+			}
 		</main>
 	);
 }

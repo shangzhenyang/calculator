@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import browserUpdate from "browser-update";
 import classnames from "classnames";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { create, all } from "mathjs";
@@ -27,7 +26,7 @@ function App(): JSX.Element {
 
 	const math = create(all, {
 		number: "BigNumber",
-		precision: 64
+		precision: 64,
 	});
 
 	const toggleSidebar = (): void => {
@@ -35,17 +34,6 @@ function App(): JSX.Element {
 	};
 
 	useEffect(() => {
-		browserUpdate({
-			required: { c: -1, e: -1, f: -1, o: -1, s: 0 },
-			insecure: true,
-			noclose: true,
-			no_permanent_hide: true,
-			notify_esr: true,
-			reminder: 0,
-			reminderClosed: 0,
-			unsupported: true,
-			url: "https://browsehappy.com/"
-		});
 		setTimeout(() => {
 			ReactGA.initialize("G-LS9MTX889C");
 			ReactGA.send("pageview");
@@ -53,9 +41,11 @@ function App(): JSX.Element {
 	}, []);
 
 	return (
-		<div className={classnames(styles["App"], {
-			[styles["show-sidebar"]]: showSidebar
-		})}>
+		<div
+			className={classnames(styles["App"], {
+				[styles["show-sidebar"]]: showSidebar,
+			})}
+		>
 			<Header toggleSidebar={toggleSidebar} />
 			<Sidebar
 				showSidebar={showSidebar}

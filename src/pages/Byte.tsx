@@ -17,7 +17,7 @@ function Byte(): JSX.Element {
 		[setKilobyte, 1024],
 		[setMegabyte, 1024 * 1024],
 		[setGigabyte, 1024 * 1024 * 1024],
-		[setTerabyte, 1024 * 1024 * 1024 * 1024]
+		[setTerabyte, 1024 * 1024 * 1024 * 1024],
 	] as [Dispatch<SetStateAction<string>>, number][];
 
 	const calculate = (newByte: number, setterIndex: number): void => {
@@ -82,28 +82,28 @@ function Byte(): JSX.Element {
 		{
 			label: "byte",
 			value: byte,
-			onChange: handleByteChange
+			onChange: handleByteChange,
 		},
 		{
 			label: "kilobyte",
 			value: kilobyte,
-			onChange: handleKilobyteChange
+			onChange: handleKilobyteChange,
 		},
 		{
 			label: "megabyte",
 			value: megabyte,
-			onChange: handleMegabyteChange
+			onChange: handleMegabyteChange,
 		},
 		{
 			label: "gigabyte",
 			value: gigabyte,
-			onChange: handleGigabyteChange
+			onChange: handleGigabyteChange,
 		},
 		{
 			label: "terabyte",
 			value: terabyte,
-			onChange: handleTerabyteChange
-		}
+			onChange: handleTerabyteChange,
+		},
 	] as const;
 
 	const inputBars = inputs.map((item) => {
@@ -121,9 +121,7 @@ function Byte(): JSX.Element {
 		);
 	});
 
-	return (
-		<main>{inputBars}</main>
-	);
+	return <main>{inputBars}</main>;
 }
 
 export default Byte;

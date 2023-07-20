@@ -15,52 +15,52 @@ function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
 	const navItems = [
 		{
 			path: "/",
-			text: "regular"
+			text: "regular",
 		},
 		{
 			path: "/base",
-			text: "base"
+			text: "base",
 		},
 		{
 			path: "/byte",
-			text: "byte"
+			text: "byte",
 		},
 		{
 			path: "/date-difference",
-			text: "dateDifference"
+			text: "dateDifference",
 		},
 		{
 			path: "/molar-mass",
-			text: "molarMass"
+			text: "molarMass",
 		},
 		{
 			path: "/stat",
-			text: "statistics"
+			text: "statistics",
 		},
 		{
 			path: "/quadratic-equation",
-			text: "quadraticEquation"
+			text: "quadraticEquation",
 		},
 		{
 			path: "/2var-linear-equations",
-			text: "twoVariableLinearEquations"
+			text: "twoVariableLinearEquations",
 		},
 		{
 			path: "/3var-linear-equations",
-			text: "threeVariableLinearEquations"
+			text: "threeVariableLinearEquations",
 		},
 		{
 			path: "/quadratic-function",
-			text: "quadraticFunction"
+			text: "quadraticFunction",
 		},
 		{
 			path: "/linear-formula",
-			text: "linearFormula"
+			text: "linearFormula",
 		},
 		{
 			path: "/quadratic-formula",
-			text: "quadraticFormula"
-		}
+			text: "quadraticFormula",
+		},
 	];
 
 	const navLinks = navItems.map((item) => {
@@ -69,7 +69,7 @@ function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
 				draggable={false}
 				className={({ isActive }): string => {
 					return classnames(styles["nav-item"], {
-						[styles["active"]]: isActive
+						[styles["active"]]: isActive,
 					});
 				}}
 				key={item.path}
@@ -82,9 +82,11 @@ function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
 	});
 
 	return (
-		<div className={classnames(styles["sidebar"], {
-			[styles["show"]]: showSidebar
-		})}>
+		<div
+			className={classnames(styles["sidebar"], {
+				[styles["show"]]: showSidebar,
+			})}
+		>
 			<nav>{navLinks}</nav>
 			<Footer />
 		</div>

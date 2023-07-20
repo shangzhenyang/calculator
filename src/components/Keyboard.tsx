@@ -11,7 +11,7 @@ interface Props {
 function Keyboard({
 	calculate,
 	updateFormula,
-	updateUseAnswer
+	updateUseAnswer,
 }: Props): JSX.Element {
 	const clickMap = {
 		"C": (): void => {
@@ -19,20 +19,20 @@ function Keyboard({
 		},
 		"=": (): void => {
 			calculate();
-		}
+		},
 	};
 
 	const labelMap = {
 		"C": "clear",
 		"-": "subtract",
 		".": "decimalPoint",
-		"∧": "exponent"
+		"∧": "exponent",
 	};
 
 	const replaceMap = {
 		"÷": "/",
 		"×": "*",
-		"∧": "^"
+		"∧": "^",
 	};
 
 	const keys = [
@@ -40,7 +40,7 @@ function Keyboard({
 		"7", "8", "9", "×",
 		"4", "5", "6", "-",
 		"1", "2", "3", "+",
-		"0", ".", "∧", "="
+		"0", ".", "∧", "=",
 	];
 
 	const keyElements = keys.map((key) => {

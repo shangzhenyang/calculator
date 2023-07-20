@@ -4,8 +4,7 @@ import { t } from "i18next";
 import InputBar from "@/components/InputBar";
 import InputBars from "@/components/InputBars";
 
-import type InputInfoWritable from "@/types/InputInfoWritable";
-import type PageProps from "@/types/PageProps";
+import type { InputInfoWritable, PageProps } from "@/types";
 
 function QuadraticFunction({ math }: PageProps): JSX.Element {
 	const [a, setA] = useState<string>("");
@@ -20,7 +19,7 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 		c: c && !isNaN(Number(c)) ? math.bignumber(c) : bigNaN,
 		x: x && !isNaN(Number(x)) ? math.bignumber(x) : bigNaN,
 
-		delta: bigNaN
+		delta: bigNaN,
 	};
 
 	const h = math.evaluate("-b / (2 * a)", scope);
@@ -36,15 +35,22 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 	if (delta > 0) {
 		const x1 = math.evaluate("(-b + sqrt(delta)) / (2 * a)", scope);
 		const x2 = math.evaluate("(-b - sqrt(delta)) / (2 * a)", scope);
-		xIntercepts.push(x1, x2);
+		if (!isNaN(Number(x1)) && !isNaN(Number(x2))) {
+			xIntercepts.push(x1, x2);
+		}
 	} else if (delta === 0) {
-		xIntercepts.push(h);
+		if (!isNaN(Number(h))) {
+			xIntercepts.push(h);
+		}
 	}
-	const xInterceptStr = xIntercepts.map((x) => {
-		return `(${math.round(x, 2).toString()}, 0)`;
-	}).join(` ${t("and").toString()} `) || t("none").toString();
+	const xInterceptStr = xIntercepts.length > 0 ?
+		xIntercepts.map((x) => {
+			return `(${math.round(x, 2).toString()}, 0)`;
+		}).join(` ${t("and").toString()} `) :
+		t("none").toString();
 
-	const isUpward = parseInt(a) > 0;
+	const isDownward = Number(a) < 0;
+	const isUpward = Number(a) > 0;
 	const extremumType = isUpward ? "minimum" : "maximum";
 
 	const inputs: InputInfoWritable[] = [
@@ -52,18 +58,18 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 			hasError: !!a && Number(a) === 0,
 			id: "a",
 			value: a,
-			updateValue: setA
+			updateValue: setA,
 		},
 		{
 			id: "b",
 			value: b,
-			updateValue: setB
+			updateValue: setB,
 		},
 		{
 			id: "c",
 			value: c,
-			updateValue: setC
-		}
+			updateValue: setC,
+		},
 	];
 
 	const allInputsFilled = inputs.every(({ value }) => {
@@ -80,49 +86,57 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 				y = {a || "a"}x<sup>2</sup> + {b || "b"}x + {c || "c"} (a ≠ 0)
 			</p>
 			<InputBars inputs={[inputs]} />
-			{allInputsFilled && <>
-				<p>
-					{t("vertexForm")}{t("colon")}y = {a}(x - ({hRounded}))
-					<sup>2</sup> + ({kRounded})
-					<br />
-					{t("symmetryAxis")}{t("colon")}{t("line")} x = {hRounded}
-					<br />
-					{t("vertexPointCoordinates")}{t("colon")}
-					({hRounded}, {kRounded})
-					<br />
-					{t("parabolaOpening")}{t("colon")}
-					{t(isUpward ? "upward" : "downward")}
-					<br />
-					{t("xIncrease", {
-						comparison: ">",
-						number: hRounded,
-						delta: t(isUpward ? "increases" : "decreases")
-					})}
-					<br />
-					{t("xIncrease", {
-						comparison: "<",
-						number: hRounded,
-						delta: t(isUpward ? "decreases" : "increases")
-					})}
-					<br />
-					{t(extremumType)}{t("colon")}y = {kRounded}
-					<br />
-					{t("xIntercept")}{t("colon")}{xInterceptStr}
-					<br />
-					{t("yIntercept")}{t("colon")}(0, {c})
-				</p>
-				<InputBar
-					id="x"
-					type="number"
-					value={x}
-					onChange={setX}
-				>x</InputBar>
-				<InputBar
-					id="y"
-					type="text"
-					value={y.toString()}
-				>y</InputBar>
-			</>}
+			{allInputsFilled &&
+				<>
+					<p>
+						{t("vertexForm")}{t("colon")}y = {a}(x - ({hRounded}))
+						<sup>2</sup> + ({kRounded})
+						<br />
+						{t("symmetryAxis")}{t("colon")}
+						{t("line")} x = {hRounded}
+						<br />
+						{t("vertexPointCoordinates")}{t("colon")}
+						({hRounded}, {kRounded})
+						<br />
+						{t("parabolaOpening")}{t("colon")}
+						{isUpward && t("upward")}
+						{isDownward && t("downward")}
+						<br />
+						{t("xIncrease", {
+							comparison: ">",
+							number: hRounded,
+							delta: t(isUpward ? "increases" : "decreases"),
+						})}
+						<br />
+						{t("xIncrease", {
+							comparison: "<",
+							number: hRounded,
+							delta: t(isUpward ? "decreases" : "increases"),
+						})}
+						<br />
+						{t(extremumType)}{t("colon")}y = {kRounded}
+						<br />
+						{t("xIntercept")}{t("colon")}{xInterceptStr}
+						<br />
+						{t("yIntercept")}{t("colon")}(0, {c})
+					</p>
+					<InputBar
+						id="x"
+						type="number"
+						value={x}
+						onChange={setX}
+					>
+						x
+					</InputBar>
+					<InputBar
+						id="y"
+						type="text"
+						value={y.toString()}
+					>
+						y
+					</InputBar>
+				</>
+			}
 		</main>
 	);
 }

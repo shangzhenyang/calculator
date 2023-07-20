@@ -27,7 +27,7 @@ function DateDifference(): JSX.Element {
 	const calculateBasedOnDayDifference = (
 		newDayDifference: number,
 		newDate: string,
-		setter: Dispatch<SetStateAction<string>>
+		setter: Dispatch<SetStateAction<string>>,
 	): void => {
 		if (!newDate) {
 			return;
@@ -48,7 +48,7 @@ function DateDifference(): JSX.Element {
 			calculateBasedOnDayDifference(
 				Number(dayDifference),
 				newValue,
-				setEndDate
+				setEndDate,
 			);
 		} else {
 			calculate(newValue, endDate);
@@ -61,7 +61,7 @@ function DateDifference(): JSX.Element {
 			calculateBasedOnDayDifference(
 				-Number(dayDifference),
 				newValue,
-				setStartDate
+				setStartDate,
 			);
 		} else {
 			calculate(startDate, newValue);
@@ -79,22 +79,22 @@ function DateDifference(): JSX.Element {
 			id: "startDate",
 			type: "date",
 			value: startDate,
-			onChange: handleStartDateChange
+			onChange: handleStartDateChange,
 		},
 		{
 			hasError: !!(dayDifference || startDate) && !endDate,
 			id: "endDate",
 			type: "date",
 			value: endDate,
-			onChange: handleEndDateChange
+			onChange: handleEndDateChange,
 		},
 		{
 			hasError: isNaN(Number(dayDifference)),
 			id: "dayDifference",
 			type: "text",
 			value: dayDifference,
-			onChange: handleDayDifferenceChange
-		}
+			onChange: handleDayDifferenceChange,
+		},
 	] as const;
 
 	const inputBars = inputs.map(({ hasError, id, type, value, onChange }) => {
@@ -112,9 +112,7 @@ function DateDifference(): JSX.Element {
 		);
 	});
 
-	return (
-		<main>{inputBars}</main>
-	);
+	return <main>{inputBars}</main>;
 }
 
 export default DateDifference;

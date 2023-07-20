@@ -7,7 +7,7 @@ import InputBar from "@/components/InputBar";
 import MainInputBar from "@/components/MainInputBar";
 
 import type { AllResult } from "@shangzhen/periodic-table";
-import type PageProps from "@/types/PageProps";
+import type { PageProps } from "@/types";
 
 function MolarMass({ math }: PageProps): JSX.Element {
 	const [historyItems, setHistoryItems] = useState<string[]>([]);
@@ -61,12 +61,12 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		const newMoleNum = math.bignumber(newMole);
 		const particleResult = math.multiply(
 			newMoleNum,
-			math.multiply(math.bignumber(6.022), 1e+23)
+			math.multiply(math.bignumber(6.022), 1e+23),
 		);
 		setParticle(math.format(particleResult));
 		const massResult = math.multiply(
 			newMoleNum,
-			math.bignumber(newElement.mass)
+			math.bignumber(newElement.mass),
 		);
 		const massResultStr = math.format(massResult);
 		setMass(massResultStr);
@@ -85,12 +85,12 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		const newMassNum = math.bignumber(newMass);
 		const moleResult = math.divide(
 			newMassNum,
-			math.bignumber(selectedElement.mass)
+			math.bignumber(selectedElement.mass),
 		);
 		setMole(math.format(moleResult));
 		const particleResult = math.multiply(
 			moleResult,
-			math.multiply(math.bignumber(6.022), 1e+23)
+			math.multiply(math.bignumber(6.022), 1e+23),
 		);
 		setParticle(math.format(particleResult));
 	};
@@ -107,12 +107,12 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		const newParticleNum = math.bignumber(newParticle);
 		const moleResult = math.divide(
 			newParticleNum,
-			math.multiply(math.bignumber(6.022), 1e+23)
+			math.multiply(math.bignumber(6.022), 1e+23),
 		);
 		setMole(math.format(moleResult));
 		const massResult = math.multiply(
 			moleResult,
-			math.bignumber(selectedElement.mass)
+			math.bignumber(selectedElement.mass),
 		);
 		setMass(math.format(massResult));
 	};
@@ -144,7 +144,7 @@ function MolarMass({ math }: PageProps): JSX.Element {
 	};
 
 	const updateHistoryItems = (
-		callback: (value: string[]) => string[]
+		callback: (value: string[]) => string[],
 	): void => {
 		setHistoryItems(callback);
 	};
@@ -153,7 +153,7 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		const name = {
 			"en-US": element.name,
 			"zh-CN": element.name_chs,
-			"zh-TW": element.name_cht
+			"zh-TW": element.name_cht,
 		}[i18n.language];
 
 		return (
@@ -168,20 +168,20 @@ function MolarMass({ math }: PageProps): JSX.Element {
 			hasError: hasMoleError,
 			label: "mole",
 			value: mole,
-			onChange: handleMoleChange
+			onChange: handleMoleChange,
 		},
 		{
 			hasError: hasParticleError,
 			label: "particle",
 			value: particle,
-			onChange: handleParticleChange
+			onChange: handleParticleChange,
 		},
 		{
 			hasError: hasMassError,
 			label: "mass",
 			value: mass,
-			onChange: handleMassChange
-		}
+			onChange: handleMassChange,
+		},
 	] as const;
 
 	const inputBars = inputs.map((input) => {

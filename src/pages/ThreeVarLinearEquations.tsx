@@ -3,9 +3,7 @@ import { Fragment, useState } from "react";
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
 
-import type InputInfo from "@/types/InputInfo";
-import type InputInfoWritable from "@/types/InputInfoWritable";
-import type PageProps from "@/types/PageProps";
+import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
 
 function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 	const [a1, setA1] = useState<string>("");
@@ -40,7 +38,7 @@ function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 		c3: c3 && !isNaN(Number(c3)) ? math.bignumber(c3) : bigNaN,
 		d3: d3 && !isNaN(Number(d3)) ? math.bignumber(d3) : bigNaN,
 
-		delta: bigNaN
+		delta: bigNaN,
 	};
 
 	scope.delta = math.evaluate("(a1 * b2 * c3) + (b1 * c2 * a3) + (c1 * a2 * b3) - (c1 * b2 * a3) - (a1 * c2 * b3) - (b1 * a2 * c3)", scope);
@@ -52,105 +50,81 @@ function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "a1",
-				label: (
-					<>a<sub>1</sub></>
-				),
+				label: <>a<sub>1</sub></>,
 				value: a1,
-				updateValue: setA1
+				updateValue: setA1,
 			},
 			{
 				id: "b1",
-				label: (
-					<>b<sub>1</sub></>
-				),
+				label: <>b<sub>1</sub></>,
 				value: b1,
-				updateValue: setB1
+				updateValue: setB1,
 			},
 			{
 				id: "c1",
-				label: (
-					<>c<sub>1</sub></>
-				),
+				label: <>c<sub>1</sub></>,
 				value: c1,
-				updateValue: setC1
+				updateValue: setC1,
 			},
 			{
 				id: "d1",
-				label: (
-					<>d<sub>1</sub></>
-				),
+				label: <>d<sub>1</sub></>,
 				value: d1,
-				updateValue: setD1
-			}
+				updateValue: setD1,
+			},
 		],
 		[
 			{
 				id: "a2",
-				label: (
-					<>a<sub>2</sub></>
-				),
+				label: <>a<sub>2</sub></>,
 				value: a2,
-				updateValue: setA2
+				updateValue: setA2,
 			},
 			{
 				id: "b2",
-				label: (
-					<>b<sub>2</sub></>
-				),
+				label: <>b<sub>2</sub></>,
 				value: b2,
-				updateValue: setB2
+				updateValue: setB2,
 			},
 			{
 				id: "c2",
-				label: (
-					<>c<sub>2</sub></>
-				),
+				label: <>c<sub>2</sub></>,
 				value: c2,
-				updateValue: setC2
+				updateValue: setC2,
 			},
 			{
 				id: "d2",
-				label: (
-					<>d<sub>2</sub></>
-				),
+				label: <>d<sub>2</sub></>,
 				value: d2,
-				updateValue: setD2
-			}
+				updateValue: setD2,
+			},
 		],
 		[
 			{
 				id: "a3",
-				label: (
-					<>a<sub>3</sub></>
-				),
+				label: <>a<sub>3</sub></>,
 				value: a3,
-				updateValue: setA3
+				updateValue: setA3,
 			},
 			{
 				id: "b3",
-				label: (
-					<>b<sub>3</sub></>
-				),
+				label: <>b<sub>3</sub></>,
 				value: b3,
-				updateValue: setB3
+				updateValue: setB3,
 			},
 			{
 				id: "c3",
-				label: (
-					<>c<sub>3</sub></>
-				),
+				label: <>c<sub>3</sub></>,
 				value: c3,
-				updateValue: setC3
+				updateValue: setC3,
 			},
 			{
 				id: "d3",
-				label: (
-					<>d<sub>3</sub></>
-				),
+				label: <>d<sub>3</sub></>,
 				value: d3,
-				updateValue: setD3
-			}
-		]
+				updateValue: setD3,
+			},
+		],
 	];
 
 	const allInputsFilled = inputs.flat().every(({ value }) => {
@@ -171,26 +145,28 @@ function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 	const results: InputInfo[] = [
 		{
 			id: "x",
-			value: x
+			value: x,
 		},
 		{
 			id: "y",
-			value: y
+			value: y,
 		},
 		{
 			id: "z",
-			value: z
-		}
+			value: z,
+		},
 	];
 
 	return (
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled && <>
-				<hr />
-				<ResultBars enforceNumber={true} results={results} />
-			</>}
+			{allInputsFilled &&
+				<>
+					<hr />
+					<ResultBars enforceNumber={true} results={results} />
+				</>
+			}
 		</main>
 	);
 }

@@ -20,7 +20,7 @@ function History({
 	showClearButton,
 	addToHistory,
 	updateHistoryItems,
-	updateInputValue
+	updateInputValue,
 }: Props): JSX.Element {
 	const handleClearHistoryClick = (): void => {
 		updateHistoryItems(() => {
@@ -45,30 +45,40 @@ function History({
 		return (
 			<li key={index}>
 				<div className={styles["list-item-main"]}>{value}</div>
-				{updateInputValue && <button
-					type="button"
-					onClick={handleEnterClick}
-				>{t("enter")}</button>}
+				{updateInputValue &&
+					<button
+						type="button"
+						onClick={handleEnterClick}
+					>
+						{t("enter")}
+					</button>
+				}
 				<button
 					type="button"
 					onClick={handleDeleteClick}
-				>{t("delete")}</button>
+				>
+					{t("delete")}
+				</button>
 			</li>
 		);
 	});
 
 	return (
 		<div className={styles["history"]}>
-			{showAddButton && addToHistory && <BlockButton
-				icon={faCirclePlus}
-				label="addToHistory"
-				onClick={addToHistory}
-			/>}
-			{showClearButton && <BlockButton
-				icon={faBroom}
-				label="clearHistory"
-				onClick={handleClearHistoryClick}
-			/>}
+			{showAddButton && addToHistory &&
+				<BlockButton
+					icon={faCirclePlus}
+					label="addToHistory"
+					onClick={addToHistory}
+				/>
+			}
+			{showClearButton &&
+				<BlockButton
+					icon={faBroom}
+					label="clearHistory"
+					onClick={handleClearHistoryClick}
+				/>
+			}
 			<ul>{historyListItems}</ul>
 		</div>
 	);

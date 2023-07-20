@@ -3,9 +3,7 @@ import { Fragment, useState } from "react";
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
 
-import type InputInfo from "@/types/InputInfo";
-import type InputInfoWritable from "@/types/InputInfoWritable";
-import type PageProps from "@/types/PageProps";
+import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
 
 function QuadraticFormula({ math }: PageProps): JSX.Element {
 	const [x1, setX1] = useState<string>("");
@@ -31,7 +29,7 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 		delta: bigNaN,
 		x1Squared: bigNaN,
 		x2Squared: bigNaN,
-		x3Squared: bigNaN
+		x3Squared: bigNaN,
 	};
 
 	scope.x1Squared = math.bignumber(Number(math.pow(scope.x1, 2)));
@@ -46,57 +44,45 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x1",
-				label: (
-					<>x<sub>1</sub></>
-				),
+				label: <>x<sub>1</sub></>,
 				value: x1,
-				updateValue: setX1
+				updateValue: setX1,
 			},
 			{
 				id: "y1",
-				label: (
-					<>y<sub>1</sub></>
-				),
+				label: <>y<sub>1</sub></>,
 				value: y1,
-				updateValue: setY1
-			}
+				updateValue: setY1,
+			},
 		],
 		[
 			{
 				id: "x2",
-				label: (
-					<>x<sub>2</sub></>
-				),
+				label: <>x<sub>2</sub></>,
 				value: x2,
-				updateValue: setX2
+				updateValue: setX2,
 			},
 			{
 				id: "y2",
-				label: (
-					<>y<sub>2</sub></>
-				),
+				label: <>y<sub>2</sub></>,
 				value: y2,
-				updateValue: setY2
-			}
+				updateValue: setY2,
+			},
 		],
 		[
 			{
 				id: "x3",
-				label: (
-					<>x<sub>3</sub></>
-				),
+				label: <>x<sub>3</sub></>,
 				value: x3,
-				updateValue: setX3
+				updateValue: setX3,
 			},
 			{
 				id: "y3",
-				label: (
-					<>y<sub>3</sub></>
-				),
+				label: <>y<sub>3</sub></>,
 				value: y3,
-				updateValue: setY3
-			}
-		]
+				updateValue: setY3,
+			},
+		],
 	];
 
 	const allInputsFilled = inputs.flat().every(({ value }) => {
@@ -120,30 +106,32 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 	const results: InputInfo[] = [
 		{
 			id: "a",
-			value: a
+			value: a,
 		},
 		{
 			id: "b",
-			value: b
+			value: b,
 		},
 		{
 			id: "c",
-			value: c
+			value: c,
 		},
 		{
 			id: "y",
-			value: `(${aRounded}) * x^2 + (${bRounded}) * x + (${cRounded})`
-		}
+			value: `(${aRounded}) * x^2 + (${bRounded}) * x + (${cRounded})`,
+		},
 	];
 
 	return (
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled && <>
-				<hr />
-				<ResultBars enforceNumber={false} results={results} />
-			</>}
+			{allInputsFilled &&
+				<>
+					<hr />
+					<ResultBars enforceNumber={false} results={results} />
+				</>
+			}
 		</main>
 	);
 }

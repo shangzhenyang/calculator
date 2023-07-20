@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc && vite build",
+		"lint": "eslint . --ext .ts,.tsx --fix",
 		"preview": "vite preview"
 	},
 	"dependencies": {
@@ -14,29 +15,26 @@
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@fortawesome/react-fontawesome": "^0.2.0",
 		"@shangzhen/periodic-table": "^2.1.3",
-		"browser-update": "^3.3.44",
 		"classnames": "^2.3.2",
-		"i18next": "^22.4.14",
-		"mathjs": "^11.8.0",
+		"i18next": "^23.2.11",
+		"mathjs": "^11.9.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-ga4": "^2.1.0",
-		"react-router-dom": "^6.10.0"
+		"react-router-dom": "^6.14.2"
 	},
 	"devDependencies": {
-		"@rollup/plugin-eslint": "^9.0.3",
-		"@types/browser-update": "^3.3.0",
-		"@types/react": "^18.0.28",
-		"@types/react-dom": "^18.0.11",
-		"@typescript-eslint/eslint-plugin": "^5.59.0",
-		"@typescript-eslint/parser": "^5.59.0",
-		"@vitejs/plugin-react": "^3.1.0",
+		"@types/react": "^18.2.15",
+		"@types/react-dom": "^18.2.7",
+		"@typescript-eslint/eslint-plugin": "^6.1.0",
+		"@typescript-eslint/parser": "^6.1.0",
+		"@vitejs/plugin-react": "^4.0.3",
 		"autoprefixer": "^10.4.14",
-		"eslint": "^8.43.0",
+		"eslint": "^8.45.0",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
 		"eslint-plugin-react": "^7.32.2",
-		"typescript": "^5.0.4",
-		"vite": "^4.3.9",
-		"vite-plugin-pwa": "^0.14.7"
+		"typescript": "^5.1.6",
+		"vite": "^4.4.4",
+		"vite-plugin-pwa": "^0.16.4"
 	}
 }

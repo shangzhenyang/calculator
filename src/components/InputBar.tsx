@@ -20,7 +20,7 @@ function InputBar({
 	id,
 	type,
 	value,
-	onChange
+	onChange,
 }: Props): JSX.Element {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		onChange?.(event.target.value);
@@ -32,7 +32,7 @@ function InputBar({
 			<input
 				autoComplete="off"
 				className={classnames({
-					[styles["error"]]: hasError
+					[styles["error"]]: hasError,
 				})}
 				id={id}
 				placeholder={(onChange && type !== "date") ?

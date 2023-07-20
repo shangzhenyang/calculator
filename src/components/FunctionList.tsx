@@ -1,4 +1,4 @@
-import { keyboardClick } from "@/utils";
+import { handleKeyboardClick } from "@/utils";
 
 import styles from "@/styles/FunctionList.module.css";
 
@@ -35,7 +35,7 @@ function FunctionList({ updateFormula }: Props): JSX.Element {
 		"sqrt()",
 		"tan()",
 		"tanh()",
-		"(π/180)"
+		"(π/180)",
 	];
 
 	const listItems = functions.map((item) => {
@@ -53,7 +53,7 @@ function FunctionList({ updateFormula }: Props): JSX.Element {
 					role="button"
 					tabIndex={0}
 					onClick={handleClick}
-					onKeyDown={keyboardClick(handleClick)}
+					onKeyDown={handleKeyboardClick(handleClick)}
 				>
 					{item}
 				</div>

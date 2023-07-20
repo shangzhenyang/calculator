@@ -10,7 +10,7 @@ import MainInputBar from "@/components/MainInputBar";
 import styles from "@/styles/Stat.module.css";
 
 import type { ChangeEvent } from "react";
-import type PageProps from "@/types/PageProps";
+import type { PageProps } from "@/types";
 
 function Stat({ math }: PageProps): JSX.Element {
 	const [newNumber, setNewNumber] = useState<string>("");
@@ -45,7 +45,7 @@ function Stat({ math }: PageProps): JSX.Element {
 	};
 
 	const handleNumbersChange = (
-		event: ChangeEvent<HTMLTextAreaElement>
+		event: ChangeEvent<HTMLTextAreaElement>,
 	): void => {
 		setNumbers(event.target.value);
 	};
@@ -80,14 +80,14 @@ function Stat({ math }: PageProps): JSX.Element {
 	const minimum = Math.min(...numberArray);
 	const range = math.subtract(
 		math.bignumber(maximum),
-		math.bignumber(minimum)
+		math.bignumber(minimum),
 	);
 	const median = count ? Number(math.median(numberArray)) : undefined;
 	const lowerQuantile = (count >= 4) ? (
 		count % 4 === 0 ?
 			math.divide(math.add(
 				math.bignumber(numberArray[(count / 4) - 1]),
-				math.bignumber(numberArray[count / 4])
+				math.bignumber(numberArray[count / 4]),
 			), 2) :
 			numberArray[Math.floor(count / 4)]
 	) : undefined;
@@ -95,7 +95,7 @@ function Stat({ math }: PageProps): JSX.Element {
 		count % 4 === 0 ?
 			math.divide(math.add(
 				math.bignumber(numberArray[(count * 3 / 4) - 1]),
-				math.bignumber(numberArray[count * 3 / 4])
+				math.bignumber(numberArray[count * 3 / 4]),
 			), 2) :
 			numberArray[Math.floor(count * 3 / 4)]
 	) : undefined;
@@ -103,7 +103,7 @@ function Stat({ math }: PageProps): JSX.Element {
 	for (const number of numberArray) {
 		tmpVariance = tmpVariance.add(math.square(Number(math.subtract(
 			math.bignumber(number),
-			average
+			average,
 		))));
 	}
 	const sampleVariance = math.divide(tmpVariance, count - 1);
@@ -113,7 +113,7 @@ function Stat({ math }: PageProps): JSX.Element {
 		(upperQuantile !== undefined && lowerQuantile !== undefined) ?
 			math.subtract(
 				upperQuantile,
-				lowerQuantile
+				lowerQuantile,
 			) : undefined;
 	const quartileDeviation = (interquartileRange !== undefined) ?
 		math.divide(interquartileRange, 2) : undefined;
@@ -133,13 +133,13 @@ function Stat({ math }: PageProps): JSX.Element {
 		lowerQuantile,
 		median,
 		upperQuantile,
-		maximum
+		maximum,
 	} as const : {} as const;
 
 	const resultBars = Object.keys(results).map((key) => {
 		const value = results[key as keyof typeof results];
 		if (!value) {
-			return null;
+			return <></>;
 		}
 		return (
 			<InputBar
@@ -147,7 +147,9 @@ function Stat({ math }: PageProps): JSX.Element {
 				key={key}
 				type="text"
 				value={value.toString()}
-			>{t(key)}</InputBar>
+			>
+				{t(key)}
+			</InputBar>
 		);
 	});
 

@@ -3,9 +3,7 @@ import { Fragment, useState } from "react";
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
 
-import type InputInfo from "@/types/InputInfo";
-import type InputInfoWritable from "@/types/InputInfoWritable";
-import type PageProps from "@/types/PageProps";
+import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
 
 function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 	const [a1, setA1] = useState<string>("");
@@ -24,7 +22,7 @@ function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 
 		a2: a2 && !isNaN(Number(a2)) ? math.bignumber(a2) : bigNaN,
 		b2: b2 && !isNaN(Number(b2)) ? math.bignumber(b2) : bigNaN,
-		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(-c2) : bigNaN
+		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(-c2) : bigNaN,
 	};
 
 	const x = math.evaluate("((b1 * c2) - (b2 * c1)) / ((a1 * b2) - (b1 * a2))",
@@ -36,55 +34,43 @@ function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "a1",
-				label: (
-					<>a<sub>1</sub></>
-				),
+				label: <>a<sub>1</sub></>,
 				value: a1,
-				updateValue: setA1
+				updateValue: setA1,
 			},
 			{
 				id: "b1",
-				label: (
-					<>b<sub>1</sub></>
-				),
+				label: <>b<sub>1</sub></>,
 				value: b1,
-				updateValue: setB1
+				updateValue: setB1,
 			},
 			{
 				id: "c1",
-				label: (
-					<>c<sub>1</sub></>
-				),
+				label: <>c<sub>1</sub></>,
 				value: c1,
-				updateValue: setC1
-			}
+				updateValue: setC1,
+			},
 		],
 		[
 			{
 				id: "a2",
-				label: (
-					<>a<sub>2</sub></>
-				),
+				label: <>a<sub>2</sub></>,
 				value: a2,
-				updateValue: setA2
+				updateValue: setA2,
 			},
 			{
 				id: "b2",
-				label: (
-					<>b<sub>2</sub></>
-				),
+				label: <>b<sub>2</sub></>,
 				value: b2,
-				updateValue: setB2
+				updateValue: setB2,
 			},
 			{
 				id: "c2",
-				label: (
-					<>c<sub>2</sub></>
-				),
+				label: <>c<sub>2</sub></>,
 				value: c2,
-				updateValue: setC2
-			}
-		]
+				updateValue: setC2,
+			},
+		],
 	];
 
 	const allInputsFilled = inputs.flat().every(({ value }) => {
@@ -104,22 +90,24 @@ function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 	const results: InputInfo[] = [
 		{
 			id: "x",
-			value: x
+			value: x,
 		},
 		{
 			id: "y",
-			value: y
-		}
+			value: y,
+		},
 	];
 
 	return (
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled && <>
-				<hr />
-				<ResultBars enforceNumber={true} results={results} />
-			</>}
+			{allInputsFilled &&
+				<>
+					<hr />
+					<ResultBars enforceNumber={true} results={results} />
+				</>
+			}
 		</main>
 	);
 }
