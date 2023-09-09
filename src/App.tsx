@@ -1,25 +1,23 @@
-import { useEffect, useState } from "react";
-import classnames from "classnames";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { create, all } from "mathjs";
-import ReactGA from "react-ga4";
-
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import Base from "@/pages/Base";
 import Byte from "@/pages/Byte";
 import DateDifference from "@/pages/DateDifference";
-import Header from "@/components/Header";
 import LinearFormula from "@/pages/LinearFormula";
 import MolarMass from "@/pages/MolarMass";
-import Regular from "@/pages/Regular";
-import Sidebar from "@/components/Sidebar";
 import QuadraticEquation from "@/pages/QuadraticEquation";
 import QuadraticFormula from "@/pages/QuadraticFormula";
 import QuadraticFunction from "@/pages/QuadraticFunction";
+import Regular from "@/pages/Regular";
 import Stat from "@/pages/Stat";
 import ThreeVarLinearEquations from "@/pages/ThreeVarLinearEquations";
 import TwoVarLinearEquations from "@/pages/TwoVarLinearEquations";
-
 import styles from "@/styles/App.module.css";
+import classNames from "classnames";
+import { all, create } from "mathjs";
+import { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 function App(): JSX.Element {
 	const [showSidebar, setShowSidebar] = useState(false);
@@ -42,7 +40,7 @@ function App(): JSX.Element {
 
 	return (
 		<div
-			className={classnames(styles["App"], {
+			className={classNames(styles["App"], {
 				[styles["show-sidebar"]]: showSidebar,
 			})}
 		>

@@ -1,15 +1,14 @@
-import { t } from "i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-
 import styles from "@/styles/Header.module.css";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { t } from "i18next";
 
-interface Props {
+interface HeaderProps {
 	toggleSidebar: () => void;
 }
 
-function Header({ toggleSidebar }: Props): JSX.Element {
+function Header({ toggleSidebar }: HeaderProps): JSX.Element {
 	return (
 		<header className={styles["header"]}>
 			<div className={styles["header-left"]}>

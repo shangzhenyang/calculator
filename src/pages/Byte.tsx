@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { t } from "i18next";
-
 import InputBar from "@/components/InputBar";
-
-import type { Dispatch, SetStateAction } from "react";
+import { t } from "i18next";
+import { Dispatch, SetStateAction, useState } from "react";
 
 function Byte(): JSX.Element {
 	const [byte, setByte] = useState("");
@@ -81,28 +78,28 @@ function Byte(): JSX.Element {
 	const inputs = [
 		{
 			label: "byte",
-			value: byte,
 			onChange: handleByteChange,
+			value: byte,
 		},
 		{
 			label: "kilobyte",
-			value: kilobyte,
 			onChange: handleKilobyteChange,
+			value: kilobyte,
 		},
 		{
 			label: "megabyte",
-			value: megabyte,
 			onChange: handleMegabyteChange,
+			value: megabyte,
 		},
 		{
 			label: "gigabyte",
-			value: gigabyte,
 			onChange: handleGigabyteChange,
+			value: gigabyte,
 		},
 		{
 			label: "terabyte",
-			value: terabyte,
 			onChange: handleTerabyteChange,
+			value: terabyte,
 		},
 	] as const;
 

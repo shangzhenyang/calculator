@@ -1,13 +1,15 @@
-import { useState } from "react";
-import i18n, { t } from "i18next";
-import { elements, getCompound, isErrorResult } from "@shangzhen/periodic-table";
-
 import History from "@/components/History";
 import InputBar from "@/components/InputBar";
 import MainInputBar from "@/components/MainInputBar";
-
-import type { AllResult } from "@shangzhen/periodic-table";
-import type { PageProps } from "@/types";
+import { PageProps } from "@/types";
+import {
+	AllResult,
+	elements,
+	getCompound,
+	isErrorResult,
+} from "@shangzhen/periodic-table";
+import i18n, { t } from "i18next";
+import { useState } from "react";
 
 function MolarMass({ math }: PageProps): JSX.Element {
 	const [historyItems, setHistoryItems] = useState<string[]>([]);
@@ -167,20 +169,20 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		{
 			hasError: hasMoleError,
 			label: "mole",
-			value: mole,
 			onChange: handleMoleChange,
+			value: mole,
 		},
 		{
 			hasError: hasParticleError,
 			label: "particle",
-			value: particle,
 			onChange: handleParticleChange,
+			value: particle,
 		},
 		{
 			hasError: hasMassError,
 			label: "mass",
-			value: mass,
 			onChange: handleMassChange,
+			value: mass,
 		},
 	] as const;
 

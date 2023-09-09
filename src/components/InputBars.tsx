@@ -1,14 +1,12 @@
+import InputBar from "@/components/InputBar";
+import { InputInfoWritable } from "@/types";
 import { Fragment } from "react";
 
-import InputBar from "@/components/InputBar";
-
-import type { InputInfoWritable } from "@/types";
-
-interface Props {
+interface InputBarsProps {
 	inputs: InputInfoWritable[][];
 }
 
-function InputBars({ inputs }: Props): JSX.Element {
+function InputBars({ inputs }: InputBarsProps): JSX.Element {
 	const elements = inputs.map((row, index) => {
 		const rows = row.map(({ hasError, id, label, value, updateValue }) => {
 			return (

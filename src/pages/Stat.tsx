@@ -1,32 +1,40 @@
-import { useState } from "react";
-import { t } from "i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBroom, faCheck } from "@fortawesome/free-solid-svg-icons";
-
 import BlockButton from "@/components/BlockButton";
 import InputBar from "@/components/InputBar";
 import MainInputBar from "@/components/MainInputBar";
-
 import styles from "@/styles/Stat.module.css";
-
-import type { ChangeEvent } from "react";
-import type { PageProps } from "@/types";
+import { PageProps } from "@/types";
+import { faBroom, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { t } from "i18next";
+import { BigNumber } from "mathjs";
+import { ChangeEvent, Fragment, useState } from "react";
 
 function Stat({ math }: PageProps): JSX.Element {
 	const [newNumber, setNewNumber] = useState<string>("");
 	const [newNumberHasError, setNewNumberHasError] = useState<boolean>(false);
 	const [numbers, setNumbers] = useState<string>("");
 
+	const numberArray = numbers
+		.replace(/(,|，|、|\n|\s)+/g, ",")
+		.replace(/\s/g, "")
+		.split(",")
+		.filter((item) => {
+			return item && !isNaN(Number(item));
+		})
+		.map((item) => {
+			return Number(item);
+		});
+
 	const addNumber = (): void => {
 		if (!newNumber) {
 			return;
 		}
 		try {
-			const evaluated = math.evaluate(newNumber);
+			const evaluated = math.evaluate(newNumber) as BigNumber;
 			if (evaluated.isNaN()) {
 				throw new Error("NaN");
 			}
-			setNumbers([...numberArray, evaluated].sort((a, b) => {
+			setNumbers([...numberArray, evaluated.toNumber()].sort((a, b) => {
 				return a - b;
 			}).join(", "));
 			setNewNumber("");
@@ -50,16 +58,6 @@ function Stat({ math }: PageProps): JSX.Element {
 		setNumbers(event.target.value);
 	};
 
-	const numberArray = numbers
-		.replace(/(,|，|、|\n|\s)+/g, ",")
-		.replace(/\s/g, "")
-		.split(",")
-		.filter((item) => {
-			return item && !isNaN(Number(item));
-		})
-		.map((item) => {
-			return Number(item);
-		});
 	numberArray.sort((a, b) => {
 		return a - b;
 	});
@@ -70,7 +68,7 @@ function Stat({ math }: PageProps): JSX.Element {
 		frequency.set(number, (frequency.get(number) || 0) + 1);
 		sum = sum.add(math.bignumber(number));
 	}
-	const average = math.divide(sum, count);
+	const average = Number(math.divide(sum, count));
 	const maxFrequency = Math.max(...Array.from(frequency.values()));
 	const modes = Array.from(frequency.keys()).filter((key) => {
 		return frequency.get(key) === maxFrequency;
@@ -82,23 +80,23 @@ function Stat({ math }: PageProps): JSX.Element {
 		math.bignumber(maximum),
 		math.bignumber(minimum),
 	);
-	const median = count ? Number(math.median(numberArray)) : undefined;
+	const median = count ? Number(math.median(numberArray)) : NaN;
 	const lowerQuantile = (count >= 4) ? (
 		count % 4 === 0 ?
-			math.divide(math.add(
+			Number(math.divide(math.add(
 				math.bignumber(numberArray[(count / 4) - 1]),
 				math.bignumber(numberArray[count / 4]),
-			), 2) :
+			), 2)) :
 			numberArray[Math.floor(count / 4)]
-	) : undefined;
+	) : NaN;
 	const upperQuantile = (count >= 4) ? (
 		count % 4 === 0 ?
-			math.divide(math.add(
+			Number(math.divide(math.add(
 				math.bignumber(numberArray[(count * 3 / 4) - 1]),
 				math.bignumber(numberArray[count * 3 / 4]),
-			), 2) :
+			), 2)) :
 			numberArray[Math.floor(count * 3 / 4)]
-	) : undefined;
+	) : NaN;
 	let tmpVariance = math.bignumber(0);
 	for (const number of numberArray) {
 		tmpVariance = tmpVariance.add(math.square(Number(math.subtract(
@@ -106,49 +104,93 @@ function Stat({ math }: PageProps): JSX.Element {
 			average,
 		))));
 	}
-	const sampleVariance = math.divide(tmpVariance, count - 1);
-	const populationVariance = math.divide(tmpVariance, count);
-	const standardDeviation = math.sqrt(Number(populationVariance));
+	const sampleVariance = Number(math.divide(tmpVariance, count - 1));
+	const populationVariance = Number(math.divide(tmpVariance, count));
+	const standardDeviation = Number(math.sqrt(populationVariance));
 	const interquartileRange =
-		(upperQuantile !== undefined && lowerQuantile !== undefined) ?
+		(!isNaN(upperQuantile) && !isNaN(lowerQuantile)) ?
 			math.subtract(
 				upperQuantile,
 				lowerQuantile,
-			) : undefined;
-	const quartileDeviation = (interquartileRange !== undefined) ?
-		math.divide(interquartileRange, 2) : undefined;
+			) : NaN;
+	const quartileDeviation = !isNaN(interquartileRange) ?
+		Number(math.divide(interquartileRange, 2)) : NaN;
 
-	const results = count ? {
-		range,
-		count,
-		average,
-		sum,
-		mode,
-		sampleVariance,
-		populationVariance,
-		standardDeviation,
-		quartileDeviation,
-		interquartileRange,
-		minimum,
-		lowerQuantile,
-		median,
-		upperQuantile,
-		maximum,
-	} as const : {} as const;
+	const results = count ? [
+		{
+			label: "range",
+			value: range.toString(),
+		},
+		{
+			label: "count",
+			value: count.toString(),
+		},
+		{
+			label: "average",
+			value: average.toString(),
+		},
+		{
+			label: "sum",
+			value: sum.toString(),
+		},
+		{
+			label: "mode",
+			value: mode,
+		},
+		{
+			label: "sampleVariance",
+			value: sampleVariance.toString(),
+		},
+		{
+			label: "populationVariance",
+			value: populationVariance.toString(),
+		},
+		{
+			label: "standardDeviation",
+			value: standardDeviation.toString(),
+		},
+		{
+			label: "quartileDeviation",
+			value: quartileDeviation.toString(),
+		},
+		{
+			label: "interquartileRange",
+			value: interquartileRange.toString(),
+		},
+		{
+			label: "minimum",
+			value: minimum.toString(),
+		},
+		{
+			label: "lowerQuantile",
+			value: lowerQuantile.toString(),
+		},
+		{
+			label: "median",
+			value: median.toString(),
+		},
+		{
+			label: "upperQuantile",
+			value: upperQuantile.toString(),
+		},
+		{
+			label: "maximum",
+			value: maximum.toString(),
+		},
+	] as const : [] as const;
 
-	const resultBars = Object.keys(results).map((key) => {
-		const value = results[key as keyof typeof results];
-		if (!value) {
-			return <></>;
+	const resultBars = results.map(({ label, value }) => {
+		if (!value || value === "NaN") {
+			return <Fragment key={label}></Fragment>;
 		}
 		return (
 			<InputBar
-				id={key}
-				key={key}
+				id={label}
+				key={label}
 				type="text"
-				value={value.toString()}
+				value={value}
 			>
-				{t(key)}
+				{t(label)}
 			</InputBar>
 		);
 	});

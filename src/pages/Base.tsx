@@ -1,10 +1,8 @@
-import { useState } from "react";
-import { t } from "i18next";
-
 import InputBar from "@/components/InputBar";
-
-import type { Dispatch, SetStateAction } from "react";
-import type { PageProps } from "@/types";
+import { PageProps } from "@/types";
+import { t } from "i18next";
+import { BigNumber } from "mathjs";
+import { Dispatch, SetStateAction, useState } from "react";
 
 function Base({ math }: PageProps): JSX.Element {
 	const [binary, setBinary] = useState("");
@@ -33,8 +31,10 @@ function Base({ math }: PageProps): JSX.Element {
 				return;
 			}
 			if (base) {
-				const result = math.evaluate(`${base}(${newDecimal})`);
-				setter(result.toString().substring(2));
+				const result = math.evaluate(
+					`${base}(${newDecimal})`,
+				) as string;
+				setter(result.substring(2));
 			} else {
 				setter(newDecimal);
 			}
@@ -65,7 +65,8 @@ function Base({ math }: PageProps): JSX.Element {
 		if (isNaN(number)) {
 			return;
 		}
-		calculate(math.evaluate(newValue).toString(), setterIndex);
+		const result = math.evaluate(newValue) as BigNumber;
+		calculate(result.toString(), setterIndex);
 	};
 
 	const handleBinaryChange = (newValue: string): void => {
@@ -106,26 +107,26 @@ function Base({ math }: PageProps): JSX.Element {
 		{
 			hasError: hasError(binary, binaryPrefix) || binary.length > 64,
 			label: "binary",
-			value: binary,
 			onChange: handleBinaryChange,
+			value: binary,
 		},
 		{
 			hasError: hasError(octal, octalPrefix),
 			label: "octal",
-			value: octal,
 			onChange: handleOctalChange,
+			value: octal,
 		},
 		{
 			hasError: hasError(decimal),
 			label: "decimal",
-			value: decimal,
 			onChange: handleDecimalChange,
+			value: decimal,
 		},
 		{
 			hasError: hasError(hexadecimal, hexadecimalPrefix),
 			label: "hexadecimal",
-			value: hexadecimal,
 			onChange: handleHexadecimalChange,
+			value: hexadecimal,
 		},
 	] as const;
 

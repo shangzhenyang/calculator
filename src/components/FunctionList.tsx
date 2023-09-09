@@ -1,12 +1,11 @@
+import styles from "@/styles/FunctionList.module.css";
 import { handleKeyboardClick } from "@/utils";
 
-import styles from "@/styles/FunctionList.module.css";
-
-interface Props {
+interface FunctionListProps {
 	updateFormula: (newValue: string, append?: boolean) => void;
 }
 
-function FunctionList({ updateFormula }: Props): JSX.Element {
+function FunctionList({ updateFormula }: FunctionListProps): JSX.Element {
 	const functions = [
 		"0b",
 		"0o",

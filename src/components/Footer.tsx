@@ -1,6 +1,5 @@
-import { t } from "i18next";
-
 import styles from "@/styles/Footer.module.css";
+import { t } from "i18next";
 
 function Footer(): JSX.Element {
 	return (

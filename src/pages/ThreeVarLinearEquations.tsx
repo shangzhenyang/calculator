@@ -1,9 +1,8 @@
-import { Fragment, useState } from "react";
-
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
-
-import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
+import { InputInfo, InputInfoWritable, PageProps } from "@/types";
+import { BigNumber } from "mathjs";
+import { Fragment, useState } from "react";
 
 function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 	const [a1, setA1] = useState<string>("");
@@ -24,105 +23,137 @@ function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 	const bigNaN = math.bignumber(NaN);
 	const scope: Record<string, math.BigNumber> = {
 		a1: a1 && !isNaN(Number(a1)) ? math.bignumber(a1) : bigNaN,
-		b1: b1 && !isNaN(Number(b1)) ? math.bignumber(b1) : bigNaN,
-		c1: c1 && !isNaN(Number(c1)) ? math.bignumber(c1) : bigNaN,
-		d1: d1 && !isNaN(Number(d1)) ? math.bignumber(d1) : bigNaN,
-
 		a2: a2 && !isNaN(Number(a2)) ? math.bignumber(a2) : bigNaN,
-		b2: b2 && !isNaN(Number(b2)) ? math.bignumber(b2) : bigNaN,
-		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(c2) : bigNaN,
-		d2: d2 && !isNaN(Number(d2)) ? math.bignumber(d2) : bigNaN,
-
 		a3: a3 && !isNaN(Number(a3)) ? math.bignumber(a3) : bigNaN,
+		b1: b1 && !isNaN(Number(b1)) ? math.bignumber(b1) : bigNaN,
+		b2: b2 && !isNaN(Number(b2)) ? math.bignumber(b2) : bigNaN,
 		b3: b3 && !isNaN(Number(b3)) ? math.bignumber(b3) : bigNaN,
+		c1: c1 && !isNaN(Number(c1)) ? math.bignumber(c1) : bigNaN,
+		c2: c2 && !isNaN(Number(c2)) ? math.bignumber(c2) : bigNaN,
 		c3: c3 && !isNaN(Number(c3)) ? math.bignumber(c3) : bigNaN,
+		d1: d1 && !isNaN(Number(d1)) ? math.bignumber(d1) : bigNaN,
+		d2: d2 && !isNaN(Number(d2)) ? math.bignumber(d2) : bigNaN,
 		d3: d3 && !isNaN(Number(d3)) ? math.bignumber(d3) : bigNaN,
-
 		delta: bigNaN,
 	};
 
-	scope.delta = math.evaluate("(a1 * b2 * c3) + (b1 * c2 * a3) + (c1 * a2 * b3) - (c1 * b2 * a3) - (a1 * c2 * b3) - (b1 * a2 * c3)", scope);
-	const x = math.evaluate("((d1 * b2 * c3) + (b1 * c2 * d3) + (c1 * d2 * b3) - (c1 * b2 * d3) - (d1 * c2 * b3) - (b1 * d2 * c3)) / delta", scope);
-	const y = math.evaluate("((a1 * d2 * c3) + (d1 * c2 * a3) + (c1 * a2 * d3) - (c1 * d2 * a3) - (a1 * c2 * d3) - (d1 * a2 * c3)) / delta", scope);
-	const z = math.evaluate("((a1 * b2 * d3) + (b1 * d2 * a3) + (d1 * a2 * b3) - (d1 * b2 * a3) - (a1 * d2 * b3) - (b1 * a2 * d3)) / delta", scope);
+	scope.delta = math.evaluate(
+		"(a1 * b2 * c3) +" +
+		" (b1 * c2 * a3) +" +
+		" (c1 * a2 * b3) -" +
+		" (c1 * b2 * a3) -" +
+		" (a1 * c2 * b3) -" +
+		" (b1 * a2 * c3)",
+		scope,
+	) as BigNumber;
+	const x = math.evaluate(
+		"((d1 * b2 * c3) +" +
+		" (b1 * c2 * d3) +" +
+		" (c1 * d2 * b3) -" +
+		" (c1 * b2 * d3) -" +
+		" (d1 * c2 * b3) -" +
+		" (b1 * d2 * c3)" +
+		") / delta",
+		scope,
+	) as BigNumber;
+	const y = math.evaluate(
+		"((a1 * d2 * c3) +" +
+		" (d1 * c2 * a3) +" +
+		" (c1 * a2 * d3) -" +
+		" (c1 * d2 * a3) -" +
+		" (a1 * c2 * d3) -" +
+		" (d1 * a2 * c3)" +
+		") / delta",
+		scope,
+	) as BigNumber;
+	const z = math.evaluate(
+		"((a1 * b2 * d3) +" +
+		" (b1 * d2 * a3) +" +
+		" (d1 * a2 * b3) -" +
+		" (d1 * b2 * a3) -" +
+		" (a1 * d2 * b3) -" +
+		" (b1 * a2 * d3)" +
+		") / delta",
+		scope,
+	) as BigNumber;
 
 	const inputs: InputInfoWritable[][] = [
 		[
 			{
 				id: "a1",
 				label: <>a<sub>1</sub></>,
-				value: a1,
 				updateValue: setA1,
+				value: a1,
 			},
 			{
 				id: "b1",
 				label: <>b<sub>1</sub></>,
-				value: b1,
 				updateValue: setB1,
+				value: b1,
 			},
 			{
 				id: "c1",
 				label: <>c<sub>1</sub></>,
-				value: c1,
 				updateValue: setC1,
+				value: c1,
 			},
 			{
 				id: "d1",
 				label: <>d<sub>1</sub></>,
-				value: d1,
 				updateValue: setD1,
+				value: d1,
 			},
 		],
 		[
 			{
 				id: "a2",
 				label: <>a<sub>2</sub></>,
-				value: a2,
 				updateValue: setA2,
+				value: a2,
 			},
 			{
 				id: "b2",
 				label: <>b<sub>2</sub></>,
-				value: b2,
 				updateValue: setB2,
+				value: b2,
 			},
 			{
 				id: "c2",
 				label: <>c<sub>2</sub></>,
-				value: c2,
 				updateValue: setC2,
+				value: c2,
 			},
 			{
 				id: "d2",
 				label: <>d<sub>2</sub></>,
-				value: d2,
 				updateValue: setD2,
+				value: d2,
 			},
 		],
 		[
 			{
 				id: "a3",
 				label: <>a<sub>3</sub></>,
-				value: a3,
 				updateValue: setA3,
+				value: a3,
 			},
 			{
 				id: "b3",
 				label: <>b<sub>3</sub></>,
-				value: b3,
 				updateValue: setB3,
+				value: b3,
 			},
 			{
 				id: "c3",
 				label: <>c<sub>3</sub></>,
-				value: c3,
 				updateValue: setC3,
+				value: c3,
 			},
 			{
 				id: "d3",
 				label: <>d<sub>3</sub></>,
-				value: d3,
 				updateValue: setD3,
+				value: d3,
 			},
 		],
 	];
@@ -145,15 +176,15 @@ function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 	const results: InputInfo[] = [
 		{
 			id: "x",
-			value: x,
+			value: x.toString(),
 		},
 		{
 			id: "y",
-			value: y,
+			value: y.toString(),
 		},
 		{
 			id: "z",
-			value: z,
+			value: z.toString(),
 		},
 	];
 

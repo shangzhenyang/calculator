@@ -1,17 +1,15 @@
-import classnames from "classnames";
-import { NavLink } from "react-router-dom";
-import { t } from "i18next";
-
 import Footer from "@/components/Footer";
-
 import styles from "@/styles/Sidebar.module.css";
+import classNames from "classnames";
+import { t } from "i18next";
+import { NavLink } from "react-router-dom";
 
-interface Props {
+interface SidebarProps {
 	showSidebar: boolean;
 	toggleSidebar: () => void;
 }
 
-function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
+function Sidebar({ showSidebar, toggleSidebar }: SidebarProps): JSX.Element {
 	const navItems = [
 		{
 			path: "/",
@@ -68,7 +66,7 @@ function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
 			<NavLink
 				draggable={false}
 				className={({ isActive }): string => {
-					return classnames(styles["nav-item"], {
+					return classNames(styles["nav-item"], {
 						[styles["active"]]: isActive,
 					});
 				}}
@@ -83,7 +81,7 @@ function Sidebar({ showSidebar, toggleSidebar }: Props): JSX.Element {
 
 	return (
 		<div
-			className={classnames(styles["sidebar"], {
+			className={classNames(styles["sidebar"], {
 				[styles["show"]]: showSidebar,
 			})}
 		>

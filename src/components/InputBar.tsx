@@ -1,11 +1,9 @@
-import classnames from "classnames";
-import { t } from "i18next";
-
 import styles from "@/styles/InputBar.module.css";
+import classNames from "classnames";
+import { t } from "i18next";
+import { ChangeEvent, ReactNode } from "react";
 
-import type { ChangeEvent, ReactNode } from "react";
-
-interface Props {
+interface InputBarProps {
 	children: ReactNode;
 	hasError?: boolean;
 	id: string;
@@ -21,7 +19,7 @@ function InputBar({
 	type,
 	value,
 	onChange,
-}: Props): JSX.Element {
+}: InputBarProps): JSX.Element {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		onChange?.(event.target.value);
 	};
@@ -31,7 +29,7 @@ function InputBar({
 			<label htmlFor={id}>{children}</label>
 			<input
 				autoComplete="off"
-				className={classnames({
+				className={classNames({
 					[styles["error"]]: hasError,
 				})}
 				id={id}

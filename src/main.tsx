@@ -1,15 +1,12 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import i18n, { t } from "i18next";
-
+import App from "@/App";
+import "@/styles/globals.css";
 import translationEnUs from "@/translations/en-us.json";
 import translationZhCn from "@/translations/zh-cn.json";
 import translationZhTw from "@/translations/zh-tw.json";
-
-import App from "./App";
-
-import "@/styles/globals.css";
+import i18n, { t } from "i18next";
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 const i18nResources = {
 	"en-US": {
@@ -24,7 +21,7 @@ const i18nResources = {
 };
 
 const lang = ((): string => {
-	if (/^(yue|zh)(-cn|-hans(-[a-z]+)?)?$/i.test(navigator.language)) {
+	if (/^(yue|zh)(-cn|-sg|-hans(-[a-z]+)?)?$/i.test(navigator.language)) {
 		return "zh-CN";
 	} else if (
 		navigator.language.startsWith("zh") ||
@@ -37,16 +34,17 @@ const lang = ((): string => {
 })();
 
 i18n.init({
-	resources: i18nResources,
-	lng: lang,
 	fallbackLng: "en-US",
 	interpolation: {
 		escapeValue: false,
 	},
-});
+	lng: lang,
+	resources: i18nResources,
+}).then(() => {
+	document.title = t("calculatorByShangzhen");
+}).catch(() => { });
 
 document.documentElement.lang = lang;
-document.title = t("calculatorByShangzhen");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<StrictMode>

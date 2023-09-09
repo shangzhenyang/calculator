@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import type { MathJsStatic } from "mathjs";
+import { ReactNode } from "react";
+import { MathJsStatic } from "mathjs";
 
 export interface InputInfo {
 	hasError?: boolean;

@@ -1,16 +1,14 @@
-import classnames from "classnames";
-import { t } from "i18next";
-
 import styles from "@/styles/MainInputBar.module.css";
-
-import type {
+import classNames from "classnames";
+import { t } from "i18next";
+import {
 	ChangeEvent,
 	FormEvent,
 	KeyboardEventHandler,
 	ReactNode,
 } from "react";
 
-interface Props {
+interface MainInputBarProps {
 	children: ReactNode;
 	className?: string;
 	hasError: boolean;
@@ -32,7 +30,7 @@ function MainInputBar({
 	onChange,
 	onKeyDown,
 	onSubmit,
-}: Props): JSX.Element {
+}: MainInputBarProps): JSX.Element {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
 		onChange(event.target.value);
 	};
@@ -49,7 +47,7 @@ function MainInputBar({
 		>
 			<input
 				autoComplete="off"
-				className={classnames(className, {
+				className={classNames(className, {
 					[styles["error"]]: hasError,
 				})}
 				list={list}

@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { t } from "i18next";
-
 import InputBar from "@/components/InputBar";
 import InputBars from "@/components/InputBars";
-
-import type { InputInfoWritable, PageProps } from "@/types";
+import { InputInfoWritable, PageProps } from "@/types";
+import { t } from "i18next";
+import { BigNumber } from "mathjs";
+import { useEffect, useState } from "react";
 
 function QuadraticFunction({ math }: PageProps): JSX.Element {
 	const [a, setA] = useState<string>("");
@@ -17,24 +16,32 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 		a: a && !isNaN(Number(a)) ? math.bignumber(a) : bigNaN,
 		b: b && !isNaN(Number(b)) ? math.bignumber(b) : bigNaN,
 		c: c && !isNaN(Number(c)) ? math.bignumber(c) : bigNaN,
-		x: x && !isNaN(Number(x)) ? math.bignumber(x) : bigNaN,
-
 		delta: bigNaN,
+		x: x && !isNaN(Number(x)) ? math.bignumber(x) : bigNaN,
 	};
 
-	const h = math.evaluate("-b / (2 * a)", scope);
-	const k = math.evaluate("(4 * a * c - pow(b, 2)) / (4 * a)", scope);
-	const y = math.evaluate("a * pow(x, 2) + b * x + c", scope);
+	const h = math.evaluate("-b / (2 * a)", scope) as BigNumber;
+	const k = math.evaluate(
+		"(4 * a * c - pow(b, 2)) / (4 * a)",
+		scope,
+	) as BigNumber;
+	const y = math.evaluate("a * pow(x, 2) + b * x + c", scope) as BigNumber;
 
 	const hRounded = math.round(h, 2).toString();
 	const kRounded = math.round(k, 2).toString();
 
 	const xIntercepts = [];
-	scope.delta = math.evaluate("pow(b, 2) - 4 * a * c", scope);
+	scope.delta = math.evaluate("pow(b, 2) - 4 * a * c", scope) as BigNumber;
 	const delta = Number(scope.delta);
 	if (delta > 0) {
-		const x1 = math.evaluate("(-b + sqrt(delta)) / (2 * a)", scope);
-		const x2 = math.evaluate("(-b - sqrt(delta)) / (2 * a)", scope);
+		const x1 = math.evaluate(
+			"(-b + sqrt(delta)) / (2 * a)",
+			scope,
+		) as BigNumber;
+		const x2 = math.evaluate(
+			"(-b - sqrt(delta)) / (2 * a)",
+			scope,
+		) as BigNumber;
 		if (!isNaN(Number(x1)) && !isNaN(Number(x2))) {
 			xIntercepts.push(x1, x2);
 		}
@@ -57,18 +64,18 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 		{
 			hasError: !!a && Number(a) === 0,
 			id: "a",
-			value: a,
 			updateValue: setA,
+			value: a,
 		},
 		{
 			id: "b",
-			value: b,
 			updateValue: setB,
+			value: b,
 		},
 		{
 			id: "c",
-			value: c,
 			updateValue: setC,
+			value: c,
 		},
 	];
 
@@ -77,8 +84,8 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 	});
 
 	useEffect(() => {
-		setX(h);
-	}, [a, b, c]);
+		setX(h.toString());
+	}, [a, b, c, h]);
 
 	return (
 		<main>
@@ -104,14 +111,14 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 						<br />
 						{t("xIncrease", {
 							comparison: ">",
-							number: hRounded,
 							delta: t(isUpward ? "increases" : "decreases"),
+							number: hRounded,
 						})}
 						<br />
 						{t("xIncrease", {
 							comparison: "<",
-							number: hRounded,
 							delta: t(isUpward ? "decreases" : "increases"),
+							number: hRounded,
 						})}
 						<br />
 						{t(extremumType)}{t("colon")}y = {kRounded}

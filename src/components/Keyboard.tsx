@@ -1,8 +1,7 @@
+import styles from "@/styles/Keyboard.module.css";
 import { t } from "i18next";
 
-import styles from "@/styles/Keyboard.module.css";
-
-interface Props {
+interface KeyboardProps {
 	calculate: () => void;
 	updateFormula: (newValue: string, append?: boolean) => void;
 	updateUseAnswer: (newValue: boolean) => void;
@@ -12,26 +11,26 @@ function Keyboard({
 	calculate,
 	updateFormula,
 	updateUseAnswer,
-}: Props): JSX.Element {
+}: KeyboardProps): JSX.Element {
 	const clickMap = {
-		"C": (): void => {
-			updateFormula("", false);
-		},
 		"=": (): void => {
 			calculate();
+		},
+		"C": (): void => {
+			updateFormula("", false);
 		},
 	};
 
 	const labelMap = {
-		"C": "clear",
-		"-": "subtract",
 		".": "decimalPoint",
+		"-": "subtract",
+		"C": "clear",
 		"∧": "exponent",
 	};
 
 	const replaceMap = {
-		"÷": "/",
 		"×": "*",
+		"÷": "/",
 		"∧": "^",
 	};
 
@@ -72,7 +71,9 @@ function Keyboard({
 	});
 
 	return (
-		<div className={styles["keyboard"]}>{keyElements}</div>
+		<div className={styles["keyboard"]}>
+			{keyElements}
+		</div>
 	);
 }
 

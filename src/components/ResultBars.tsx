@@ -1,13 +1,12 @@
 import InputBar from "@/components/InputBar";
+import { InputInfo } from "@/types";
 
-import type { InputInfo } from "@/types";
-
-interface Props {
+interface ResultBarsProps {
 	enforceNumber: boolean;
 	results: InputInfo[];
 }
 
-function ResultBars({ enforceNumber, results }: Props): JSX.Element {
+function ResultBars({ enforceNumber, results }: ResultBarsProps): JSX.Element {
 	const elements = results.map(({ id, label, value }) => {
 		// multiply value by 1 to eliminate negative zero
 		const finalValue = enforceNumber ?

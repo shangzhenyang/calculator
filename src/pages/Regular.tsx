@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
-import { t } from "i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FunctionList from "@/components/FunctionList";
+import History from "@/components/History";
+import Keyboard from "@/components/Keyboard";
+import MainInputBar from "@/components/MainInputBar";
+import styles from "@/styles/Regular.module.css";
+import { PageProps } from "@/types";
 import {
 	faClockRotateLeft,
 	faDeleteLeft,
 	faEquals,
 	faKeyboard,
 } from "@fortawesome/free-solid-svg-icons";
-
-import FunctionList from "@/components/FunctionList";
-import History from "@/components/History";
-import Keyboard from "@/components/Keyboard";
-import MainInputBar from "@/components/MainInputBar";
-
-import styles from "@/styles/Regular.module.css";
-
-import type { KeyboardEvent } from "react";
-import type { PageProps } from "@/types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { t } from "i18next";
+import { BigNumber } from "mathjs";
+import { KeyboardEvent, useEffect, useState } from "react";
 
 function Regular({ math }: PageProps): JSX.Element {
 	const [formula, setFormula] = useState<string>("");
@@ -47,11 +44,12 @@ function Regular({ math }: PageProps): JSX.Element {
 			return;
 		}
 		try {
-			const result = math.evaluate(formulaProcessed);
+			const result = math.evaluate(formulaProcessed) as BigNumber;
 			if (typeof result === "function") {
 				throw new Error("NaN");
 			}
-			const formulaWithResult = formulaProcessed + " = " + result;
+			const formulaWithResult = formulaProcessed + " = " +
+				result.toString();
 			setFormula(formulaWithResult);
 			setHistoryItems((prevHistoryItems) => {
 				return [formulaWithResult, ...prevHistoryItems];

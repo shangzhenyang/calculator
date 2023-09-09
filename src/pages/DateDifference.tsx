@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { t } from "i18next";
-
 import InputBar from "@/components/InputBar";
-
-import type { Dispatch, SetStateAction } from "react";
+import { t } from "i18next";
+import { Dispatch, SetStateAction, useState } from "react";
 
 function DateDifference(): JSX.Element {
 	const millisecondsInDay = 1000 * 60 * 60 * 24;
@@ -77,23 +74,23 @@ function DateDifference(): JSX.Element {
 		{
 			hasError: !!(dayDifference || endDate) && !startDate,
 			id: "startDate",
+			onChange: handleStartDateChange,
 			type: "date",
 			value: startDate,
-			onChange: handleStartDateChange,
 		},
 		{
 			hasError: !!(dayDifference || startDate) && !endDate,
 			id: "endDate",
+			onChange: handleEndDateChange,
 			type: "date",
 			value: endDate,
-			onChange: handleEndDateChange,
 		},
 		{
 			hasError: isNaN(Number(dayDifference)),
 			id: "dayDifference",
+			onChange: handleDayDifferenceChange,
 			type: "text",
 			value: dayDifference,
-			onChange: handleDayDifferenceChange,
 		},
 	] as const;
 

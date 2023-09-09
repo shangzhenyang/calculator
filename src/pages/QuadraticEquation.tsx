@@ -1,9 +1,8 @@
-import { useState } from "react";
-
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
-
-import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
+import { InputInfo, InputInfoWritable, PageProps } from "@/types";
+import { BigNumber } from "mathjs";
+import { useState } from "react";
 
 function QuadraticEquation({ math }: PageProps): JSX.Element {
 	const [a, setA] = useState<string>("");
@@ -19,7 +18,7 @@ function QuadraticEquation({ math }: PageProps): JSX.Element {
 		delta: bigNaN,
 	};
 
-	scope.delta = math.evaluate("pow(b, 2) - (4 * a * c)", scope);
+	scope.delta = math.evaluate("pow(b, 2) - (4 * a * c)", scope) as BigNumber;
 	const delta = Number(scope.delta);
 	const hasSolutions = delta >= 0;
 	const deltaStr = delta + ((): string => {
@@ -32,26 +31,34 @@ function QuadraticEquation({ math }: PageProps): JSX.Element {
 		}
 	})();
 	const x1: string = hasSolutions ?
-		math.evaluate("(-b + sqrt(delta)) / (2 * a)", scope) : "NaN";
+		(math.evaluate(
+			"(-b + sqrt(delta)) / (2 * a)",
+			scope,
+		) as BigNumber).toString() :
+		"NaN";
 	const x2: string = hasSolutions ?
-		math.evaluate("(-b - sqrt(delta)) / (2 * a)", scope) : "NaN";
+		(math.evaluate(
+			"(-b - sqrt(delta)) / (2 * a)",
+			scope,
+		) as BigNumber).toString() :
+		"NaN";
 
 	const inputs: InputInfoWritable[] = [
 		{
 			hasError: !!a && Number(a) === 0,
 			id: "a",
-			value: a,
 			updateValue: setA,
+			value: a,
 		},
 		{
 			id: "b",
-			value: b,
 			updateValue: setB,
+			value: b,
 		},
 		{
 			id: "c",
-			value: c,
 			updateValue: setC,
+			value: c,
 		},
 	];
 

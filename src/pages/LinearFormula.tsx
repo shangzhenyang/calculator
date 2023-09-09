@@ -1,10 +1,9 @@
-import { Fragment, useState } from "react";
-import { t } from "i18next";
-
 import InputBars from "@/components/InputBars";
 import ResultBars from "@/components/ResultBars";
-
-import type { InputInfo, InputInfoWritable, PageProps } from "@/types";
+import { InputInfo, InputInfoWritable, PageProps } from "@/types";
+import { t } from "i18next";
+import { BigNumber } from "mathjs";
+import { Fragment, useState } from "react";
 
 function LinearFormula({ math }: PageProps): JSX.Element {
 	const [x1, setX1] = useState<string>("");
@@ -16,44 +15,48 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 	const bigNaN = math.bignumber(NaN);
 	const scope: Record<string, math.BigNumber> = {
 		x1: x1 && !isNaN(Number(x1)) ? math.bignumber(x1) : bigNaN,
-		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : bigNaN,
-
 		x2: x2 && !isNaN(Number(x2)) ? math.bignumber(x2) : bigNaN,
+		y1: y1 && !isNaN(Number(y1)) ? math.bignumber(y1) : bigNaN,
 		y2: y2 && !isNaN(Number(y2)) ? math.bignumber(y2) : bigNaN,
 	};
 
-	const k = math.evaluate("(y1 - y2) / (x1 - x2)", scope);
-	const b = math.evaluate("((-x1 * y2) + (x2 * y1)) / (x2 - x1)", scope);
-	const distance = math.evaluate("sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2))",
-		scope);
+	const k = math.evaluate("(y1 - y2) / (x1 - x2)", scope) as BigNumber;
+	const b = math.evaluate(
+		"((-x1 * y2) + (x2 * y1)) / (x2 - x1)",
+		scope,
+	) as BigNumber;
+	const distance = math.evaluate(
+		"sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2))",
+		scope,
+	) as BigNumber;
 
 	const inputs: InputInfoWritable[][] = [
 		[
 			{
 				id: "x1",
 				label: <>x<sub>1</sub></>,
-				value: x1,
 				updateValue: setX1,
+				value: x1,
 			},
 			{
 				id: "y1",
 				label: <>y<sub>1</sub></>,
-				value: y1,
 				updateValue: setY1,
+				value: y1,
 			},
 		],
 		[
 			{
 				id: "x2",
 				label: <>x<sub>2</sub></>,
-				value: x2,
 				updateValue: setX2,
+				value: x2,
 			},
 			{
 				id: "y2",
 				label: <>y<sub>2</sub></>,
-				value: y2,
 				updateValue: setY2,
+				value: y2,
 			},
 		],
 	];
@@ -66,23 +69,24 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 	const inputPreview = inputs.map((row, index) => {
 		return (
 			<Fragment key={index}>
-				{pointLetters[index]} ({row[0].value || row[0].label}, {row[1].value || row[1].label})
+				{pointLetters[index]}{" "}
+				({row[0].value || row[0].label}, {row[1].value || row[1].label})
 				{index !== inputs.length - 1 && <br />}
 			</Fragment>
 		);
 	});
 
-	const kRounded = math.round(k, 4);
-	const bRounded = math.round(b, 4);
+	const kRounded = math.round(k.toNumber(), 4);
+	const bRounded = math.round(b.toNumber(), 4);
 
 	const results: InputInfo[] = [
 		{
 			id: "k",
-			value: k,
+			value: k.toString(),
 		},
 		{
 			id: "b",
-			value: b,
+			value: b.toString(),
 		},
 		{
 			id: "y",
@@ -91,7 +95,7 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		{
 			id: "distance",
 			label: <>{t("distanceBetweenTwoPoints")}</>,
-			value: distance,
+			value: distance.toString(),
 		},
 	];
 

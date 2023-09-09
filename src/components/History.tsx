@@ -1,11 +1,9 @@
-import { t } from "i18next";
-import { faBroom, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-
 import BlockButton from "@/components/BlockButton";
-
 import styles from "@/styles/History.module.css";
+import { faBroom, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { t } from "i18next";
 
-interface Props {
+interface HistoryProps {
 	historyItems: string[];
 	showAddButton?: boolean;
 	showClearButton?: boolean;
@@ -21,7 +19,7 @@ function History({
 	addToHistory,
 	updateHistoryItems,
 	updateInputValue,
-}: Props): JSX.Element {
+}: HistoryProps): JSX.Element {
 	const handleClearHistoryClick = (): void => {
 		updateHistoryItems(() => {
 			return [];
