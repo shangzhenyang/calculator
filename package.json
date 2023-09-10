@@ -17,7 +17,7 @@
 		"@shangzhen/periodic-table": "^2.1.3",
 		"classnames": "^2.3.2",
 		"i18next": "^23.5.1",
-		"mathjs": "^11.11.0",
+		"mathjs": "11.10.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-ga4": "^2.1.0",
