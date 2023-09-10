@@ -42,7 +42,7 @@ i18n.init({
 	resources: i18nResources,
 }).then(() => {
 	document.title = t("calculatorByShangzhen");
-}).catch(() => { });
+}).catch(console.error);
 
 document.documentElement.lang = lang;
 
