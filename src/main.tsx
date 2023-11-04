@@ -33,18 +33,17 @@ const lang = ((): string => {
 	}
 })();
 
-i18n.init({
+await i18n.init({
 	fallbackLng: "en-US",
 	interpolation: {
 		escapeValue: false,
 	},
 	lng: lang,
 	resources: i18nResources,
-}).then(() => {
-	document.title = t("calculatorByShangzhen");
-}).catch(console.error);
+});
 
 document.documentElement.lang = lang;
+document.title = t("calculatorByShangzhen");
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<StrictMode>

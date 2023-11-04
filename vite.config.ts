@@ -24,6 +24,7 @@ export default defineConfig({
 				},
 			},
 		},
+		target: "esnext",
 	},
 	css: {
 		postcss: {
