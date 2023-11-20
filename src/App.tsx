@@ -13,10 +13,10 @@ import Stat from "@/pages/Stat";
 import ThreeVarLinearEquations from "@/pages/ThreeVarLinearEquations";
 import TwoVarLinearEquations from "@/pages/TwoVarLinearEquations";
 import styles from "@/styles/App.module.css";
-import { Analytics } from "@vercel/analytics/react";
 import classNames from "classnames";
 import { all, create } from "mathjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 function App(): JSX.Element {
@@ -30,6 +30,13 @@ function App(): JSX.Element {
 	const toggleSidebar = (): void => {
 		setShowSidebar(!showSidebar);
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			ReactGA.initialize("G-LS9MTX889C");
+			ReactGA.send("pageview");
+		}, 1000);
+	}, []);
 
 	return (
 		<div
@@ -78,7 +85,6 @@ function App(): JSX.Element {
 				/>
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
-			<Analytics />
 		</div>
 	);
 }
