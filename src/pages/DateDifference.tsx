@@ -1,10 +1,11 @@
 import InputBar from "@/components/InputBar";
+import DateShift from "date-shift";
 import { t } from "i18next";
 import { Dispatch, SetStateAction, useState } from "react";
 
 function DateDifference(): JSX.Element {
 	const millisecondsInDay = 1000 * 60 * 60 * 24;
-	const todayDate = new Date().toISOString().split("T")[0];
+	const todayDate = new DateShift().toString("-");
 
 	const [startDate, setStartDate] = useState<string>(todayDate);
 	const [endDate, setEndDate] = useState<string>(todayDate);
@@ -14,10 +15,9 @@ function DateDifference(): JSX.Element {
 		if (!newStartDate || !newEndDate) {
 			return;
 		}
-		const startTimestamp = new Date(newStartDate).getTime();
-		const endTimestamp = new Date(newEndDate).getTime();
-		const result = Math.abs(endTimestamp - startTimestamp) /
-			millisecondsInDay;
+		const startDateShift = new DateShift(newStartDate);
+		const endDateShift = new DateShift(newEndDate);
+		const result = startDateShift.daysBetween(endDateShift);
 		setDayDifference(result.toString());
 	};
 
