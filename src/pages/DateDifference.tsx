@@ -4,7 +4,6 @@ import { t } from "i18next";
 import { Dispatch, SetStateAction, useState } from "react";
 
 function DateDifference(): JSX.Element {
-	const millisecondsInDay = 1000 * 60 * 60 * 24;
 	const todayDate = new DateShift().toString("-");
 
 	const [startDate, setStartDate] = useState<string>(todayDate);
@@ -26,48 +25,40 @@ function DateDifference(): JSX.Element {
 		newDate: string,
 		setter: Dispatch<SetStateAction<string>>,
 	): void => {
-		if (!newDate) {
+		if (!newDate || isNaN(newDayDifference)) {
 			return;
 		}
-		const startTimestamp = new Date(newDate).getTime();
-		if (isNaN(newDayDifference)) {
-			return;
-		}
-		const result = startTimestamp + (newDayDifference * millisecondsInDay);
-		const resultDate = new Date(result);
-		const resultStr = resultDate.toISOString().split("T")[0];
-		setter(resultStr);
+		const startDateShift = new DateShift(newDate);
+		startDateShift.addDays(newDayDifference);
+		setter(startDateShift.toString("-"));
 	};
 
 	const handleStartDateChange = (newValue: string): void => {
 		setStartDate(newValue);
-		if (!endDate && dayDifference) {
-			calculateBasedOnDayDifference(
-				Number(dayDifference),
-				newValue,
-				setEndDate,
-			);
-		} else {
-			calculate(newValue, endDate);
-		}
+		calculate(newValue, endDate);
 	};
 
 	const handleEndDateChange = (newValue: string): void => {
 		setEndDate(newValue);
-		if (!startDate && dayDifference) {
-			calculateBasedOnDayDifference(
-				-Number(dayDifference),
-				newValue,
-				setStartDate,
-			);
-		} else {
-			calculate(startDate, newValue);
-		}
+		calculate(startDate, newValue);
 	};
 
 	const handleDayDifferenceChange = (newValue: string): void => {
 		setDayDifference(newValue);
-		calculateBasedOnDayDifference(Number(newValue), startDate, setEndDate);
+		const newNumberValue = Number(newValue);
+		if (newNumberValue < 0) {
+			calculateBasedOnDayDifference(
+				newNumberValue,
+				endDate,
+				setStartDate,
+			);
+		} else {
+			calculateBasedOnDayDifference(
+				newNumberValue,
+				startDate,
+				setEndDate,
+			);
+		}
 	};
 
 	const inputs = [
