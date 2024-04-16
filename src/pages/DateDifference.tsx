@@ -25,7 +25,11 @@ function DateDifference(): JSX.Element {
 		newDate: string,
 		setter: Dispatch<SetStateAction<string>>,
 	): void => {
-		if (!newDate || isNaN(newDayDifference)) {
+		if (
+			!newDate ||
+			isNaN(newDayDifference) ||
+			Math.abs(newDayDifference) > 1_000_000
+		) {
 			return;
 		}
 		const startDateShift = new DateShift(newDate);
@@ -80,7 +84,7 @@ function DateDifference(): JSX.Element {
 			hasError: isNaN(Number(dayDifference)),
 			id: "dayDifference",
 			onChange: handleDayDifferenceChange,
-			type: "text",
+			type: "number",
 			value: dayDifference,
 		},
 	] as const;
