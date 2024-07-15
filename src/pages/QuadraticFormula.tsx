@@ -33,11 +33,11 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 	scope.x3Squared = math.bignumber(Number(math.pow(scope.x3, 2)));
 	scope.delta = math.evaluate(
 		"x1Squared * x2 +" +
-		" x1 * x3Squared +" +
-		" x2Squared * x3 -" +
-		" x2 * x3Squared -" +
-		" x1Squared * x3 -" +
-		" x1 * x2Squared",
+			" x1 * x3Squared +" +
+			" x2Squared * x3 -" +
+			" x2 * x3Squared -" +
+			" x1Squared * x3 -" +
+			" x1 * x2Squared",
 		scope,
 	) as BigNumber;
 	const a = math.evaluate(
@@ -46,22 +46,22 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 	) as BigNumber;
 	const b = math.evaluate(
 		"(x1Squared * y2 +" +
-		" y1 * x3Squared +" +
-		" x2Squared * y3 -" +
-		" y2 * x3Squared -" +
-		" x1Squared * y3 -" +
-		" y1 * x2Squared" +
-		") / delta",
+			" y1 * x3Squared +" +
+			" x2Squared * y3 -" +
+			" y2 * x3Squared -" +
+			" x1Squared * y3 -" +
+			" y1 * x2Squared" +
+			") / delta",
 		scope,
 	) as BigNumber;
 	const c = math.evaluate(
 		"(x1Squared * x2 * y3 +" +
-		" x1 * y2 * x3Squared +" +
-		" y1 * x2Squared * x3" +
-		" - y1 * x2 * x3Squared" +
-		" - x1Squared * y2 * x3" +
-		" - x1 * x2Squared * y3" +
-		") / delta",
+			" x1 * y2 * x3Squared +" +
+			" y1 * x2Squared * x3" +
+			" - y1 * x2 * x3Squared" +
+			" - x1Squared * y2 * x3" +
+			" - x1 * x2Squared * y3" +
+			") / delta",
 		scope,
 	) as BigNumber;
 
@@ -69,13 +69,21 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x1",
-				label: <>x<sub>1</sub></>,
+				label: (
+					<>
+						x<sub>1</sub>
+					</>
+				),
 				updateValue: setX1,
 				value: x1,
 			},
 			{
 				id: "y1",
-				label: <>y<sub>1</sub></>,
+				label: (
+					<>
+						y<sub>1</sub>
+					</>
+				),
 				updateValue: setY1,
 				value: y1,
 			},
@@ -83,13 +91,21 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x2",
-				label: <>x<sub>2</sub></>,
+				label: (
+					<>
+						x<sub>2</sub>
+					</>
+				),
 				updateValue: setX2,
 				value: x2,
 			},
 			{
 				id: "y2",
-				label: <>y<sub>2</sub></>,
+				label: (
+					<>
+						y<sub>2</sub>
+					</>
+				),
 				updateValue: setY2,
 				value: y2,
 			},
@@ -97,13 +113,21 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x3",
-				label: <>x<sub>3</sub></>,
+				label: (
+					<>
+						x<sub>3</sub>
+					</>
+				),
 				updateValue: setX3,
 				value: x3,
 			},
 			{
 				id: "y3",
-				label: <>y<sub>3</sub></>,
+				label: (
+					<>
+						y<sub>3</sub>
+					</>
+				),
 				updateValue: setY3,
 				value: y3,
 			},
@@ -118,8 +142,8 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 	const inputPreview = inputs.map((row, index) => {
 		return (
 			<Fragment key={index}>
-				{pointLetters[index]}{" "}
-				({row[0].value || row[0].label}, {row[1].value || row[1].label})
+				{pointLetters[index]} ({row[0].value || row[0].label},{" "}
+				{row[1].value || row[1].label})
 				{index !== inputs.length - 1 && <br />}
 			</Fragment>
 		);
@@ -152,12 +176,15 @@ function QuadraticFormula({ math }: PageProps): JSX.Element {
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled &&
+			{allInputsFilled && (
 				<>
 					<hr />
-					<ResultBars enforceNumber={false} results={results} />
+					<ResultBars
+						enforceNumber={false}
+						results={results}
+					/>
 				</>
-			}
+			)}
 		</main>
 	);
 }

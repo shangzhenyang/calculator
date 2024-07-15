@@ -16,7 +16,11 @@ function BlockButton({ icon, label, onClick }: BlockButtonProps): JSX.Element {
 			type="button"
 			onClick={onClick}
 		>
-			<FontAwesomeIcon icon={icon} size="xl" fixedWidth />
+			<FontAwesomeIcon
+				icon={icon}
+				size="xl"
+				fixedWidth
+			/>
 			{t(label)}
 		</button>
 	);

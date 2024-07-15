@@ -22,7 +22,7 @@
 	background-color: var(--fg-alpha-05);
 }
 
-.history li>* {
+.history li > * {
 	font-size: inherit;
 	padding: 10px 15px;
 }

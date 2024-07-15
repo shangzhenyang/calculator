@@ -7,7 +7,7 @@
 	width: 500px;
 }
 
-.keyboard-area>* {
+.keyboard-area > * {
 	height: 406px;
 }
 
@@ -22,7 +22,7 @@
 		width: 100%;
 	}
 
-	.keyboard-area>* {
+	.keyboard-area > * {
 		height: auto;
 	}
 }

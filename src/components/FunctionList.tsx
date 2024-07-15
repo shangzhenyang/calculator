@@ -39,9 +39,7 @@ function FunctionList({ updateFormula }: FunctionListProps): JSX.Element {
 
 	const listItems = functions.map((item) => {
 		const handleClick = (): void => {
-			const toAppend = item
-				.replace(")", "")
-				.replace("π", "pi");
+			const toAppend = item.replace(")", "").replace("π", "pi");
 			updateFormula(toAppend, true);
 			window.scrollTo(0, 0);
 		};

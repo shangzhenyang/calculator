@@ -24,10 +24,7 @@ function Regular({ math }: PageProps): JSX.Element {
 
 	const backspace = (): void => {
 		setFormula((prevFormula) => {
-			return prevFormula
-				.trim()
-				.slice(0, -1)
-				.trim();
+			return prevFormula.trim().slice(0, -1).trim();
 		});
 	};
 
@@ -48,8 +45,8 @@ function Regular({ math }: PageProps): JSX.Element {
 			if (typeof result === "function") {
 				throw new Error("NaN");
 			}
-			const formulaWithResult = formulaProcessed + " = " +
-				result.toString();
+			const formulaWithResult =
+				formulaProcessed + " = " + result.toString();
 			setFormula(formulaWithResult);
 			setHistoryItems((prevHistoryItems) => {
 				return [formulaWithResult, ...prevHistoryItems];
@@ -116,7 +113,7 @@ function Regular({ math }: PageProps): JSX.Element {
 				onSubmit={handleFormulaSubmit}
 				onKeyDown={handleFormulaKeyDown}
 			>
-				{showHistory &&
+				{showHistory && (
 					<>
 						<button
 							title={t("equal").toString()}
@@ -138,8 +135,8 @@ function Regular({ math }: PageProps): JSX.Element {
 							/>
 						</button>
 					</>
-				}
-				{!showHistory &&
+				)}
+				{!showHistory && (
 					<>
 						<button
 							title={t("backspace").toString()}
@@ -162,9 +159,9 @@ function Regular({ math }: PageProps): JSX.Element {
 							/>
 						</button>
 					</>
-				}
+				)}
 			</MainInputBar>
-			{showHistory &&
+			{showHistory && (
 				<div>
 					<History
 						historyItems={historyItems}
@@ -173,8 +170,8 @@ function Regular({ math }: PageProps): JSX.Element {
 						updateInputValue={updateFormula}
 					/>
 				</div>
-			}
-			{!showHistory &&
+			)}
+			{!showHistory && (
 				<div className={styles["keyboard-area"]}>
 					<FunctionList updateFormula={updateFormula} />
 					<Keyboard
@@ -183,7 +180,7 @@ function Regular({ math }: PageProps): JSX.Element {
 						updateUseAnswer={updateUseAnswer}
 					/>
 				</div>
-			}
+			)}
 		</main>
 	);
 }

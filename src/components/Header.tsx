@@ -30,7 +30,11 @@ function Header({ toggleSidebar }: HeaderProps): JSX.Element {
 				rel="noreferrer"
 				title="GitHub"
 			>
-				<FontAwesomeIcon icon={faGithub} size="xl" fixedWidth />
+				<FontAwesomeIcon
+					icon={faGithub}
+					size="xl"
+					fixedWidth
+				/>
 			</a>
 		</header>
 	);

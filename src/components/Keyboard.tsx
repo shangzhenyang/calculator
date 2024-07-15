@@ -35,11 +35,26 @@ function Keyboard({
 	};
 
 	const keys = [
-		"C", "(", ")", "÷",
-		"7", "8", "9", "×",
-		"4", "5", "6", "-",
-		"1", "2", "3", "+",
-		"0", ".", "∧", "=",
+		"C",
+		"(",
+		")",
+		"÷",
+		"7",
+		"8",
+		"9",
+		"×",
+		"4",
+		"5",
+		"6",
+		"-",
+		"1",
+		"2",
+		"3",
+		"+",
+		"0",
+		".",
+		"∧",
+		"=",
 	];
 
 	const keyElements = keys.map((key) => {
@@ -60,9 +75,11 @@ function Keyboard({
 				className={styles["key"]}
 				key={key}
 				type="button"
-				aria-label={key in labelMap ?
-					t(labelMap[key as keyof typeof labelMap]).toString() :
-					undefined}
+				aria-label={
+					key in labelMap
+						? t(labelMap[key as keyof typeof labelMap]).toString()
+						: undefined
+				}
 				onClick={handleClick}
 			>
 				{key}
@@ -70,11 +87,7 @@ function Keyboard({
 		);
 	});
 
-	return (
-		<div className={styles["keyboard"]}>
-			{keyElements}
-		</div>
-	);
+	return <div className={styles["keyboard"]}>{keyElements}</div>;
 }
 
 export default Keyboard;

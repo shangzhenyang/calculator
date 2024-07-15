@@ -7,12 +7,12 @@
 	display: flex;
 }
 
-.main-input-bar>* {
+.main-input-bar > * {
 	font-size: 1.5rem;
 	padding: 20px 25px;
 }
 
-.main-input-bar>button {
+.main-input-bar > button {
 	align-items: center;
 	border-left: var(--border);
 	display: flex;
@@ -20,23 +20,23 @@
 	white-space: nowrap;
 }
 
-.main-input-bar>div {
+.main-input-bar > div {
 	align-items: center;
 	border-left: var(--border);
 	display: flex;
 }
 
-.main-input-bar>input {
+.main-input-bar > input {
 	display: block;
 	width: 100%;
 }
 
-.main-input-bar>input:only-child {
+.main-input-bar > input:only-child {
 	border-right: none;
 }
 
 @media screen and (max-width: 700px) {
-	.main-input-bar>* {
+	.main-input-bar > * {
 		font-size: 1.25rem;
 		padding: 15px 20px;
 	}

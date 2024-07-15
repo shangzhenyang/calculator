@@ -21,27 +21,33 @@ function QuadraticEquation({ math }: PageProps): JSX.Element {
 	scope.delta = math.evaluate("pow(b, 2) - (4 * a * c)", scope) as BigNumber;
 	const delta = Number(scope.delta);
 	const hasSolutions = delta >= 0;
-	const deltaStr = delta + ((): string => {
-		if (delta > 0) {
-			return " > 0";
-		} else if (delta < 0) {
-			return " < 0";
-		} else {
-			return " = 0";
-		}
-	})();
-	const x1: string = hasSolutions ?
-		(math.evaluate(
-			"(-b + sqrt(delta)) / (2 * a)",
-			scope,
-		) as BigNumber).toString() :
-		"NaN";
-	const x2: string = hasSolutions ?
-		(math.evaluate(
-			"(-b - sqrt(delta)) / (2 * a)",
-			scope,
-		) as BigNumber).toString() :
-		"NaN";
+	const deltaStr =
+		delta +
+		((): string => {
+			if (delta > 0) {
+				return " > 0";
+			} else if (delta < 0) {
+				return " < 0";
+			} else {
+				return " = 0";
+			}
+		})();
+	const x1: string = hasSolutions
+		? (
+				math.evaluate(
+					"(-b + sqrt(delta)) / (2 * a)",
+					scope,
+				) as BigNumber
+			).toString()
+		: "NaN";
+	const x2: string = hasSolutions
+		? (
+				math.evaluate(
+					"(-b - sqrt(delta)) / (2 * a)",
+					scope,
+				) as BigNumber
+			).toString()
+		: "NaN";
 
 	const inputs: InputInfoWritable[] = [
 		{
@@ -74,12 +80,20 @@ function QuadraticEquation({ math }: PageProps): JSX.Element {
 		},
 		{
 			id: "x1",
-			label: <>x<sub>1</sub></>,
+			label: (
+				<>
+					x<sub>1</sub>
+				</>
+			),
 			value: x1,
 		},
 		{
 			id: "x2",
-			label: <>x<sub>2</sub></>,
+			label: (
+				<>
+					x<sub>2</sub>
+				</>
+			),
 			value: x2,
 		},
 	];
@@ -90,12 +104,15 @@ function QuadraticEquation({ math }: PageProps): JSX.Element {
 				{a || "a"}x<sup>2</sup> + {b || "b"}x + {c || "c"} = 0 (a ≠ 0)
 			</p>
 			<InputBars inputs={[inputs]} />
-			{allInputsFilled &&
+			{allInputsFilled && (
 				<>
 					<hr />
-					<ResultBars enforceNumber={false} results={results} />
+					<ResultBars
+						enforceNumber={false}
+						results={results}
+					/>
 				</>
-			}
+			)}
 		</main>
 	);
 }

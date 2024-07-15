@@ -36,19 +36,31 @@ function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "a1",
-				label: <>a<sub>1</sub></>,
+				label: (
+					<>
+						a<sub>1</sub>
+					</>
+				),
 				updateValue: setA1,
 				value: a1,
 			},
 			{
 				id: "b1",
-				label: <>b<sub>1</sub></>,
+				label: (
+					<>
+						b<sub>1</sub>
+					</>
+				),
 				updateValue: setB1,
 				value: b1,
 			},
 			{
 				id: "c1",
-				label: <>c<sub>1</sub></>,
+				label: (
+					<>
+						c<sub>1</sub>
+					</>
+				),
 				updateValue: setC1,
 				value: c1,
 			},
@@ -56,19 +68,31 @@ function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "a2",
-				label: <>a<sub>2</sub></>,
+				label: (
+					<>
+						a<sub>2</sub>
+					</>
+				),
 				updateValue: setA2,
 				value: a2,
 			},
 			{
 				id: "b2",
-				label: <>b<sub>2</sub></>,
+				label: (
+					<>
+						b<sub>2</sub>
+					</>
+				),
 				updateValue: setB2,
 				value: b2,
 			},
 			{
 				id: "c2",
-				label: <>c<sub>2</sub></>,
+				label: (
+					<>
+						c<sub>2</sub>
+					</>
+				),
 				updateValue: setC2,
 				value: c2,
 			},
@@ -104,12 +128,15 @@ function TwoVarLinearEquations({ math }: PageProps): JSX.Element {
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled &&
+			{allInputsFilled && (
 				<>
 					<hr />
-					<ResultBars enforceNumber={true} results={results} />
+					<ResultBars
+						enforceNumber={true}
+						results={results}
+					/>
 				</>
-			}
+			)}
 		</main>
 	);
 }

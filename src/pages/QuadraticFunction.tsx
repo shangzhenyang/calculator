@@ -50,11 +50,14 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 			xIntercepts.push(h);
 		}
 	}
-	const xInterceptStr = xIntercepts.length > 0 ?
-		xIntercepts.map((x) => {
-			return `(${math.round(x, 2).toString()}, 0)`;
-		}).join(` ${t("and").toString()} `) :
-		t("none").toString();
+	const xInterceptStr =
+		xIntercepts.length > 0
+			? xIntercepts
+					.map((x) => {
+						return `(${math.round(x, 2).toString()}, 0)`;
+					})
+					.join(` ${t("and").toString()} `)
+			: t("none").toString();
 
 	const isDownward = Number(a) < 0;
 	const isUpward = Number(a) > 0;
@@ -93,19 +96,22 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 				y = {a || "a"}x<sup>2</sup> + {b || "b"}x + {c || "c"} (a ≠ 0)
 			</p>
 			<InputBars inputs={[inputs]} />
-			{allInputsFilled &&
+			{allInputsFilled && (
 				<>
 					<p>
-						{t("vertexForm")}{t("colon")}y = {a}(x - ({hRounded}))
+						{t("vertexForm")}
+						{t("colon")}y = {a}(x - ({hRounded}))
 						<sup>2</sup> + ({kRounded})
 						<br />
-						{t("symmetryAxis")}{t("colon")}
+						{t("symmetryAxis")}
+						{t("colon")}
 						{t("line")} x = {hRounded}
 						<br />
-						{t("vertexPointCoordinates")}{t("colon")}
-						({hRounded}, {kRounded})
+						{t("vertexPointCoordinates")}
+						{t("colon")}({hRounded}, {kRounded})
 						<br />
-						{t("parabolaOpening")}{t("colon")}
+						{t("parabolaOpening")}
+						{t("colon")}
 						{isUpward && t("upward")}
 						{isDownward && t("downward")}
 						<br />
@@ -121,11 +127,15 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 							number: hRounded,
 						})}
 						<br />
-						{t(extremumType)}{t("colon")}y = {kRounded}
+						{t(extremumType)}
+						{t("colon")}y = {kRounded}
 						<br />
-						{t("xIntercept")}{t("colon")}{xInterceptStr}
+						{t("xIntercept")}
+						{t("colon")}
+						{xInterceptStr}
 						<br />
-						{t("yIntercept")}{t("colon")}(0, {c})
+						{t("yIntercept")}
+						{t("colon")}(0, {c})
 					</p>
 					<InputBar
 						id="x"
@@ -143,7 +153,7 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 						y
 					</InputBar>
 				</>
-			}
+			)}
 		</main>
 	);
 }

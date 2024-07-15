@@ -34,13 +34,21 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x1",
-				label: <>x<sub>1</sub></>,
+				label: (
+					<>
+						x<sub>1</sub>
+					</>
+				),
 				updateValue: setX1,
 				value: x1,
 			},
 			{
 				id: "y1",
-				label: <>y<sub>1</sub></>,
+				label: (
+					<>
+						y<sub>1</sub>
+					</>
+				),
 				updateValue: setY1,
 				value: y1,
 			},
@@ -48,13 +56,21 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		[
 			{
 				id: "x2",
-				label: <>x<sub>2</sub></>,
+				label: (
+					<>
+						x<sub>2</sub>
+					</>
+				),
 				updateValue: setX2,
 				value: x2,
 			},
 			{
 				id: "y2",
-				label: <>y<sub>2</sub></>,
+				label: (
+					<>
+						y<sub>2</sub>
+					</>
+				),
 				updateValue: setY2,
 				value: y2,
 			},
@@ -69,8 +85,8 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 	const inputPreview = inputs.map((row, index) => {
 		return (
 			<Fragment key={index}>
-				{pointLetters[index]}{" "}
-				({row[0].value || row[0].label}, {row[1].value || row[1].label})
+				{pointLetters[index]} ({row[0].value || row[0].label},{" "}
+				{row[1].value || row[1].label})
 				{index !== inputs.length - 1 && <br />}
 			</Fragment>
 		);
@@ -103,12 +119,15 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		<main>
 			<p>{inputPreview}</p>
 			<InputBars inputs={inputs} />
-			{allInputsFilled &&
+			{allInputsFilled && (
 				<>
 					<hr />
-					<ResultBars enforceNumber={false} results={results} />
+					<ResultBars
+						enforceNumber={false}
+						results={results}
+					/>
 				</>
-			}
+			)}
 		</main>
 	);
 }

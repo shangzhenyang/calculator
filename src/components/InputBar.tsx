@@ -33,8 +33,11 @@ function InputBar({
 					[styles["error"]]: hasError,
 				})}
 				id={id}
-				placeholder={(onChange && type !== "date") ?
-					t("enterNumber").toString() : undefined}
+				placeholder={
+					onChange && type !== "date"
+						? t("enterNumber").toString()
+						: undefined
+				}
 				readOnly={!onChange}
 				type={type}
 				value={value}

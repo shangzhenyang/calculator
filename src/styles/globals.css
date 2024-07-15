@@ -1,10 +1,10 @@
 :root {
 	--border: 1px solid var(--fg-alpha-2);
-	--error-color: rgba(255, 0, 0, .1);
-	--fg-alpha-05: rgba(0, 0, 0, .05);
-	--fg-alpha-1: rgba(0, 0, 0, .1);
-	--fg-alpha-15: rgba(0, 0, 0, .15);
-	--fg-alpha-2: rgba(0, 0, 0, .2);
+	--error-color: rgba(255, 0, 0, 0.1);
+	--fg-alpha-05: rgba(0, 0, 0, 0.05);
+	--fg-alpha-1: rgba(0, 0, 0, 0.1);
+	--fg-alpha-15: rgba(0, 0, 0, 0.15);
+	--fg-alpha-2: rgba(0, 0, 0, 0.2);
 	--radius: 8px;
 	--theme-color: rgb(0, 102, 204);
 }
@@ -64,7 +64,7 @@ main {
 
 main button,
 main li {
-	transition: all .25s;
+	transition: all 0.25s;
 }
 
 main button:hover {
@@ -98,10 +98,10 @@ ul {
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--fg-alpha-05: rgba(255, 255, 255, .05);
-		--fg-alpha-1: rgba(255, 255, 255, .1);
-		--fg-alpha-15: rgba(255, 255, 255, .15);
-		--fg-alpha-2: rgba(255, 255, 255, .2);
+		--fg-alpha-05: rgba(255, 255, 255, 0.05);
+		--fg-alpha-1: rgba(255, 255, 255, 0.1);
+		--fg-alpha-15: rgba(255, 255, 255, 0.15);
+		--fg-alpha-2: rgba(255, 255, 255, 0.2);
 		color-scheme: dark;
 	}
 

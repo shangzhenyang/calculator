@@ -1,12 +1,7 @@
 import styles from "@/styles/MainInputBar.module.css";
 import classNames from "classnames";
 import { t } from "i18next";
-import {
-	ChangeEvent,
-	FormEvent,
-	KeyboardEventHandler,
-	ReactNode,
-} from "react";
+import { ChangeEvent, FormEvent, KeyboardEventHandler, ReactNode } from "react";
 
 interface MainInputBarProps {
 	children: ReactNode;

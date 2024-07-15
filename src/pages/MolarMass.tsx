@@ -19,8 +19,8 @@ function MolarMass({ math }: PageProps): JSX.Element {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [selectedElement, setSelectedElement] = useState<AllResult>();
 
-	const hasSelectedElement = !!selectedElement &&
-		!isErrorResult(selectedElement);
+	const hasSelectedElement =
+		!!selectedElement && !isErrorResult(selectedElement);
 
 	const hasMassError = !mass || isNaN(Number(mass));
 	const hasMoleError = !mole || isNaN(Number(mole));
@@ -63,7 +63,7 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		const newMoleNum = math.bignumber(newMole);
 		const particleResult = math.multiply(
 			newMoleNum,
-			math.multiply(math.bignumber(6.022), 1e+23),
+			math.multiply(math.bignumber(6.022), 1e23),
 		);
 		setParticle(math.format(particleResult));
 		const massResult = math.multiply(
@@ -92,7 +92,7 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		setMole(math.format(moleResult));
 		const particleResult = math.multiply(
 			moleResult,
-			math.multiply(math.bignumber(6.022), 1e+23),
+			math.multiply(math.bignumber(6.022), 1e23),
 		);
 		setParticle(math.format(particleResult));
 	};
@@ -109,7 +109,7 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		const newParticleNum = math.bignumber(newParticle);
 		const moleResult = math.divide(
 			newParticleNum,
-			math.multiply(math.bignumber(6.022), 1e+23),
+			math.multiply(math.bignumber(6.022), 1e23),
 		);
 		setMole(math.format(moleResult));
 		const massResult = math.multiply(
@@ -159,7 +159,10 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		}[i18n.language];
 
 		return (
-			<option key={element.symbol} value={element.symbol}>
+			<option
+				key={element.symbol}
+				value={element.symbol}
+			>
 				{element.number}. {name}
 			</option>
 		);
@@ -210,9 +213,7 @@ function MolarMass({ math }: PageProps): JSX.Element {
 				value={searchTerm}
 				onChange={handleSearchTermChange}
 			>
-				<div>
-					{hasSelectedElement ? selectedElement.symbol : "N/A"}
-				</div>
+				<div>{hasSelectedElement ? selectedElement.symbol : "N/A"}</div>
 			</MainInputBar>
 			<datalist id="element-list">{elementOptions}</datalist>
 			{hasSelectedElement && <div>{inputBars}</div>}

@@ -6,7 +6,7 @@
 	line-height: 22px;
 	padding: 8px 15px;
 	text-decoration: none;
-	transition: all .25s;
+	transition: all 0.25s;
 	word-break: break-word;
 }
 
@@ -51,7 +51,7 @@
 	}
 
 	.sidebar.show {
-		animation: slideIn .25s;
+		animation: slideIn 0.25s;
 		display: flex;
 	}
 }

@@ -43,14 +43,14 @@ function History({
 		return (
 			<li key={index}>
 				<div className={styles["list-item-main"]}>{value}</div>
-				{updateInputValue &&
+				{updateInputValue && (
 					<button
 						type="button"
 						onClick={handleEnterClick}
 					>
 						{t("enter")}
 					</button>
-				}
+				)}
 				<button
 					type="button"
 					onClick={handleDeleteClick}
@@ -63,20 +63,20 @@ function History({
 
 	return (
 		<div className={styles["history"]}>
-			{showAddButton && addToHistory &&
+			{showAddButton && addToHistory && (
 				<BlockButton
 					icon={faCirclePlus}
 					label="addToHistory"
 					onClick={addToHistory}
 				/>
-			}
-			{showClearButton &&
+			)}
+			{showClearButton && (
 				<BlockButton
 					icon={faBroom}
 					label="clearHistory"
 					onClick={handleClearHistoryClick}
 				/>
-			}
+			)}
 			<ul>{historyListItems}</ul>
 		</div>
 	);

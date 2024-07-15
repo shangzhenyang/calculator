@@ -34,9 +34,13 @@ function Stat({ math }: PageProps): JSX.Element {
 			if (evaluated.isNaN()) {
 				throw new Error("NaN");
 			}
-			setNumbers([...numberArray, evaluated.toNumber()].sort((a, b) => {
-				return a - b;
-			}).join(", "));
+			setNumbers(
+				[...numberArray, evaluated.toNumber()]
+					.sort((a, b) => {
+						return a - b;
+					})
+					.join(", "),
+			);
 			setNewNumber("");
 		} catch {
 			setNewNumberHasError(true);
@@ -81,103 +85,117 @@ function Stat({ math }: PageProps): JSX.Element {
 		math.bignumber(minimum),
 	);
 	const median = count ? Number(math.median(numberArray)) : NaN;
-	const lowerQuantile = (count >= 4) ? (
-		count % 4 === 0 ?
-			Number(math.divide(math.add(
-				math.bignumber(numberArray[(count / 4) - 1]),
-				math.bignumber(numberArray[count / 4]),
-			), 2)) :
-			numberArray[Math.floor(count / 4)]
-	) : NaN;
-	const upperQuantile = (count >= 4) ? (
-		count % 4 === 0 ?
-			Number(math.divide(math.add(
-				math.bignumber(numberArray[(count * 3 / 4) - 1]),
-				math.bignumber(numberArray[count * 3 / 4]),
-			), 2)) :
-			numberArray[Math.floor(count * 3 / 4)]
-	) : NaN;
+	const lowerQuantile =
+		count >= 4
+			? count % 4 === 0
+				? Number(
+						math.divide(
+							math.add(
+								math.bignumber(numberArray[count / 4 - 1]),
+								math.bignumber(numberArray[count / 4]),
+							),
+							2,
+						),
+					)
+				: numberArray[Math.floor(count / 4)]
+			: NaN;
+	const upperQuantile =
+		count >= 4
+			? count % 4 === 0
+				? Number(
+						math.divide(
+							math.add(
+								math.bignumber(
+									numberArray[(count * 3) / 4 - 1],
+								),
+								math.bignumber(numberArray[(count * 3) / 4]),
+							),
+							2,
+						),
+					)
+				: numberArray[Math.floor((count * 3) / 4)]
+			: NaN;
 	let tmpVariance = math.bignumber(0);
 	for (const number of numberArray) {
-		tmpVariance = tmpVariance.add(math.square(Number(math.subtract(
-			math.bignumber(number),
-			average,
-		))));
+		tmpVariance = tmpVariance.add(
+			math.square(Number(math.subtract(math.bignumber(number), average))),
+		);
 	}
 	const sampleVariance = Number(math.divide(tmpVariance, count - 1));
 	const populationVariance = Number(math.divide(tmpVariance, count));
 	const standardDeviation = Number(math.sqrt(populationVariance));
 	const interquartileRange =
-		(!isNaN(upperQuantile) && !isNaN(lowerQuantile)) ?
-			math.subtract(
-				upperQuantile,
-				lowerQuantile,
-			) : NaN;
-	const quartileDeviation = !isNaN(interquartileRange) ?
-		Number(math.divide(interquartileRange, 2)) : NaN;
+		!isNaN(upperQuantile) && !isNaN(lowerQuantile)
+			? math.subtract(upperQuantile, lowerQuantile)
+			: NaN;
+	const quartileDeviation = !isNaN(interquartileRange)
+		? Number(math.divide(interquartileRange, 2))
+		: NaN;
 
-	const results = count ? [
-		{
-			label: "range",
-			value: range.toString(),
-		},
-		{
-			label: "count",
-			value: count.toString(),
-		},
-		{
-			label: "average",
-			value: average.toString(),
-		},
-		{
-			label: "sum",
-			value: sum.toString(),
-		},
-		{
-			label: "mode",
-			value: mode,
-		},
-		{
-			label: "sampleVariance",
-			value: sampleVariance.toString(),
-		},
-		{
-			label: "populationVariance",
-			value: populationVariance.toString(),
-		},
-		{
-			label: "standardDeviation",
-			value: standardDeviation.toString(),
-		},
-		{
-			label: "quartileDeviation",
-			value: quartileDeviation.toString(),
-		},
-		{
-			label: "interquartileRange",
-			value: interquartileRange.toString(),
-		},
-		{
-			label: "minimum",
-			value: minimum.toString(),
-		},
-		{
-			label: "lowerQuantile",
-			value: lowerQuantile.toString(),
-		},
-		{
-			label: "median",
-			value: median.toString(),
-		},
-		{
-			label: "upperQuantile",
-			value: upperQuantile.toString(),
-		},
-		{
-			label: "maximum",
-			value: maximum.toString(),
-		},
-	] as const : [] as const;
+	const results = count
+		? ([
+				{
+					label: "range",
+					value: range.toString(),
+				},
+				{
+					label: "count",
+					value: count.toString(),
+				},
+				{
+					label: "average",
+					value: average.toString(),
+				},
+				{
+					label: "sum",
+					value: sum.toString(),
+				},
+				{
+					label: "mode",
+					value: mode,
+				},
+				{
+					label: "sampleVariance",
+					value: sampleVariance.toString(),
+				},
+				{
+					label: "populationVariance",
+					value: populationVariance.toString(),
+				},
+				{
+					label: "standardDeviation",
+					value: standardDeviation.toString(),
+				},
+				{
+					label: "quartileDeviation",
+					value: quartileDeviation.toString(),
+				},
+				{
+					label: "interquartileRange",
+					value: interquartileRange.toString(),
+				},
+				{
+					label: "minimum",
+					value: minimum.toString(),
+				},
+				{
+					label: "lowerQuantile",
+					value: lowerQuantile.toString(),
+				},
+				{
+					label: "median",
+					value: median.toString(),
+				},
+				{
+					label: "upperQuantile",
+					value: upperQuantile.toString(),
+				},
+				{
+					label: "maximum",
+					value: maximum.toString(),
+				},
+			] as const)
+		: ([] as const);
 
 	const resultBars = results.map(({ label, value }) => {
 		if (!value || value === "NaN") {
@@ -204,8 +222,14 @@ function Stat({ math }: PageProps): JSX.Element {
 				onChange={handleNewNumberChange}
 				onSubmit={addNumber}
 			>
-				<button type="submit" title={t("add").toString()}>
-					<FontAwesomeIcon icon={faCheck} fixedWidth />
+				<button
+					type="submit"
+					title={t("add").toString()}
+				>
+					<FontAwesomeIcon
+						icon={faCheck}
+						fixedWidth
+					/>
 				</button>
 			</MainInputBar>
 			<div className={styles["stat-editor"]}>

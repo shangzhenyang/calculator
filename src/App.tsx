@@ -50,10 +50,22 @@ function App(): JSX.Element {
 				toggleSidebar={toggleSidebar}
 			/>
 			<Routes>
-				<Route path="/" element={<Regular math={math} />} />
-				<Route path="/base" element={<Base math={math} />} />
-				<Route path="/byte" element={<Byte />} />
-				<Route path="/date-difference" element={<DateDifference />} />
+				<Route
+					path="/"
+					element={<Regular math={math} />}
+				/>
+				<Route
+					path="/base"
+					element={<Base math={math} />}
+				/>
+				<Route
+					path="/byte"
+					element={<Byte />}
+				/>
+				<Route
+					path="/date-difference"
+					element={<DateDifference />}
+				/>
 				<Route
 					path="/linear-formula"
 					element={<LinearFormula math={math} />}
@@ -74,7 +86,10 @@ function App(): JSX.Element {
 					path="/quadratic-function"
 					element={<QuadraticFunction math={math} />}
 				/>
-				<Route path="/stat" element={<Stat math={math} />} />
+				<Route
+					path="/stat"
+					element={<Stat math={math} />}
+				/>
 				<Route
 					path="/2var-linear-equations"
 					element={<TwoVarLinearEquations math={math} />}
@@ -83,7 +98,10 @@ function App(): JSX.Element {
 					path="/3var-linear-equations"
 					element={<ThreeVarLinearEquations math={math} />}
 				/>
-				<Route path="*" element={<Navigate to="/" />} />
+				<Route
+					path="*"
+					element={<Navigate to="/" />}
+				/>
 			</Routes>
 		</div>
 	);
