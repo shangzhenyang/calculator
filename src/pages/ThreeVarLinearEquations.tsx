@@ -206,9 +206,7 @@ function ThreeVarLinearEquations({ math }: PageProps): JSX.Element {
 		],
 	];
 
-	const allInputsFilled = inputs.flat().every(({ value }) => {
-		return value !== "";
-	});
+	const allInputsFilled = inputs.flat().every(({ value }) => value !== "");
 
 	const inputPreview = inputs.map((row, index) => {
 		return (

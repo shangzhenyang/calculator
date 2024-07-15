@@ -65,11 +65,11 @@ function Sidebar({ showSidebar, toggleSidebar }: SidebarProps): JSX.Element {
 		return (
 			<NavLink
 				draggable={false}
-				className={({ isActive }): string => {
-					return classNames(styles["nav-item"], {
+				className={({ isActive }): string =>
+					classNames(styles["nav-item"], {
 						[styles["active"]]: isActive,
-					});
-				}}
+					})
+				}
 				key={item.path}
 				to={item.path}
 				onClick={toggleSidebar}

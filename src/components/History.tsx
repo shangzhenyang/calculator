@@ -21,9 +21,7 @@ function History({
 	updateInputValue,
 }: HistoryProps): JSX.Element {
 	const handleClearHistoryClick = (): void => {
-		updateHistoryItems(() => {
-			return [];
-		});
+		updateHistoryItems(() => []);
 		updateInputValue?.("");
 	};
 

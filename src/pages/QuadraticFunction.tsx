@@ -53,9 +53,7 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 	const xInterceptStr =
 		xIntercepts.length > 0
 			? xIntercepts
-					.map((x) => {
-						return `(${math.round(x, 2).toString()}, 0)`;
-					})
+					.map((x) => `(${math.round(x, 2).toString()}, 0)`)
 					.join(` ${t("and").toString()} `)
 			: t("none").toString();
 
@@ -82,9 +80,7 @@ function QuadraticFunction({ math }: PageProps): JSX.Element {
 		},
 	];
 
-	const allInputsFilled = inputs.every(({ value }) => {
-		return value !== "";
-	});
+	const allInputsFilled = inputs.every(({ value }) => value !== "");
 
 	useEffect(() => {
 		setX(h.toString());

@@ -23,9 +23,7 @@ function Regular({ math }: PageProps): JSX.Element {
 	const [useAnswer, setUseAnswer] = useState<boolean>(false);
 
 	const backspace = (): void => {
-		setFormula((prevFormula) => {
-			return prevFormula.trim().slice(0, -1).trim();
-		});
+		setFormula((prevFormula) => prevFormula.trim().slice(0, -1).trim());
 	};
 
 	const calculate = (): void => {
@@ -48,9 +46,10 @@ function Regular({ math }: PageProps): JSX.Element {
 			const formulaWithResult =
 				formulaProcessed + " = " + result.toString();
 			setFormula(formulaWithResult);
-			setHistoryItems((prevHistoryItems) => {
-				return [formulaWithResult, ...prevHistoryItems];
-			});
+			setHistoryItems((prevHistoryItems) => [
+				formulaWithResult,
+				...prevHistoryItems,
+			]);
 		} catch {
 			setFormulaHasError(true);
 		}
@@ -75,9 +74,7 @@ function Regular({ math }: PageProps): JSX.Element {
 	};
 
 	const toggleHistory = (): void => {
-		setShowHistory((prevShowHistory) => {
-			return !prevShowHistory;
-		});
+		setShowHistory((prevShowHistory) => !prevShowHistory);
 	};
 
 	const updateFormula = (newValue: string, append = false): void => {

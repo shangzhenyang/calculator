@@ -77,9 +77,7 @@ function LinearFormula({ math }: PageProps): JSX.Element {
 		],
 	];
 
-	const allInputsFilled = inputs.flat().every(({ value }) => {
-		return value !== "";
-	});
+	const allInputsFilled = inputs.flat().every(({ value }) => value !== "");
 
 	const pointLetters = ["a", "b"];
 	const inputPreview = inputs.map((row, index) => {

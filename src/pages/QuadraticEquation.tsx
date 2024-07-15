@@ -68,9 +68,7 @@ function QuadraticEquation({ math }: PageProps): JSX.Element {
 		},
 	];
 
-	const allInputsFilled = inputs.every(({ value }) => {
-		return value !== "";
-	});
+	const allInputsFilled = inputs.every(({ value }) => value !== "");
 
 	const results: InputInfo[] = [
 		{

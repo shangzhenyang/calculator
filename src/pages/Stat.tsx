@@ -10,6 +10,8 @@ import { BigNumber } from "mathjs";
 import { ChangeEvent, Fragment, useState } from "react";
 
 function Stat({ math }: PageProps): JSX.Element {
+	const BIG_NAN: BigNumber = math.bignumber(NaN);
+
 	const [newNumber, setNewNumber] = useState<string>("");
 	const [newNumberHasError, setNewNumberHasError] = useState<boolean>(false);
 	const [numbers, setNumbers] = useState<string>("");
@@ -18,12 +20,9 @@ function Stat({ math }: PageProps): JSX.Element {
 		.replace(/(,|，|、|\n|\s)+/g, ",")
 		.replace(/\s/g, "")
 		.split(",")
-		.filter((item) => {
-			return item && !isNaN(Number(item));
-		})
-		.map((item) => {
-			return Number(item);
-		});
+		.filter((item) => !!item)
+		.map((item) => math.bignumber(item))
+		.filter((item) => !item.isNaN());
 
 	const addNumber = (): void => {
 		if (!newNumber) {
@@ -35,11 +34,7 @@ function Stat({ math }: PageProps): JSX.Element {
 				throw new Error("NaN");
 			}
 			setNumbers(
-				[...numberArray, evaluated.toNumber()]
-					.sort((a, b) => {
-						return a - b;
-					})
-					.join(", "),
+				[...numberArray, evaluated].sort(compareBigNumber).join(", "),
 			);
 			setNewNumber("");
 		} catch {
@@ -62,75 +57,78 @@ function Stat({ math }: PageProps): JSX.Element {
 		setNumbers(event.target.value);
 	};
 
-	numberArray.sort((a, b) => {
-		return a - b;
-	});
-	const count = numberArray.length;
-	const frequency = new Map<number, number>();
-	let sum = math.bignumber(0);
-	for (const number of numberArray) {
-		frequency.set(number, (frequency.get(number) || 0) + 1);
-		sum = sum.add(math.bignumber(number));
+	numberArray.sort(compareBigNumber);
+	const count: number = numberArray.length;
+	const frequency = new Map<number, BigNumber>();
+	let sum: BigNumber = math.bignumber(0);
+	for (const item of numberArray) {
+		const number = item.toNumber();
+		frequency.set(
+			number,
+			(frequency.get(number) || math.bignumber(0)).add(1),
+		);
+		sum = sum.add(number);
 	}
-	const average = Number(math.divide(sum, count));
-	const maxFrequency = Math.max(...Array.from(frequency.values()));
-	const modes = Array.from(frequency.keys()).filter((key) => {
-		return frequency.get(key) === maxFrequency;
-	});
-	const mode = modes.join(", ");
-	const maximum = Math.max(...numberArray);
-	const minimum = Math.min(...numberArray);
-	const range = math.subtract(
-		math.bignumber(maximum),
-		math.bignumber(minimum),
+	const average: BigNumber = math.divide(sum, count) as BigNumber;
+	const frequencyValues: BigNumber[] = Array.from(frequency.values());
+	const maxFrequency: BigNumber =
+		frequencyValues.length > 0 ? math.max(...frequencyValues) : BIG_NAN;
+	const modes: number[] = Array.from(frequency.keys()).filter((key) =>
+		frequency.get(key)?.equals(maxFrequency),
 	);
-	const median = count ? Number(math.median(numberArray)) : NaN;
-	const lowerQuantile =
+	const mode: string = modes.join(", ");
+	const maximum: BigNumber =
+		numberArray.length > 0 ? math.max(...numberArray) : BIG_NAN;
+	const minimum: BigNumber =
+		numberArray.length > 0 ? math.min(...numberArray) : BIG_NAN;
+	const range: BigNumber = math.subtract(maximum, minimum);
+	const median: BigNumber = count > 0 ? math.median(numberArray) : BIG_NAN;
+	const lowerQuantile: BigNumber =
 		count >= 4
 			? count % 4 === 0
-				? Number(
-						math.divide(
-							math.add(
-								math.bignumber(numberArray[count / 4 - 1]),
-								math.bignumber(numberArray[count / 4]),
-							),
-							2,
+				? (math.divide(
+						math.add(
+							numberArray[count / 4 - 1],
+							numberArray[count / 4],
 						),
-					)
+						2,
+					) as BigNumber)
 				: numberArray[Math.floor(count / 4)]
-			: NaN;
-	const upperQuantile =
+			: BIG_NAN;
+	const upperQuantile: BigNumber =
 		count >= 4
 			? count % 4 === 0
-				? Number(
-						math.divide(
-							math.add(
-								math.bignumber(
-									numberArray[(count * 3) / 4 - 1],
-								),
-								math.bignumber(numberArray[(count * 3) / 4]),
-							),
-							2,
+				? (math.divide(
+						math.add(
+							numberArray[(count * 3) / 4 - 1],
+							numberArray[(count * 3) / 4],
 						),
-					)
+						2,
+					) as BigNumber)
 				: numberArray[Math.floor((count * 3) / 4)]
-			: NaN;
-	let tmpVariance = math.bignumber(0);
+			: BIG_NAN;
+	let tmpVariance: BigNumber = math.bignumber(0);
 	for (const number of numberArray) {
 		tmpVariance = tmpVariance.add(
-			math.square(Number(math.subtract(math.bignumber(number), average))),
+			math.square(math.subtract(number, average)),
 		);
 	}
-	const sampleVariance = Number(math.divide(tmpVariance, count - 1));
-	const populationVariance = Number(math.divide(tmpVariance, count));
-	const standardDeviation = Number(math.sqrt(populationVariance));
+	const sampleVariance: BigNumber = math.divide(
+		tmpVariance,
+		count - 1,
+	) as BigNumber;
+	const populationVariance: BigNumber = math.divide(
+		tmpVariance,
+		count,
+	) as BigNumber;
+	const standardDeviation: BigNumber = math.sqrt(populationVariance);
 	const interquartileRange =
-		!isNaN(upperQuantile) && !isNaN(lowerQuantile)
+		!upperQuantile.isNaN() && !lowerQuantile.isNaN()
 			? math.subtract(upperQuantile, lowerQuantile)
-			: NaN;
-	const quartileDeviation = !isNaN(interquartileRange)
-		? Number(math.divide(interquartileRange, 2))
-		: NaN;
+			: BIG_NAN;
+	const quartileDeviation: BigNumber = !interquartileRange.isNaN()
+		? (math.divide(interquartileRange, 2) as BigNumber)
+		: BIG_NAN;
 
 	const results = count
 		? ([
@@ -248,6 +246,17 @@ function Stat({ math }: PageProps): JSX.Element {
 			{resultBars}
 		</main>
 	);
+}
+
+function compareBigNumber(a: BigNumber, b: BigNumber): number {
+	const result = a.minus(b);
+	if (result.isNegative()) {
+		return -1;
+	} else if (result.isPositive()) {
+		return 1;
+	} else {
+		return 0;
+	}
 }
 
 export default Stat;

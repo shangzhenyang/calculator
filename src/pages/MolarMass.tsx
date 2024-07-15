@@ -51,9 +51,10 @@ function MolarMass({ math }: PageProps): JSX.Element {
 		resultParts.push("-");
 		resultParts.push(massResultStr);
 		const valueToAdd = resultParts.join("");
-		setHistoryItems((prevHistoryItems) => {
-			return [valueToAdd, ...prevHistoryItems];
-		});
+		setHistoryItems((prevHistoryItems) => [
+			valueToAdd,
+			...prevHistoryItems,
+		]);
 	};
 
 	const calculate = (newElement: AllResult, newMole: string): string => {

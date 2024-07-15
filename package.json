@@ -20,7 +20,7 @@
 		"classnames": "^2.5.1",
 		"date-shift": "^1.2.4",
 		"i18next": "^23.12.1",
-		"mathjs": "11.10.1",
+		"mathjs": "^13.0.2",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"react-ga4": "^2.1.0",
