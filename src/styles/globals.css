@@ -37,6 +37,10 @@ body {
 	user-select: none;
 }
 
+body > div {
+	height: 100%;
+}
+
 button,
 input,
 textarea {
@@ -92,10 +96,6 @@ ul {
 	padding-inline-start: 0;
 }
 
-#root {
-	height: 100%;
-}
-
 @media (prefers-color-scheme: dark) {
 	:root {
 		--fg-alpha-05: rgba(255, 255, 255, 0.05);
@@ -106,7 +106,7 @@ ul {
 	}
 
 	body {
-		background-color: rgb(30, 30, 30);
+		background-color: black;
 		color: whitesmoke;
 	}
 }
