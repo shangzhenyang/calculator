@@ -1,35 +1,11 @@
 import viteReact from "@vitejs/plugin-react";
-import autoprefixer from "autoprefixer";
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
 	build: {
-		rollupOptions: {
-			output: {
-				manualChunks: function (id) {
-					if (id.includes("fortawesome")) {
-						return "icons";
-					}
-					if (id.includes("mathjs")) {
-						return "mathjs";
-					}
-					if (id.includes("node_modules")) {
-						return "vendors";
-					}
-					if (id.includes("translations")) {
-						return "translations";
-					}
-				},
-			},
-		},
 		target: "esnext",
-	},
-	css: {
-		postcss: {
-			plugins: [autoprefixer],
-		},
 	},
 	plugins: [
 		viteReact(),

@@ -1,5 +1,5 @@
-import App from "@/App";
-import "@/styles/globals.css";
+import App from "@/components/app";
+import "@/globals.css";
 import translationEnUs from "@/translations/en-us.json";
 import translationZhCn from "@/translations/zh-cn.json";
 import translationZhTw from "@/translations/zh-tw.json";

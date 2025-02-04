@@ -1,0 +1,114 @@
+:root {
+	--border: 1px solid var(--fg-alpha-2);
+	--error-color: rgba(255, 0, 0, 0.1);
+	--fg-alpha-05: rgba(0, 0, 0, 0.05);
+	--fg-alpha-1: rgba(0, 0, 0, 0.1);
+	--fg-alpha-15: rgba(0, 0, 0, 0.15);
+	--fg-alpha-2: rgba(0, 0, 0, 0.2);
+	--fg-alpha-8: rgba(0, 0, 0, 0.8);
+	--radius: 8px;
+	--theme-color: rgb(0, 102, 204);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+*:focus:not(:focus-visible),
+input:focus-visible,
+textarea:focus-visible {
+	outline: none;
+}
+
+*:focus-visible {
+	outline: auto;
+}
+
+a {
+	color: inherit;
+}
+
+body {
+	cursor: default;
+	font-family: sans-serif;
+	height: 100%;
+	margin: 0;
+	-webkit-tap-highlight-color: transparent;
+	text-size-adjust: 100%;
+	user-select: none;
+}
+
+body > div {
+	height: 100%;
+}
+
+button,
+input,
+textarea {
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	color: inherit;
+	font: inherit;
+}
+
+hr {
+	border: none;
+	border-top: var(--border);
+	margin: 0;
+}
+
+html {
+	height: 100%;
+	touch-action: manipulation;
+}
+
+main {
+	grid-area: main;
+}
+
+main button,
+main li {
+	transition: all 0.25s;
+}
+
+main button:hover {
+	background-color: var(--fg-alpha-2);
+}
+
+main button:active {
+	background-color: var(--theme-color);
+	color: white;
+}
+
+p {
+	border: var(--border);
+	border-radius: var(--radius);
+	line-height: 1.5em;
+	margin: 15px;
+	padding: 10px 15px;
+	user-select: text;
+	word-break: break-all;
+}
+
+ul {
+	margin: 0;
+	overflow: hidden;
+	padding-inline-start: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--fg-alpha-05: rgba(255, 255, 255, 0.05);
+		--fg-alpha-1: rgba(255, 255, 255, 0.1);
+		--fg-alpha-15: rgba(255, 255, 255, 0.15);
+		--fg-alpha-2: rgba(255, 255, 255, 0.2);
+		--fg-alpha-8: rgba(255, 255, 255, 0.8);
+		color-scheme: dark;
+	}
+
+	body {
+		background-color: black;
+		color: whitesmoke;
+	}
+}

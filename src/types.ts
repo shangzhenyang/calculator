@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { MathJsStatic } from "mathjs";
 
 export interface InputInfo {
 	hasError?: boolean;
@@ -8,10 +7,6 @@ export interface InputInfo {
 	value: string;
 }
 
-export interface InputInfoWritable extends InputInfo {
+export interface InputWritableInfo extends InputInfo {
 	updateValue: (newValue: string) => void;
-}
-
-export interface PageProps {
-	math: MathJsStatic;
 }
