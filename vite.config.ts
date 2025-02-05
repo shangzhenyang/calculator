@@ -1,4 +1,4 @@
-import viteReact from "@vitejs/plugin-react";
+import preactPlugin from "@preact/preset-vite";
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
@@ -8,7 +8,7 @@ export default defineConfig({
 		target: "esnext",
 	},
 	plugins: [
-		viteReact(),
+		preactPlugin(),
 		VitePWA({
 			manifest: {
 				description:
