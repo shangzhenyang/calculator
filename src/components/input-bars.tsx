@@ -1,6 +1,7 @@
 import InputBar from "@/components/input-bar";
-import { InputWritableInfo } from "@/types";
-import { Fragment, JSX } from "react";
+import type { InputWritableInfo } from "@/types";
+import type { JSX } from "react";
+import { Fragment } from "react";
 
 interface InputBarsProps {
 	inputs: InputWritableInfo[][];

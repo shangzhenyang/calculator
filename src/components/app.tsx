@@ -1,3 +1,4 @@
+import styles from "@/components/app.module.css";
 import BasePage from "@/components/base-page";
 import BytePage from "@/components/byte-page";
 import DateDifferencePage from "@/components/date-difference-page";
@@ -12,45 +13,17 @@ import Sidebar from "@/components/sidebar";
 import StatPage from "@/components/stat-page";
 import ThreeVarLinearEquationsPage from "@/components/three-var-linear-equations-page";
 import TwoVarLinearEquationsPage from "@/components/two-var-linear-equations-page";
-import { JSX, useEffect, useState } from "react";
+import clsx from "clsx";
+import type { JSX } from "react";
+import { useEffect, useState } from "react";
 import ReactGA from "react-ga4";
-import { Navigate, Route, Routes } from "react-router-dom";
-import styled from "styled-components";
-
-const StyledAppContainer = styled.div`
-	display: grid;
-	grid-template-areas:
-		"header header"
-		"sidebar main";
-	grid-template-columns: 1fr 3fr;
-	grid-template-rows: auto 1fr;
-	height: 100%;
-
-	@media screen and (max-width: 768px) {
-		grid-template-areas:
-			"header"
-			"main";
-		grid-template-columns: 1fr;
-	}
-`;
-
-const StyledAppContainerWithSidebar = styled(StyledAppContainer)`
-	@media screen and (max-width: 768px) {
-		grid-template-areas:
-			"header"
-			"sidebar";
-
-		main {
-			display: none;
-		}
-	}
-`;
+import { Navigate, Route, Routes } from "react-router";
 
 function App(): JSX.Element {
-	const [showSidebar, setShowSidebar] = useState(false);
+	const [isSidebarShown, setIsSidebarShown] = useState(false);
 
 	const toggleSidebar = (): void => {
-		setShowSidebar(!showSidebar);
+		setIsSidebarShown(!isSidebarShown);
 	};
 
 	useEffect(() => {
@@ -60,14 +33,16 @@ function App(): JSX.Element {
 		}, 1000);
 	}, []);
 
-	const AppContainer = showSidebar
-		? StyledAppContainerWithSidebar
-		: StyledAppContainer;
 	return (
-		<AppContainer>
+		<div
+			className={clsx(
+				styles["container"],
+				isSidebarShown && styles["sidebar-shown"],
+			)}
+		>
 			<Header toggleSidebar={toggleSidebar} />
 			<Sidebar
-				showSidebar={showSidebar}
+				isSidebarShown={isSidebarShown}
 				toggleSidebar={toggleSidebar}
 			/>
 			<Routes>
@@ -124,7 +99,7 @@ function App(): JSX.Element {
 					element={<Navigate to="/" />}
 				/>
 			</Routes>
-		</AppContainer>
+		</div>
 	);
 }
 

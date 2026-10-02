@@ -6,7 +6,7 @@ import translationZhTw from "@/translations/zh-tw.json";
 import i18n, { t } from "i18next";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 
 const i18nResources = {
 	"en-US": {

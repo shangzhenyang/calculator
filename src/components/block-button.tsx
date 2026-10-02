@@ -1,7 +1,7 @@
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import styles from "@/components/block-button.module.css";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { JSX, ReactNode } from "react";
-import styled from "styled-components";
+import type { JSX, ReactNode } from "react";
 
 interface BlockButtonProps {
 	children: ReactNode;
@@ -9,25 +9,14 @@ interface BlockButtonProps {
 	onClick: () => void;
 }
 
-const StyledButton = styled.button`
-	align-items: center;
-	border: var(--border);
-	border-radius: var(--radius);
-	display: flex;
-	flex: 1;
-	font-size: inherit;
-	gap: 10px;
-	padding: 15px 20px;
-	width: 100%;
-`;
-
 function BlockButton({
 	children,
 	icon,
 	onClick,
 }: BlockButtonProps): JSX.Element {
 	return (
-		<StyledButton
+		<button
+			className={styles["button"]}
 			type="button"
 			onClick={onClick}
 		>
@@ -37,7 +26,7 @@ function BlockButton({
 				fixedWidth
 			/>
 			{children}
-		</StyledButton>
+		</button>
 	);
 }
 

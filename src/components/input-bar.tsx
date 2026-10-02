@@ -1,6 +1,8 @@
+import styles from "@/components/input-bar.module.css";
+import clsx from "clsx";
 import { t } from "i18next";
-import { ChangeEvent, JSX, ReactNode, useId } from "react";
-import styled from "styled-components";
+import type { ChangeEvent, JSX, ReactNode } from "react";
+import { useId } from "react";
 
 interface InputBarProps {
 	children: ReactNode;
@@ -9,37 +11,6 @@ interface InputBarProps {
 	value: string;
 	onChange?: (newValue: string) => void;
 }
-
-const StyledInputBar = styled.div`
-	align-items: center;
-	display: flex;
-	margin: 15px;
-`;
-
-const StyledInput = styled.input<{ $hasError?: boolean }>`
-	background-color: ${({ $hasError }): string =>
-		$hasError ? "var(--error-color)" : "inherit"};
-	border: var(--border);
-	border-radius: var(--radius);
-	flex: 1;
-	font-size: inherit;
-	padding: 10px 15px;
-	transition: border-color 0.25s;
-
-	&:focus {
-		border-color: var(--fg-alpha-8);
-	}
-
-	&:read-only {
-		background-color: var(--fg-alpha-05);
-		cursor: not-allowed;
-	}
-`;
-
-const StyledLabel = styled.label`
-	padding: 0 15px;
-	width: 30%;
-`;
 
 function InputBar({
 	children,
@@ -55,11 +26,16 @@ function InputBar({
 	};
 
 	return (
-		<StyledInputBar>
-			<StyledLabel htmlFor={id}>{children}</StyledLabel>
-			<StyledInput
-				$hasError={hasError}
+		<div className={styles["container"]}>
+			<label
+				className={styles["label"]}
+				htmlFor={id}
+			>
+				{children}
+			</label>
+			<input
 				autoComplete="off"
+				className={clsx(styles["input"], hasError && styles["error"])}
 				id={id}
 				placeholder={
 					onChange && type !== "date"
@@ -71,7 +47,7 @@ function InputBar({
 				value={value}
 				onChange={handleChange}
 			/>
-		</StyledInputBar>
+		</div>
 	);
 }
 

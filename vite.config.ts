@@ -1,4 +1,5 @@
-import preactPlugin from "@preact/preset-vite";
+import babelPlugin from "@rolldown/plugin-babel";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
@@ -8,7 +9,10 @@ export default defineConfig({
 		target: "esnext",
 	},
 	plugins: [
-		preactPlugin(),
+		react(),
+		babelPlugin({
+			presets: [reactCompilerPreset()],
+		}),
 		VitePWA({
 			manifest: {
 				description:

@@ -1,10 +1,11 @@
 import InputBar from "@/components/input-bar";
 import InputBars from "@/components/input-bars";
 import globals from "@/globals";
-import { InputWritableInfo } from "@/types";
+import type { InputWritableInfo } from "@/types";
 import { t } from "i18next";
-import { BigNumber } from "mathjs";
-import { JSX, useEffect, useState } from "react";
+import type { BigNumber } from "mathjs";
+import type { JSX } from "react";
+import { useState } from "react";
 
 const { bigNan, math } = globals;
 
@@ -12,14 +13,14 @@ function QuadraticFunctionPage(): JSX.Element {
 	const [a, setA] = useState<string>("");
 	const [b, setB] = useState<string>("");
 	const [c, setC] = useState<string>("");
-	const [x, setX] = useState<string>("");
+	const [customX, setCustomX] = useState<string>();
 
 	const scope: Record<string, math.BigNumber> = {
 		a: a && !isNaN(Number(a)) ? math.bignumber(a) : bigNan,
 		b: b && !isNaN(Number(b)) ? math.bignumber(b) : bigNan,
 		c: c && !isNaN(Number(c)) ? math.bignumber(c) : bigNan,
 		delta: bigNan,
-		x: x && !isNaN(Number(x)) ? math.bignumber(x) : bigNan,
+		x: bigNan,
 	};
 
 	const h = math.evaluate("-b / (2 * a)", scope) as BigNumber;
@@ -27,6 +28,9 @@ function QuadraticFunctionPage(): JSX.Element {
 		"(4 * a * c - pow(b, 2)) / (4 * a)",
 		scope,
 	) as BigNumber;
+
+	const x = customX ?? h.toString();
+	scope.x = x && !isNaN(Number(x)) ? math.bignumber(x) : bigNan;
 	const y = math.evaluate("a * pow(x, 2) + b * x + c", scope) as BigNumber;
 
 	const hRounded = math.round(h, 2).toString();
@@ -63,30 +67,41 @@ function QuadraticFunctionPage(): JSX.Element {
 	const isUpward = Number(a) > 0;
 	const extremumType = isUpward ? "minimum" : "maximum";
 
+	const updateA = (newValue: string): void => {
+		setA(newValue);
+		setCustomX(undefined);
+	};
+
+	const updateB = (newValue: string): void => {
+		setB(newValue);
+		setCustomX(undefined);
+	};
+
+	const updateC = (newValue: string): void => {
+		setC(newValue);
+		setCustomX(undefined);
+	};
+
 	const inputs: InputWritableInfo[] = [
 		{
 			hasError: !!a && Number(a) === 0,
 			id: "a",
-			updateValue: setA,
+			updateValue: updateA,
 			value: a,
 		},
 		{
 			id: "b",
-			updateValue: setB,
+			updateValue: updateB,
 			value: b,
 		},
 		{
 			id: "c",
-			updateValue: setC,
+			updateValue: updateC,
 			value: c,
 		},
 	];
 
 	const allInputsFilled = inputs.every(({ value }) => value !== "");
-
-	useEffect(() => {
-		setX(h.toString());
-	}, [a, b, c, h]);
 
 	return (
 		<main>
@@ -138,7 +153,7 @@ function QuadraticFunctionPage(): JSX.Element {
 					<InputBar
 						type="number"
 						value={x}
-						onChange={setX}
+						onChange={setCustomX}
 					>
 						x
 					</InputBar>

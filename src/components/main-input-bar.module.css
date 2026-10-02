@@ -1,0 +1,44 @@
+.form {
+	border-bottom: var(--border);
+	display: flex;
+}
+
+.form > * {
+	font-size: 1.5rem;
+	padding: 20px 25px;
+}
+
+.form > button {
+	align-items: center;
+	border-left: var(--border);
+	display: flex;
+	gap: 10px;
+	white-space: nowrap;
+}
+
+.form > div {
+	align-items: center;
+	border-left: var(--border);
+	display: flex;
+}
+
+.input {
+	background-color: inherit;
+	display: block;
+	width: 100%;
+}
+
+.input.error {
+	background-color: var(--error-color);
+}
+
+.input:only-child {
+	border-right: none;
+}
+
+@media screen and (max-width: 768px) {
+	.form > * {
+		font-size: 1.25rem;
+		padding: 15px 20px;
+	}
+}

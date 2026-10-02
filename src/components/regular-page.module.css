@@ -1,0 +1,28 @@
+.keyboard-area {
+	align-items: center;
+	display: flex;
+	flex: 1;
+	gap: 1px;
+	margin: 0 auto;
+	width: 500px;
+}
+
+.keyboard-area > * {
+	height: 406px;
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+	.keyboard-area {
+		flex-direction: column-reverse;
+		width: 100%;
+	}
+
+	.keyboard-area > * {
+		height: auto;
+	}
+}

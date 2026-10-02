@@ -1,18 +1,13 @@
+import styles from "@/components/footer.module.css";
 import { t } from "i18next";
-import { JSX } from "react";
-import styled from "styled-components";
-
-const StyledFooter = styled.footer`
-	margin-top: auto;
-	padding: 5px;
-`;
+import type { JSX } from "react";
 
 function Footer(): JSX.Element {
 	return (
-		<StyledFooter>
+		<footer className={styles["footer"]}>
 			&copy; {new Date().getFullYear()}{" "}
 			<a href="https://www.shangzhenyang.com/">{t("shangzhenYang")}</a>
-		</StyledFooter>
+		</footer>
 	);
 }
 

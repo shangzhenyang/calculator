@@ -1,68 +1,22 @@
 import BlockButton from "@/components/block-button";
+import styles from "@/components/history.module.css";
 import { faBroom, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { t } from "i18next";
-import { JSX } from "react";
-import styled from "styled-components";
+import type { JSX } from "react";
 
 interface HistoryProps {
 	historyItems: string[];
-	showAddButton?: boolean;
-	showClearButton?: boolean;
+	shouldShowAddButton?: boolean;
+	shouldShowClearButton?: boolean;
 	addToHistory?: () => void;
 	updateHistoryItems: (callback: (value: string[]) => string[]) => void;
 	updateInputValue?: (newValue: string) => void;
 }
 
-const StyledHistoryContainer = styled.div`
-	margin: 15px;
-`;
-
-const StyledHistoryList = styled.ul`
-	margin: 15px 0;
-
-	&:empty {
-		display: none;
-	}
-`;
-
-const StyledHistoryListItem = styled.li`
-	background-color: var(--fg-alpha-1);
-	display: flex;
-	overflow: hidden;
-
-	&:first-of-type {
-		border-top-left-radius: var(--radius);
-		border-top-right-radius: var(--radius);
-	}
-
-	&:last-of-type {
-		border-bottom-left-radius: var(--radius);
-		border-bottom-right-radius: var(--radius);
-	}
-
-	&:nth-child(even) {
-		background-color: var(--fg-alpha-05);
-	}
-
-	& > * {
-		font-size: inherit;
-		padding: 10px 15px;
-	}
-`;
-
-const StyledListItemMain = styled.div`
-	cursor: text;
-	flex: 1;
-	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	user-select: text;
-`;
-
 function History({
 	historyItems,
-	showAddButton,
-	showClearButton,
+	shouldShowAddButton,
+	shouldShowClearButton,
 	addToHistory,
 	updateHistoryItems,
 	updateInputValue,
@@ -86,8 +40,11 @@ function History({
 		};
 
 		return (
-			<StyledHistoryListItem key={index}>
-				<StyledListItemMain>{value}</StyledListItemMain>
+			<li
+				className={styles["list-item"]}
+				key={index}
+			>
+				<div className={styles["list-item-main"]}>{value}</div>
 				{updateInputValue && (
 					<button
 						type="button"
@@ -102,13 +59,13 @@ function History({
 				>
 					{t("delete")}
 				</button>
-			</StyledHistoryListItem>
+			</li>
 		);
 	});
 
 	return (
-		<StyledHistoryContainer>
-			{showAddButton && addToHistory && (
+		<div className={styles["container"]}>
+			{shouldShowAddButton && addToHistory && (
 				<BlockButton
 					icon={faCirclePlus}
 					onClick={addToHistory}
@@ -116,7 +73,7 @@ function History({
 					{t("addToHistory")}
 				</BlockButton>
 			)}
-			{showClearButton && (
+			{shouldShowClearButton && (
 				<BlockButton
 					icon={faBroom}
 					onClick={handleClearHistoryClick}
@@ -124,8 +81,8 @@ function History({
 					{t("clearHistory")}
 				</BlockButton>
 			)}
-			<StyledHistoryList>{historyListItems}</StyledHistoryList>
-		</StyledHistoryContainer>
+			<ul className={styles["list"]}>{historyListItems}</ul>
+		</div>
 	);
 }
 

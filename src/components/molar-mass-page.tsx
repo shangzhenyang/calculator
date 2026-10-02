@@ -2,14 +2,15 @@ import History from "@/components/history";
 import InputBar from "@/components/input-bar";
 import MainInputBar from "@/components/main-input-bar";
 import globals from "@/globals";
+import type { AllResult } from "@shangzhen/periodic-table";
 import {
-	AllResult,
 	elements,
 	getCompound,
 	isErrorResult,
 } from "@shangzhen/periodic-table";
 import i18n, { t } from "i18next";
-import { JSX, useState } from "react";
+import type { JSX } from "react";
+import { useState } from "react";
 
 const { math } = globals;
 
@@ -221,7 +222,7 @@ function MolarMassPage(): JSX.Element {
 			{hasSelectedElement && <div>{inputBars}</div>}
 			<History
 				historyItems={historyItems}
-				showAddButton={
+				shouldShowAddButton={
 					hasSelectedElement &&
 					!hasMassError &&
 					!hasMoleError &&

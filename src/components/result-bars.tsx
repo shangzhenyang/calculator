@@ -1,6 +1,6 @@
 import InputBar from "@/components/input-bar";
-import { InputInfo } from "@/types";
-import { JSX } from "react";
+import type { InputInfo } from "@/types";
+import type { JSX } from "react";
 
 interface ResultBarsProps {
 	enforceNumber: boolean;

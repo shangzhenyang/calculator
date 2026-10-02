@@ -1,9 +1,10 @@
 import InputBars from "@/components/input-bars";
 import ResultBars from "@/components/result-bars";
 import globals from "@/globals";
-import { InputInfo, InputWritableInfo } from "@/types";
-import { BigNumber } from "mathjs";
-import { JSX, useState } from "react";
+import type { InputInfo, InputWritableInfo } from "@/types";
+import type { BigNumber } from "mathjs";
+import type { JSX } from "react";
+import { useState } from "react";
 
 const { bigNan, math } = globals;
 

@@ -1,0 +1,26 @@
+.button {
+	border-bottom: var(--border);
+	font-size: 1.5rem;
+	line-height: 30px;
+	padding: 25px;
+}
+
+.keyboard {
+	border-top: var(--border);
+	display: grid;
+	flex: 1;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+	.button {
+		font-size: 1.25rem;
+		padding: 15px;
+	}
+
+	.keyboard {
+		border-top: none;
+	}
+}

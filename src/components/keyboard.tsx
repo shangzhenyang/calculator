@@ -1,42 +1,17 @@
+import styles from "@/components/keyboard.module.css";
 import { t } from "i18next";
-import { JSX } from "react";
-import styled from "styled-components";
+import type { JSX } from "react";
 
 interface KeyboardProps {
 	calculate: () => void;
 	updateFormula: (newValue: string, append?: boolean) => void;
-	updateUseAnswer: (newValue: boolean) => void;
+	updateShouldUseAnswer: (newValue: boolean) => void;
 }
-
-const StyledButton = styled.button`
-	border-bottom: var(--border);
-	font-size: 1.5rem;
-	line-height: 30px;
-	padding: 25px;
-
-	@media screen and (max-width: 768px) {
-		font-size: 1.25rem;
-		padding: 15px;
-	}
-`;
-
-const StyledKeyboard = styled.div`
-	border-top: var(--border);
-	display: grid;
-	flex: 1;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-rows: repeat(5, 1fr);
-	width: 100%;
-
-	@media screen and (max-width: 768px) {
-		border-top: none;
-	}
-`;
 
 function Keyboard({
 	calculate,
 	updateFormula,
-	updateUseAnswer,
+	updateShouldUseAnswer,
 }: KeyboardProps): JSX.Element {
 	const clickMap = {
 		"=": (): void => {
@@ -92,12 +67,13 @@ function Keyboard({
 					key = replaceMap[key as keyof typeof replaceMap];
 				}
 				updateFormula(key, true);
-				updateUseAnswer(true);
+				updateShouldUseAnswer(true);
 			}
 		};
 
 		return (
-			<StyledButton
+			<button
+				className={styles["button"]}
 				key={key}
 				type="button"
 				aria-label={
@@ -108,11 +84,11 @@ function Keyboard({
 				onClick={handleClick}
 			>
 				{key}
-			</StyledButton>
+			</button>
 		);
 	});
 
-	return <StyledKeyboard>{keyElements}</StyledKeyboard>;
+	return <div className={styles["keyboard"]}>{keyElements}</div>;
 }
 
 export default Keyboard;

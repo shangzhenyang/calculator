@@ -1,6 +1,6 @@
+import styles from "@/components/function-list.module.css";
 import { handleKeyboardClick } from "@/utils";
-import { JSX } from "react";
-import styled from "styled-components";
+import type { JSX } from "react";
 
 const FUNCTIONS = Object.freeze([
 	"0b",
@@ -37,56 +37,6 @@ interface FunctionListProps {
 	updateFormula: (newValue: string, append?: boolean) => void;
 }
 
-const StyledContainer = styled.div`
-	border-bottom: var(--border);
-	border-right: var(--border);
-	border-top: var(--border);
-	overflow: auto;
-	padding: 10px;
-	scrollbar-width: thin;
-
-	&::-webkit-scrollbar {
-		width: 10px;
-	}
-
-	&::-webkit-scrollbar-track {
-		background-color: var(--fg-alpha-05);
-	}
-
-	&::-webkit-scrollbar-thumb {
-		background-color: var(--fg-alpha-15);
-	}
-
-	&::-webkit-scrollbar-thumb:hover {
-		background-color: var(--theme-color);
-	}
-
-	@media screen and (max-width: 768px) {
-		border: none;
-		height: auto;
-		width: 100%;
-	}
-`;
-
-const StyledListItem = styled.li`
-	& > div {
-		border-radius: var(--radius);
-		padding: 10px 15px;
-		transition:
-			background-color 0.25s,
-			color 0.25s;
-
-		&:hover {
-			background-color: var(--fg-alpha-2);
-		}
-
-		&:active {
-			background-color: var(--theme-color);
-			color: white;
-		}
-	}
-`;
-
 function FunctionList({ updateFormula }: FunctionListProps): JSX.Element {
 	const listItems = FUNCTIONS.map((item) => {
 		const handleClick = (): void => {
@@ -96,8 +46,9 @@ function FunctionList({ updateFormula }: FunctionListProps): JSX.Element {
 		};
 
 		return (
-			<StyledListItem key={item}>
+			<li key={item}>
 				<div
+					className={styles["item"]}
 					role="button"
 					tabIndex={0}
 					onClick={handleClick}
@@ -105,14 +56,14 @@ function FunctionList({ updateFormula }: FunctionListProps): JSX.Element {
 				>
 					{item}
 				</div>
-			</StyledListItem>
+			</li>
 		);
 	});
 
 	return (
-		<StyledContainer>
+		<div className={styles["container"]}>
 			<ul>{listItems}</ul>
-		</StyledContainer>
+		</div>
 	);
 }
 

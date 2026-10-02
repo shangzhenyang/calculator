@@ -2,6 +2,7 @@ import FunctionList from "@/components/function-list";
 import History from "@/components/history";
 import Keyboard from "@/components/keyboard";
 import MainInputBar from "@/components/main-input-bar";
+import styles from "@/components/regular-page.module.css";
 import globals from "@/globals";
 import {
 	faClockRotateLeft,
@@ -11,45 +12,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { t } from "i18next";
-import { BigNumber } from "mathjs";
-import { JSX, KeyboardEvent, useEffect, useState } from "react";
-import styled from "styled-components";
+import type { BigNumber } from "mathjs";
+import type { JSX, KeyboardEvent } from "react";
+import { useState } from "react";
 
 const { math } = globals;
 
-const StyledKeyboardArea = styled.div`
-	align-items: center;
-	display: flex;
-	flex: 1;
-	gap: 1px;
-	margin: 0 auto;
-	width: 500px;
-
-	> * {
-		height: 406px;
-	}
-
-	@media screen and (max-width: 768px) {
-		flex-direction: column-reverse;
-		width: 100%;
-
-		> * {
-			height: auto;
-		}
-	}
-`;
-
-const StyledMain = styled.main`
-	display: flex;
-	flex-direction: column;
-`;
-
 function RegularPage(): JSX.Element {
+	const [failedFormula, setFailedFormula] = useState<string>();
 	const [formula, setFormula] = useState<string>("");
-	const [formulaHasError, setFormulaHasError] = useState<boolean>(false);
 	const [historyItems, setHistoryItems] = useState<string[]>([]);
-	const [showHistory, setShowHistory] = useState<boolean>(false);
-	const [useAnswer, setUseAnswer] = useState<boolean>(false);
+	const [isHistoryShown, setIsHistoryShown] = useState<boolean>(false);
+	const [shouldUseAnswer, setShouldUseAnswer] = useState<boolean>(false);
+
+	const hasFormulaError = failedFormula === formula;
 
 	const backspace = (): void => {
 		setFormula((prevFormula) => prevFormula.trim().slice(0, -1).trim());
@@ -57,7 +33,7 @@ function RegularPage(): JSX.Element {
 
 	const calculate = (): void => {
 		const formulaParts = formula.split("=");
-		const index = useAnswer ? formulaParts.length - 1 : 0;
+		const index = shouldUseAnswer ? formulaParts.length - 1 : 0;
 		const formulaProcessed = formulaParts[index]
 			.replaceAll("×", "*")
 			.replaceAll("÷", "/")
@@ -80,7 +56,7 @@ function RegularPage(): JSX.Element {
 				...prevHistoryItems,
 			]);
 		} catch {
-			setFormulaHasError(true);
+			setFailedFormula(formula);
 		}
 	};
 
@@ -94,16 +70,16 @@ function RegularPage(): JSX.Element {
 		if (event.key === "Escape") {
 			setFormula("");
 		}
-		setUseAnswer(false);
+		setShouldUseAnswer(false);
 	};
 
 	const handleFormulaSubmit = (): void => {
 		calculate();
-		setUseAnswer(false);
+		setShouldUseAnswer(false);
 	};
 
 	const toggleHistory = (): void => {
-		setShowHistory((prevShowHistory) => !prevShowHistory);
+		setIsHistoryShown((prevIsHistoryShown) => !prevIsHistoryShown);
 	};
 
 	const updateFormula = (newValue: string, append = false): void => {
@@ -120,25 +96,21 @@ function RegularPage(): JSX.Element {
 		setHistoryItems(callback);
 	};
 
-	const updateUseAnswer = (newValue: boolean): void => {
-		setUseAnswer(newValue);
+	const updateShouldUseAnswer = (newValue: boolean): void => {
+		setShouldUseAnswer(newValue);
 	};
 
-	useEffect(() => {
-		setFormulaHasError(false);
-	}, [formula]);
-
 	return (
-		<StyledMain>
+		<main className={styles["main"]}>
 			<MainInputBar
-				hasError={formulaHasError}
+				hasError={hasFormulaError}
 				placeholder="enterFormula"
 				value={formula}
 				onChange={handleFormulaChange}
 				onSubmit={handleFormulaSubmit}
 				onKeyDown={handleFormulaKeyDown}
 			>
-				{showHistory && (
+				{isHistoryShown && (
 					<>
 						<button
 							title={t("equal").toString()}
@@ -161,7 +133,7 @@ function RegularPage(): JSX.Element {
 						</button>
 					</>
 				)}
-				{!showHistory && (
+				{!isHistoryShown && (
 					<>
 						<button
 							title={t("backspace").toString()}
@@ -186,27 +158,27 @@ function RegularPage(): JSX.Element {
 					</>
 				)}
 			</MainInputBar>
-			{showHistory && (
+			{isHistoryShown && (
 				<div>
 					<History
 						historyItems={historyItems}
-						showClearButton={true}
+						shouldShowClearButton
 						updateHistoryItems={updateHistoryItems}
 						updateInputValue={updateFormula}
 					/>
 				</div>
 			)}
-			{!showHistory && (
-				<StyledKeyboardArea>
+			{!isHistoryShown && (
+				<div className={styles["keyboard-area"]}>
 					<FunctionList updateFormula={updateFormula} />
 					<Keyboard
 						calculate={calculate}
 						updateFormula={updateFormula}
-						updateUseAnswer={updateUseAnswer}
+						updateShouldUseAnswer={updateShouldUseAnswer}
 					/>
-				</StyledKeyboardArea>
+				</div>
 			)}
-		</StyledMain>
+		</main>
 	);
 }
 

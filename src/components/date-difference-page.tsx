@@ -1,7 +1,8 @@
 import InputBar from "@/components/input-bar";
 import dayjs from "dayjs";
 import { t } from "i18next";
-import { Dispatch, JSX, SetStateAction, useState } from "react";
+import type { Dispatch, JSX, SetStateAction } from "react";
+import { useState } from "react";
 
 const FORMAT = "YYYY-MM-DD";
 const UNIT = "day";

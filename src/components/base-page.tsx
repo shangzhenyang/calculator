@@ -1,8 +1,9 @@
 import InputBar from "@/components/input-bar";
 import globals from "@/globals";
 import { t } from "i18next";
-import { BigNumber } from "mathjs";
-import { Dispatch, JSX, SetStateAction, useState } from "react";
+import type { BigNumber } from "mathjs";
+import type { Dispatch, JSX, SetStateAction } from "react";
+import { useState } from "react";
 
 const BINARY_PREFIX = "0b";
 const OCTAL_PREFIX = "0o";

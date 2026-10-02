@@ -1,37 +1,16 @@
 import BlockButton from "@/components/block-button";
 import InputBar from "@/components/input-bar";
 import MainInputBar from "@/components/main-input-bar";
+import styles from "@/components/stat-page.module.css";
 import globals from "@/globals";
 import { faBroom, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { t } from "i18next";
-import { BigNumber } from "mathjs";
-import { ChangeEvent, Fragment, JSX, useId, useState } from "react";
-import styled from "styled-components";
+import type { BigNumber } from "mathjs";
+import type { ChangeEvent, JSX } from "react";
+import { Fragment, useId, useState } from "react";
 
 const { bigNan, math } = globals;
-
-const StyledLabel = styled.label`
-	padding: 0 5px;
-`;
-
-const StyledStatEditor = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
-	margin: 15px;
-`;
-
-const StyledTextArea = styled.textarea`
-	border: var(--border);
-	border-radius: var(--radius);
-	display: block;
-	font-size: inherit;
-	height: 300px;
-	padding: 10px 15px;
-	resize: none;
-	width: 100%;
-`;
 
 function StatPage(): JSX.Element {
 	const [newNumber, setNewNumber] = useState<string>("");
@@ -107,30 +86,8 @@ function StatPage(): JSX.Element {
 		numberArray.length > 0 ? math.min(...numberArray) : bigNan;
 	const range: BigNumber = math.subtract(maximum, minimum);
 	const median: BigNumber = count > 0 ? math.median(numberArray) : bigNan;
-	const lowerQuantile: BigNumber =
-		count >= 4
-			? count % 4 === 0
-				? (math.divide(
-						math.add(
-							numberArray[count / 4 - 1],
-							numberArray[count / 4],
-						),
-						2,
-					) as BigNumber)
-				: numberArray[Math.floor(count / 4)]
-			: bigNan;
-	const upperQuantile: BigNumber =
-		count >= 4
-			? count % 4 === 0
-				? (math.divide(
-						math.add(
-							numberArray[(count * 3) / 4 - 1],
-							numberArray[(count * 3) / 4],
-						),
-						2,
-					) as BigNumber)
-				: numberArray[Math.floor((count * 3) / 4)]
-			: bigNan;
+	const lowerQuantile = getQuantile(numberArray, 1);
+	const upperQuantile = getQuantile(numberArray, 3);
 	let tmpVariance: BigNumber = math.bignumber(0);
 	for (const number of numberArray) {
 		tmpVariance = tmpVariance.add(
@@ -253,20 +210,26 @@ function StatPage(): JSX.Element {
 					/>
 				</button>
 			</MainInputBar>
-			<StyledStatEditor>
-				<StyledLabel htmlFor={id}>{t("addedNumbers")}</StyledLabel>
-				<StyledTextArea
+			<div className={styles["stat-editor"]}>
+				<label
+					className={styles["label"]}
+					htmlFor={id}
+				>
+					{t("addedNumbers")}
+				</label>
+				<textarea
+					className={styles["text-area"]}
 					id={id}
 					value={numbers}
 					onChange={handleNumbersChange}
-				></StyledTextArea>
+				></textarea>
 				<BlockButton
 					icon={faBroom}
 					onClick={clear}
 				>
 					{t("clear")}
 				</BlockButton>
-			</StyledStatEditor>
+			</div>
 			{resultBars}
 		</main>
 	);
@@ -281,6 +244,21 @@ function compareBigNumber(a: BigNumber, b: BigNumber): number {
 	} else {
 		return 0;
 	}
+}
+
+function getQuantile(sortedNumbers: BigNumber[], quarter: number): BigNumber {
+	const count = sortedNumbers.length;
+	if (count < 4) {
+		return bigNan;
+	}
+	const position = (count * quarter) / 4;
+	if (count % 4 === 0) {
+		return math.divide(
+			math.add(sortedNumbers[position - 1], sortedNumbers[position]),
+			2,
+		) as BigNumber;
+	}
+	return sortedNumbers[Math.floor(position)];
 }
 
 export default StatPage;

@@ -1,9 +1,10 @@
 import InputBars from "@/components/input-bars";
 import ResultBars from "@/components/result-bars";
 import globals from "@/globals";
-import { InputInfo, InputWritableInfo } from "@/types";
-import { BigNumber } from "mathjs";
-import { Fragment, JSX, useState } from "react";
+import type { InputInfo, InputWritableInfo } from "@/types";
+import type { BigNumber } from "mathjs";
+import type { JSX } from "react";
+import { Fragment, useState } from "react";
 
 const { math } = globals;
 
@@ -245,7 +246,7 @@ function ThreeVarLinearEquationsPage(): JSX.Element {
 				<>
 					<hr />
 					<ResultBars
-						enforceNumber={true}
+						enforceNumber
 						results={results}
 					/>
 				</>

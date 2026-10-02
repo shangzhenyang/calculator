@@ -1,0 +1,33 @@
+.container {
+	align-items: center;
+	display: flex;
+	margin: 15px;
+}
+
+.input {
+	background-color: inherit;
+	border: var(--border);
+	border-radius: var(--radius);
+	flex: 1;
+	font-size: inherit;
+	padding: 10px 15px;
+	transition: border-color 0.25s;
+}
+
+.input.error {
+	background-color: var(--error-color);
+}
+
+.input:focus {
+	border-color: var(--fg-alpha-8);
+}
+
+.input:read-only {
+	background-color: var(--fg-alpha-05);
+	cursor: not-allowed;
+}
+
+.label {
+	padding: 0 15px;
+	width: 30%;
+}

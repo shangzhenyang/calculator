@@ -1,0 +1,5 @@
+allowBuilds:
+  "@shangzhen/periodic-table@https://codeload.github.com/shangzhenyang/periodic-table/tar.gz/f6d98f5accf784845d2b2954728690d2020c4a4d": true
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - "@shangzhen/eslint-config@6.0.0"
